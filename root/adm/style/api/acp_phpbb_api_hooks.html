@@ -1,0 +1,194 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE api/acp_phpbb_api_jquery_package.html -->
+<!-- * @version $Id: acp_phpbb_api_hooks.html v{S_VERSION} 13h13 10/19/2013 Geolim4 Exp $ -->
+<h1>{TITLE} <img src="{TITLE_IMG}" title="{TITLE}" alt="{TITLE}" style="float:right" /></h1>
+<p>{TITLE_EXPLAIN}</p>
+<!-- IF S_HOOK_MANAGE -->
+	<!-- IF not S_HOOK_EDIT and not S_HOOK_CREATE -->
+	<!-- IF S_HOOK_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{HOOK_ERROR_MSG}</p>
+	</div>
+	<!-- ENDIF -->
+		<table cellspacing="1">
+			<thead>
+				<tr>
+					<th style="text-align: center !important; width: 10%;">{L_ACP_PHPBB_API_KEY_TOOLS}</th>
+					<th style="text-align: center !important; width: 14%;">{L_ACP_PHPBB_API_HOOK_NAME}</th>
+					<th style="text-align: center !important; width: 10%;">{L_ACP_PHPBB_API_HOOK_AUTHOR}</th>
+					<th style="text-align: center !important; width: 14%;">{L_ACP_PHPBB_API_HOOK_VERSION}</th>
+					<th style="text-align: center !important; width: 14%;">{L_ACP_PHPBB_API_HOOK_DATE}</th>
+					<th style="text-align: center !important; width: 14%;">{L_ACP_PHPBB_API_HOOK_FILE}</th>
+				</tr>
+			</thead>
+			<tbody id="tbodycount">
+			<tr>
+			<!-- IF .api_hooks -->
+				<td class="row3" colspan="6"><strong>{L_ACP_PHPBB_API_HOOK_INSTALLED}</strong></td></tr>
+				<!-- BEGIN api_hooks -->
+					<!-- IF  api_hooks.INSTALLED -->
+						<tr class="<!-- IF api_hooks.S_ROW_COUNT is even -->row1<!-- ELSE -->row2<!-- ENDIF --><!-- IF api_hooks.IS_OUTDATED --> outdated<!-- ENDIF --><!-- IF api_hooks.KEY_STATUS == 2 --> suspended<!-- ENDIF -->">
+						<td style="text-align: center; width: 15%;"><a href="{api_hooks.U_DOWNLOAD}">{ICON_HOOK_DOWNLOAD}</a>&nbsp;&nbsp;&nbsp;<a href="{api_hooks.U_UNINSTALL}">{ICON_HOOK_UNINSTALL}</a></td>
+						<td style="text-align: center; width: 25%;"><!-- IF not S_HOOK_ERROR --><div class="hook-origin<!-- IF api_hooks.OFFICIAL --> official<!-- ELSE --> unofficial<!-- ENDIF -->"><!-- IF api_hooks.OFFICIAL -->{L_ACP_PHPBB_API_HOOK_OFFICIAL}<!-- ELSE -->{L_ACP_PHPBB_API_HOOK_UNOFFICIAL}<!-- ENDIF --></div><!-- ENDIF -->{api_hooks.NAME}</td>
+						<td style="text-align: center; width: 10%;"><em><!-- IF api_hooks.WEBSITE --><a href="{api_hooks.WEBSITE}"><strong>{api_hooks.AUTHOR}</strong></a><!-- ELSE -->{api_hooks.AUTHOR}<!-- ENDIF --></em></td>
+						<td style="text-align: center; width: 5%;"><!-- IF api_hooks.IS_UP_TO_DATE === true and not S_HOOK_ERROR --><strong class="ok">{api_hooks.VERSION}</strong><!-- ELSEIF api_hooks.IS_UP_TO_DATE === false and not S_HOOK_ERROR --><strong class="error">{api_hooks.VERSION}</strong><br />[ <a onclick="window.open(this.href); return false;" href="{api_hooks.U_LAST_UPDATE}">{L_MORE_INFORMATION}</a> ]<!-- ELSE -->{api_hooks.VERSION}<!-- ENDIF --></td>
+						<td style="text-align: center; width: 15%;">{api_hooks.DATE}</td>
+						<td style="text-align: center; width: 30%;"><strong>{api_hooks.FILE}</strong><a href="javascript:void(0)" style="float: right;" onclick="api_info('{LA_ACP_PHPBB_API_SHA1}', '{api_hooks.SHA1}', false, true, false)">[ {L_ACP_PHPBB_API_SHA1} ]</a></td>
+					</tr>
+					<!-- ENDIF -->
+				<!-- END api_hooks -->
+				<tr><td class="row3" colspan="6"><strong>{L_ACP_PHPBB_API_HOOK_UNINSTALLED}</strong></td></tr>
+				<!-- BEGIN api_hooks -->
+					<!-- IF not api_hooks.INSTALLED -->
+						<tr class="<!-- IF api_hooks.S_ROW_COUNT is even -->row1<!-- ELSE -->row2<!-- ENDIF --><!-- IF api_hooks.IS_OUTDATED --> outdated<!-- ENDIF --><!-- IF api_hooks.KEY_STATUS == 2 --> suspended<!-- ENDIF -->">
+						<td style="text-align: center;"><a href="{api_hooks.U_DOWNLOAD}">{ICON_HOOK_DOWNLOAD}</a>&nbsp;&nbsp;&nbsp;<a href="{api_hooks.U_INSTALL}">{ICON_HOOK_INSTALL}</a>&nbsp;&nbsp;<a href="{api_hooks.U_DELETE}">{ICON_HOOK_DELETE}</a></td>
+						<td style="text-align: center;"><!-- IF not S_HOOK_ERROR --><div class="hook-origin<!-- IF api_hooks.OFFICIAL --> official<!-- ELSE --> unofficial<!-- ENDIF -->"><!-- IF api_hooks.OFFICIAL -->{L_ACP_PHPBB_API_HOOK_OFFICIAL}<!-- ELSE -->{L_ACP_PHPBB_API_HOOK_UNOFFICIAL}<!-- ENDIF --></div><!-- ENDIF -->{api_hooks.NAME}</td>
+						<td style="text-align: center;"><em><!-- IF api_hooks.WEBSITE --><a href="{api_hooks.WEBSITE}"><strong>{api_hooks.AUTHOR}</strong></a><!-- ELSE -->{api_hooks.AUTHOR}<!-- ENDIF --></em></td>
+						<td style="text-align: center;"><!-- IF api_hooks.IS_UP_TO_DATE === true and not S_HOOK_ERROR --><strong class="ok">{api_hooks.VERSION}</strong><!-- ELSEIF api_hooks.IS_UP_TO_DATE === false and not S_HOOK_ERROR --><strong class="error">{api_hooks.VERSION}</strong><br />[ <a onclick="window.open(this.href); return false;" href="{api_hooks.U_LAST_UPDATE}">{L_MORE_INFORMATION}</a> ]<!-- ELSE -->{api_hooks.VERSION}<!-- ENDIF --></td>
+						<td style="text-align: center;">{api_hooks.DATE}</td>
+						<td style="text-align: center;"><strong>{api_hooks.FILE}</strong><a href="javascript:void(0)" style="float: right;" onclick="api_info('{LA_ACP_PHPBB_API_SHA1}', '{api_hooks.SHA1}', false, true, false)">[ {L_ACP_PHPBB_API_SHA1} ]</a></td>
+					</tr>
+					<!-- ENDIF -->
+				<!-- END api_hooks -->
+			<!-- ELSE -->
+			<tr class="row1">	
+				<td style="text-align: center;" colspan="6"><em>-</em></td>
+			</tr>
+			<!-- ENDIF -->
+			</tbody>
+		</table>
+	<form id="keys_list" action="{U_ACTION}" method="post"{S_FORM_ENCTYPE}>
+		<fieldset style="width: 40%;float: left;" id="psubmit">
+			<legend>{L_ACP_PHPBB_API_UPLOAD_HOOK}</legend>
+				<p>{L_ACP_PHPBB_API_UPLOAD_HOOK_EXP}</p>
+				<input type="file" name="hookupload" id="hookupload" value="" style="width:50%" />
+				<input type="hidden" name="action" value="upload" style="width:50%" />
+				{S_FORM_TOKEN}
+				<br /><br /><input type="submit" onclick="run_upload();" name="submithook" value="{L_ACP_PHPBB_API_UPLOAD}" id="submithook" class="button1" />
+		</fieldset>
+	</form>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<div style="text-align:center;padding-top:15px;clear: both;"><span style="font-size:0.90em;"><em>{ERRORS_VERSION}</em></span></div>
+<script type="text/javascript">
+// <![CDATA[
+//Hook the CSS to the header.
+$('head').append('<link rel="stylesheet" media="all" type="text/css" href="style/jquery_api/css/api/jqueryui.css" />');
+$('head').append('<link rel="stylesheet" media="all" type="text/css" href="style/jquery_api/css/api/jqueryui-timepicker.css" />');
+$('head').append(
+'<style>' +
+	'.ok{color: green;}' +
+	'.official{background-color: #009933;}' +
+	'.unofficial{background-color: #8B0000;}' +
+	'.hook-origin{float: left;border-radius: 4px 4px 4px 4px;color: #FFFFFF;display: inline-block;font: bold 9px Arial;margin: 2px;padding: 2px;text-transform: uppercase;}' +
+'</style>'
+);
+$(".spinner").spinner({
+	spin: function( event, ui ) {
+		if (ui.value < 0 ) {
+			$( this ).spinner( "value", 0 );
+			return false;
+		}
+	}
+});
+$('#hookupload').change(function() {
+	$('#keys_list').submit();
+	run_upload();
+});
+$('textarea').autosize();
+$('textarea').css({
+	"transition":" height 0.2s ease-in-out 0s",
+	"border-radius" : "5px",
+	"resize" : "horizontal"
+});
+$('.key_id').effect('highlight', 800);
+/*
+//Tooltip look really weird here :o
+$('.title').tooltip({
+	content: function(callback) {
+		callback($(this).prop('title').replace('|', '<br />')); 
+	},
+	show : {duration: 100},
+	hide : {duration: 100},
+	position: { my: "left+15 center", at: "right center" }
+});*/
+function run_upload(){
+	$('#submithook').hide();
+	$('#psubmit').append('<img src="images/api/downloading_hook.gif" alt="{LA_DOWNLOADING_FILE}"/>');
+}
+function api_info(title, message, alert, field, callback){
+	okBtn = '{LA_CLOSE_WINDOW}';
+	btns = {};
+	btns[okBtn] = function () {
+		$(this).dialog('close');
+		if (callback){
+			eval(callback);
+		}
+	};
+	if (field)
+	{
+		message = '<input type="text" style="text-align: center;" class="full inputbox ui-widget-content ui-corner-all" value="' + message + '" />';
+	}
+	$('<div></div>').appendTo('body')
+	.html('<div>' + (alert ? '<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>' : '') + '<p>' + message + '</p></div>')
+	.dialog({
+		modal: true, title: title, 
+		zIndex: 10000, autoOpen: true,
+		width: '350px', resizable: true,
+		buttons: btns, 
+		show: {effect : 'blind'},
+		hide: {effect : 'blind'}
+	});
+}
+function api_confirm(msg)
+{
+	return confirm(msg);
+}
+function numbersonly(myfield, e)
+{
+	var key;
+	var keychar;
+
+	if (window.event)
+	{
+	   key = window.event.keyCode;
+	}
+	else if (e)
+	{
+	   key = e.which;
+	}
+	else
+	{
+		return true;
+	}
+	keychar = String.fromCharCode(key);
+	if ((key==null) || (key==0) || (key==8) || (key==9) || (key==13) || (key==27))
+	{
+	   return true;
+	}
+	else if ((('0123456789').indexOf(keychar) > -1))
+	{
+	   return true;
+	}
+	else
+	{
+	   return false;
+	}
+
+}
+function phpbb_api()
+{
+	if (confirm('{LA_CONFIRM_OPERATION}'))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	} 
+}
+// ]]>
+</script>
+<!-- INCLUDE overall_footer.html -->

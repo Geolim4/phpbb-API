@@ -1,0 +1,357 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE api/acp_phpbb_api_jquery_package.html -->
+<!-- * @version $Id: acp_phpbb_api_stats.html v{S_VERSION} 13h13 10/19/2013 Geolim4 Exp $ -->
+<script type="text/javascript">
+// <![CDATA[
+//Hook the CSS to the header, it avoid us to modify admin.css ;)
+$('head').append('<link rel="stylesheet" media="all" type="text/css" href="style/jquery_api/css/api/jqueryui.css" />');
+$('head').append('<link rel="stylesheet" media="all" type="text/css" href="style/jquery_api/css/api/jqueryui-timepicker.css" />');
+$('head').append(
+'<style>' + 
+		'html.busy, html.busy * {cursor: wait !important;}' +
+		'map[id^="pictureMap"] area {cursor: pointer;}' +
+		'div.pChartPicture { border: 0px; }' + 
+		'.lazy-container{border-radius: 4px 4px 0 0;height: 460px;min-height: 460px;overflow: hidden;position: relative; width: 900px;}' + 
+		'.lazy-container img{position: absolute; top:0px: left 0px; z-index: 5;}' + 
+		'.lazy-container p{font-size: 1.3em;font-style: italic; margin-left: 30px; position: absolute;}' + 
+		'.lazy-container fieldset{min-height: 50px;}' +
+		'.etabs {margin: 0 0 0 10px; padding: 0; }' + 
+		'#testDiv{z-index: 999;}' + 
+		'#testDiv div div:first-child{width: 90px;overflow: hidden; text-overflow: ellipsis;}' + 
+		'#testDiv div div table tbody tr td{color: black; font-family: "Trebuchet MS",Helvetica,sans-serif;font-size: 1.2em;font-weight: bold;}' + 
+		'#tab-container fieldset, #subtab-container fieldset{border-radius: 5px; border: 1px solid #000; display: block; margin-top: -2px; padding: 20px;}' +
+		'.tab { display: inline-block; zoom:1; *display:inline; background: #eee; border: solid 1px #999; border-bottom: none; border-radius: 4px 4px 0 0; }' + 
+		'.tab a { font-size: 14px; line-height: 2em; display: block; padding: 0 10px; outline: none; }' + 
+		'.tab a:hover { text-decoration: underline; }' + 
+		'.tab.active { background: #fff; padding-top: 6px; position: relative; top: -1px; z-index: 1; border-color: #666; }' + 
+		'.tab a.active { font-weight: bold; }' + 
+		'.tab-container .panel-container { background: #fff; border: solid #666 1px; padding: 10px; border-radius: 0 4px 4px 4px; }' + 
+		'span.ui-text {margin-bottom: -2px;}' +
+		'#day-items, #day-items > table {display: none;}' +
+		'#day-items tr {background-color: #EFF0F0;}' +
+		'#day-items td, #day-items th{text-align: center;}' +
+		'#view-more td{border: 1px dashed #93C8D2;}' +
+		'#view-more td a{display: block;}' +
+		'.auto-height{height: auto !important; overflow: auto !important;}' +
+'</style>'
+);
+$.fn.maphilight.defaults = {
+	fill: true, fillColor: '000000', fillOpacity: 0.2,
+	stroke: true, strokeColor: 'FFFF66', strokeOpacity: 1,
+	strokeWidth: 1, fade: true, alwaysOn: true, 
+	neverOn: false, groupBy: false, wrapClass: true,
+	shadow: true, shadowX: 0, shadowY: 0,
+	shadowRadius: 6, shadowColor: '000000', shadowOpacity: 0.8,
+	shadowPosition: 'outside', shadowFrom: false
+}
+// ]]>
+</script>
+<a name="maincontent"></a>
+<h1>{TITLE} <img src="{TITLE_IMG}" title="{TITLE}" alt="{TITLE}" style="float:right" /></h1>
+<p>{TITLE_EXPLAIN}</p>
+<!-- IF S_ERROR -->
+<div class="errorbox">
+	<h3>{L_WARNING}</h3>
+	<p>{ERROR_MSG}</p>
+</div>
+<!-- ENDIF -->
+<!-- IF S_STATS_MANAGE -->
+<div id="tab-container" class="tab-container">
+	<p class="quick" style="float: right;">[&nbsp;<a href="{U_PCHART_CHECK}">{L_ACP_PHPBB_API_PCHART_CHECK}</a>&nbsp;]</p>
+	<ul class="etabs">
+		<!-- BEGIN timeline -->
+			<li class="year-tabs tab"><a href="#apitabs{timeline.S_YEAR_COUNT}" class="apitabs" onclick="run_lazyload('#seed_{timeline.SEED},<!-- BEGIN month --><!-- IF timeline.month.S_MONTH_COUNT === 12 -->#seed_{timeline.month.SEED}<!-- ENDIF --><!-- END month -->');">{timeline.YEAR}</a></li>
+		<!-- END timeline -->
+	</ul>
+	<fieldset>
+	<!-- BEGIN timeline -->
+	  <div id="apitabs{timeline.S_YEAR_COUNT}">
+			<div class="lazy-container">
+				<img id="seed_{timeline.SEED}" src="style/jquery_api/wait.gif" class="lazy" title="" alt="" /><p id="seed_{timeline.SEED}p">{L_ACP_PHPBB_API_LOADING}</p>
+			</div>
+			<br /><hr />
+			<div id="subtab-container{timeline.YEAR}" class="tab-container">
+				<ul class='etabs'>
+					<!-- BEGIN month -->
+						<li class='tab'><a href="#apisubtabs{timeline.YEAR}{timeline.month.S_MONTH_COUNT}" id="li{timeline.month.SEED}" class="subapitabs" onclick="run_lazyload('#seed_{timeline.month.SEED}')">{timeline.month.MONTH}</a></li>
+					<!-- END month -->
+				</ul>
+				<fieldset class="month">
+				<!-- BEGIN month -->
+				  <div class="apisubtabs" id="apisubtabs{timeline.YEAR}{timeline.month.S_MONTH_COUNT}">
+						<div class="lazy-container">
+							<img id="seed_{timeline.month.SEED}" src="style/jquery_api/wait.gif" class="lazy" title="" alt="" /><p id="seed_{timeline.month.SEED}p">{L_ACP_PHPBB_API_LOADING}</p>
+						</div>
+				  </div>
+				<!-- END month -->
+			  </fieldset>
+			</div>
+	  </div>
+	<!-- END timeline -->
+	</fieldset>
+</div>
+<fieldset id="day-stats">
+	<legend>{L_ACP_PHPBB_API_STATS_DAY}</legend>
+	<span class="ui-text ui-icon ui-icon-lightbulb" style="display: inline-block;"></span><em>{L_ACP_PHPBB_API_STATS_DAY_EXP}</em>
+	<div class="lazy-container">
+		<img id="day-stats-img" src="style/jquery_api/wait.gif" class="lazyday" title="" alt="" /><p id="day-stats-p">{L_ACP_PHPBB_API_LOADING}</p>
+	</div>
+</fieldset>
+<div class="lazy-container auto-height" style="width: auto;">
+	<fieldset id="hour-stats">
+		<legend>{L_ACP_PHPBB_API_STATS_HOURS}</legend>
+		<span class="ui-text ui-icon ui-icon-lightbulb" style="display: inline-block;"></span><em>{L_ACP_PHPBB_API_STATS_HOURS_EXP}</em>
+		<div id="day-items">
+			<img id="hour-stats-img" src="style/jquery_api/wait.gif" title="" alt="" /><p id="hour-stats-p">{L_ACP_PHPBB_API_LOADING}</p>
+		</div>
+	</fieldset>
+</div>
+<!-- ENDIF -->
+<script type="text/javascript">
+// <![CDATA[
+var docloaded = false;
+var ajax_process = false;
+var items = 0;
+var currentimg = '';
+var noimgmonth = {0:"",1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:"",9:"",10:"",11:""};
+var maploaded = {}, imgloaded = {}, map_uri = {}, hour_uri = {}, key_group = {}, ip_group = {};
+var day_uri = {<!-- BEGIN timeline --><!-- IF timeline.S_YEAR_COUNT > 1 -->, <!-- ENDIF -->"{timeline.YEAR}":{<!-- BEGIN month --><!-- IF timeline.month.S_MONTH_COUNT > 1 -->, <!-- ENDIF -->"{timeline.month.MONTH_SHORT}": {<!-- BEGIN day --><!-- IF timeline.month.day.S_DAY_COUNT > 1 -->, <!-- ENDIF -->"{timeline.month.day.DAY}": "{timeline.month.day.U_LINK}"<!-- END day -->}<!-- END month -->}<!-- END timeline -->};
+<!-- BEGIN timeline -->
+$('#seed_{timeline.SEED}').attr('data-original', '{timeline.U_LINK}');<!-- BEGIN month -->$('#seed_{timeline.month.SEED}').attr('data-original', '{timeline.month.U_LINK}');<!-- END month -->
+<!-- END timeline -->
+$('#day-stats-img').attr('data-original', '{U_DAY_STATS_IMG}');
+$("#tab-container"<!-- BEGIN timeline --> + ",#subtab-container{timeline.YEAR}"<!-- END timeline -->).easytabs({
+	animationSpeed: 'fast', animate: true,
+	transitionIn: 'slideDown', transitionUp: 'slideUp',
+	transitionCollapse: 'slideUp', transitionUncollapse:  'slideDown',
+	defaultTab: 'li:last-child'
+});
+<!-- IF S_SINGLE_STAT -->
+$('#toggle, #tabs, #menu, #page-header').hide();
+switch_menu();
+<!-- ENDIF -->
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+function load_day_hours(uri)
+{
+	var i = 0;
+	map_uri['pictureMap-day-stats-img'] = {};
+	hour_uri = {};
+	while (i < 25)
+	{
+		hour_uri[i] = uri + '&range_hour=' + i;
+		map_uri['pictureMap-day-stats-img'][i] = "javascript:get_hourly_calls(" + [i-1] + ", 0)";
+		i++;
+	}
+}
+$( document ).ready(function() {
+		$('html, body').animate({
+			scrollTop: $("#main").offset().top
+		}, 800);
+	if (!docloaded){
+		//Set a timeout here in order to fix a Firefox issue https://geolim4.com/tracker/index.php?do=details&task_id=3
+		setTimeout(function(){
+			run_lazyload('img.lazy:visible');
+			run_day_tab(false, '{U_DAY_STATS_IMG}');
+			docloaded = true;
+		}, 500);
+	}
+});
+$(function () {
+	$(".apitabs").click(function (){
+		$('html, body').animate({
+			scrollTop: $("fieldset:visible").offset().top
+		}, 800);
+	});
+	$(".subapitabs, area").click(function (){
+		$('html, body').animate({
+			scrollTop: $(".apisubtabs:visible").last().offset().top
+		}, 800);
+	});
+});
+
+function imagemap_handler(mrgreen) {
+<!-- BEGIN timeline -->
+	if (typeof(maploaded['seed_{timeline.SEED}']) == 'undefined' && mrgreen == 'seed_{timeline.SEED}'){
+		map_uri["pictureMap-{timeline.SEED}"] = {<!-- BEGIN month --><!-- IF timeline.month.S_MONTH_COUNT > 1 -->, <!-- ENDIF -->{timeline.month.S_MONTH_COUNT} : "javascript:run_month_tab('{timeline.month.SEED}', '#apisubtabs{timeline.YEAR}{timeline.month.S_MONTH_COUNT}')"<!-- END month -->};
+		addImage("seed_{timeline.SEED}","pictureMap-{timeline.SEED}","{timeline.U_LINK_IMAGEMAP}");
+		maploaded['seed_{timeline.SEED}'] = true;
+		return true;
+	}<!-- BEGIN month -->
+	if (typeof(maploaded['seed_{timeline.month.SEED}']) == 'undefined' && mrgreen == 'seed_{timeline.month.SEED}'){
+		map_uri["pictureMap-{timeline.month.SEED}"] = {<!-- BEGIN day --><!-- IF timeline.month.day.S_DAY_COUNT > 1 -->, <!-- ENDIF -->{timeline.month.day.S_DAY_COUNT} : "javascript:run_day_tab(true, day_uri['{timeline.YEAR}']['{timeline.month.MONTH_SHORT}']['{timeline.month.day.DAY}'])"<!-- END day -->};
+		addImage("seed_{timeline.month.SEED}","pictureMap-{timeline.month.SEED}","{timeline.month.U_LINK_IMAGEMAP}", noimgmonth);
+		maploaded['seed_{timeline.month.SEED}'] = true;
+		return true;
+	}<!-- END month -->
+<!-- END timeline -->
+}
+function run_month_tab(seed, uri){
+	window.location = uri;
+	$('html, body').animate({
+		scrollTop: $("fieldset.month:visible").last().offset().top
+	}, 800);
+	run_lazyload('#seed_' + seed);
+}
+function run_day_tab(scrollto, uri){
+	var jseed = Math.floor(Math.random()*1000);
+	if (scrollto){
+		$('html, body').animate({
+			scrollTop: $("#day-stats").last().offset().top
+		}, 800);
+	}
+	$('#day-stats-img').remove();
+	$('div.lazyday').remove();
+	$('#day-stats').children('div').children('p').before('<img id="day-stats-img" data-original= "' + uri + '&jseed=' + jseed + '" src="style/jquery_api/wait.gif" class="lazyday" title="" alt="" />');
+	setTimeout(function(){
+		$('#day-stats-img').load(function() {
+			load_day_hours(remove_parameter(uri, ['action', 'image', 'interval', 'seed']));
+			addImage("day-stats-img","pictureMap-day-stats-img", uri + '&{S_IMGMAP_PARAM}');
+		});
+		$('#day-stats-img').lazyload({
+			effect : "fadeIn",
+			threshold : 200,
+		});
+	}, 500);
+	$('#day-stats-p').html('{LA_ACP_PHPBB_API_LOAD_STATS}');
+}
+function get_hourly_calls(hid, start){
+	//get_hourly_calls() is already busy, skip it.
+	if (ajax_process){
+		$('html, body').animate({
+			scrollTop: $((items ? '#tr' + items : "#hour-stats")).offset().top
+		}, 800);
+		return;
+	}
+	$('html, body').addClass('busy');
+	$.ajax({
+		type: 'GET',
+		url: hour_uri[hid],
+		data: {'action' : 'ajax', 'start' : start<!-- IF S_SINGLE_STAT -->, 'key_id' : '{S_KEY_ID}'<!-- ENDIF -->},
+		timeout: 5000,
+		dataType: 'json',
+		beforeSend: function(){
+			ajax_process = true;
+			if (start === 0){
+				items = 0;
+				$('#day-items').children('table').remove();
+			}
+			$('#day-items').show(300);
+			//$('#day-items').children('ul').slideUp(600);
+			$('#hour-stats-img, #hour-stats-p').show(300);
+		},
+		success: function(data, textStts, errThrown) {
+			//$('#day-items').append('<ul></ul>');
+			if (start === 0){
+				$('#day-items').append(
+					'<table cellspacing="1">' +
+						'<thead>' +
+							'<tr>' +
+								'<th title="{LA_ACP_PHPBB_API_EVENT_ID}">&#35;</th>' +
+								'<th>{LA_TIME}</th>' +
+								'<th>{LA_ACP_PHPBB_API_KEY_TITLE}</th>' +
+								'<th>{LA_USERNAME}</th>' +
+								'<th>{LA_IP}</th>' +
+								'<th>{LA_ACTION}</th>' +
+							'</tr>' +
+						'</thead>' +
+						'<tbody>' +
+						'</tbody>' +
+					'</table>'
+				);
+			}
+			$('html, body').animate({
+				scrollTop: $((items ? '#tr' + items : "#hour-stats")).offset().top
+			}, 800);
+			if (Object.size(data) === 0){
+				$('#day-items').children('table').children('tbody').append('<tr class="row1"><td colspan="6"><strong class="error">{LA_NO_ENTRIES}</strong></td></tr>');
+			}
+			for (var i in data) {
+				if (typeof(data[i]['key_id']) != 'undefined'){
+					if (typeof(key_group[data[i]['key_id']]) == 'undefined'){
+						key_group[data[i]['key_id']] = 'rgb(' + (Math.floor((256-199)*Math.random()) + 200) + ',' + (Math.floor((256-199)*Math.random()) + 200) + ',' + (Math.floor((256-199)*Math.random()) + 200) + ')';
+					}
+					if (typeof(ip_group[data[i]['ip']]) == 'undefined'){
+						ip_group[data[i]['ip']] = 'rgb(' + (Math.floor((256-199)*Math.random()) + 200) + ',' + (Math.floor((256-199)*Math.random()) + 200) + ',' + (Math.floor((256-199)*Math.random()) + 200) + ')';
+					}
+					if (start === 0){
+						$('#day-items').children('table').children('tbody').append('<tr id="tr' + (parseInt(items) + 1) + '"><td>' + data[i]['history_id'] + '</td><td class="hour-list time">' + data[i]['time'] + '</td><td style="background-color:' + key_group[data[i]['key_id']] + '" class="hour-list key">' + data[i]['key_id'] + '</td><td class="hour-list username">' + data[i]['username'] + '</td><td style="background-color:' + ip_group[data[i]['ip']] + '" class="hour-list">' + data[i]['ip'] + '</td><td class="hour-list">' + data[i]['method'] + '</td></tr>');
+					}else{
+						$('#view-more').before('<tr id="tr' + (parseInt(items) + 1) + '"><td>' + data[i]['history_id'] + '</td><td class="hour-list time">' + data[i]['time'] + '</td><td style="background-color:' + key_group[data[i]['key_id']] + '" class="hour-list key">' + data[i]['key_id'] + '</td><td class="hour-list username">' + data[i]['username'] + '</td><td style="background-color:' + ip_group[data[i]['ip']] + '" class="hour-list">' + data[i]['ip'] + '</td><td class="hour-list">' + data[i]['method'] + '</td></tr>');
+					}
+					items++;
+				}
+			}
+			if (typeof(data['view_more']) != 'undefined'){
+				if (start === 0){
+					$('#day-items').children('table').children('tbody').append('<tr id="view-more" class="row2"><td colspan="6"><a href="javascript:get_hourly_calls(' + hid + ',' + items +')">{LA_ACP_PHPBB_API_VIEW_MORE}</a></td></tr>');
+				}else{
+					$('#view-more').html('<td colspan="6"><a href="javascript:get_hourly_calls(' + hid + ',' + items +')">{LA_ACP_PHPBB_API_VIEW_MORE}</a></td>');
+				}
+				$('#hour-stats').children('legend').html('{LA_ACP_PHPBB_API_STATS_HOURS} (' + items + '+)');
+			}else{
+				$('#view-more').remove();
+				$('#hour-stats').children('legend').html('{LA_ACP_PHPBB_API_STATS_HOURS} (' + items + ')');
+			}
+			start = items;
+			$('#hour-stats-img, #hour-stats-p').hide(300);
+			$('#day-items').children('table').fadeIn(600);
+		},
+		complete: function(data, textStts, errThrown) {
+			ajax_process = false;
+			$('html, body').removeClass('busy');
+		},
+		error: function(data, textStts, errThrown) {
+
+		},
+	});
+}
+
+function remove_parameter(url, parameter)
+{
+	for (var i in parameter) {
+		var urlparts= url.split('?');
+		if (urlparts.length>=2)
+		{
+			var urlBase=urlparts.shift(); //get first part, and remove from array
+			var queryString=urlparts.join("?"); //join it back up
+			var prefix = encodeURIComponent(parameter[i])+'=';
+			var pars = queryString.split(/[&;]/g);
+			for (var ii= pars.length; ii-- > 0;){               //reverse iteration as may be destructive
+				if (pars[ii].lastIndexOf(prefix, 0)!==-1)   //idiom for string.startsWith
+					pars.splice(ii, 1);
+			}
+			url = urlBase+'?'+pars.join('&');
+		}
+	}
+	return url;
+}
+
+function run_lazyload(imgtoload){
+	var timefire = 500;
+	if (typeof(imgloaded[imgtoload]) != 'undefined'){
+		return;
+	}
+	imgloaded[imgtoload] = true;
+	setTimeout(function(){ 
+		$(imgtoload).load(function() {
+			imagemap_handler($(this).attr('id'));
+		});
+		$(imgtoload).lazyload({
+			effect : "fadeIn",
+			threshold : 200,
+		});
+	}, timefire);
+	$(imgtoload).each(function(index){
+		$('#' + this.id + 'p').html('{LA_ACP_PHPBB_API_LOAD_STATS}');
+	});
+}
+// ]]>
+</script>
+<!-- INCLUDE overall_footer.html -->

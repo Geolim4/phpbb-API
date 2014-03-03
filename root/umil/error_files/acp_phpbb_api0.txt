@@ -1,0 +1,20 @@
+phpBB API
+PHP Version: 5.4.12
+DBMS: MySQL 5.6.12-log
+phpBB3 Version: 3.0.11
+
+Ajout du module ucp : UCP_PHPBB_API
+ERREUR : le module existe déjà.
+
+Ajout du module acp : Statistiques
+ERREUR : la catégorie parent spécifiée pour ce module n’existe pas.
+
+Ajout du module acp : Statistiques
+ERREUR : la catégorie parent spécifiée pour ce module n’existe pas.
+
+Ajout du module acp : Statistiques
+ERREUR : la catégorie parent spécifiée pour ce module n’existe pas.
+
+Ajout du module acp : Statistiques
+ERREUR : la catégorie parent spécifiée pour ce module n’existe pas.
+

@@ -1,0 +1,219 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE api/acp_phpbb_api_jquery_package.html -->
+<!-- * @version $Id: acp_phpbb_api_logs.html v{S_VERSION} 13h13 10/19/2013 Geolim4 Exp $ -->
+<script type="text/javascript">
+// <![CDATA[
+//Hook the CSS to the header, it avoid us to modify admin.css ;)
+$('head').append(
+'<style>' + 
+		'code {color: #000000;line-height: 1.1em; font-size: 1.1em;}' +
+		'p.download span.ui-icon {display: inline-block; margin-bottom: -3px;}' +
+		'p.download {margin-bottom: -20px; font-size: 0.85em;}' +
+'</style>'
+);
+// ]]>
+</script>
+<a name="maincontent"></a>
+
+<h1>{TITLE} <img src="{TITLE_IMG}" title="{TITLE}" alt="{TITLE}" style="float:right" /></h1>
+<p>{TITLE_EXPLAIN}</p>
+
+<form id="list" method="post" action="{U_ACTION}">
+
+<!-- IF PAGINATION -->
+<!--
+<div class="pagination" style="float: right; margin: 15px 0 2px 0">
+	<a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{S_ON_PAGE}</a> &bull; <span>{PAGINATION}</span>
+</div>
+-->
+<!-- ENDIF -->
+
+<!-- IF .log -->
+<div class="clearfix">&nbsp;</div>
+<div><br style="clear: both;" /></div>
+	<fieldset>
+		<legend onclick="$('#advsearch, #noobspanopen, #noobspanclose').fadeToggle(200);"><a href="javascript:void(0)">{L_SEARCH_ADV}&nbsp;<span id="noobspanopen"<!-- IF not S_LOG_RESULTS and not S_LOG_USERNAME and not S_LOG_KEY_ID and not S_KEYWORDS and not S_LOG_DATE_FROM and not S_LOG_DATE_TO --> style="display: none;"<!-- ENDIF -->>[-]</span><span id="noobspanclose"<!-- IF S_LOG_RESULTS or S_LOG_USERNAME or S_LOG_KEY_ID or S_KEYWORDS or S_LOG_DATE_FROM or S_LOG_DATE_TO --> style="display: none;"<!-- ENDIF -->>[+]</span></a></legend>
+		<div id="advsearch"<!-- IF not S_LOG_RESULTS and not S_LOG_USERNAME and not S_LOG_KEY_ID and not S_KEYWORDS and not S_LOG_DATE_FROM and not S_LOG_DATE_TO --> style="display: none;"<!-- ENDIF -->>
+			<dl>
+				<dt><label for="log_username">{L_SELECT_USER}:</label></dt>
+				<dd><input class="text medium" type="text" id="log_username" name="log_username" value="{S_LOG_USERNAME}" /></dd>
+				<dd>[ <a href="{U_FIND_USERNAME}" onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a> ]</dd>
+			</dl>
+			<dl>
+				<dt><label for="log_key_id">{L_ACP_PHPBB_API_KEY_SELECT}:</label></dt>
+				<dd>
+					<!-- IF S_USER_KEYS --><select id="user_keys" onchange="if (this.options[this.selectedIndex].value != -1){$('#log_key_id').val(this.value); document.forms['list'].submit();}">{S_USER_KEYS}</select><br /><!-- ENDIF -->
+					<input class="text medium" type="text" id="log_key_id" name="log_key_id" value="{S_LOG_KEY_ID}" />
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="keywords">{L_TIME}:</label><br />{L_ACP_PHPBB_API_KEY_TIME_EXP}</dt>
+				<dd><input type="text" class="text" id="log_date_from" name="log_date_from" readonly="readonly" maxlength="16" size="16" value="{S_LOG_DATE_FROM}" />&nbsp;<strong>-&gt;</strong>&nbsp;<input type="text" class="text" id="log_date_to" name="log_date_to" readonly="readonly" maxlength="16" size="16" value="{S_LOG_DATE_TO}" /></dd>
+				<dd>[ <a href="javascript:void(0)" onclick="$('#log_date_from, #log_date_to').val('');">{L_RESET}</a> ]</dd>
+			</dl>
+			<dl>
+				<dt><label for="keywords">{L_SEARCH_KEYWORDS}:</label></dt>
+				<dd><input class="text medium" type="text" id="keywords" name="keywords" value="{S_KEYWORDS}" /></dd>
+			</dl>
+			<p class="quick">
+				{L_ACP_PHPBB_API_RESULT}:<select name="results" id="results">{S_RESULTS}</select><br />
+				<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />&nbsp;
+				<input type="submit" name="submitadv" value="{L_SUBMIT}" class="button1" />
+			</p>
+		</div>
+	</fieldset>
+	<!-- IF S_HARD_LOG -->
+		<p class="download">{S_HARD_LOG_SIZE}&nbsp;<span class="ui-icon ui-icon-info title-tooltip" title="{L_ACP_PHPBB_API_ERR_LOGS_HARD_EXP}"></span><br />
+			[<a href="{S_HARD_LOG_DOWNLOAD}">{L_DOWNLOAD}</a>&nbsp;|&nbsp;<a href="{S_HARD_LOG_PURGE}">{L_ACP_PHPBB_API_ERR_LOGS_PURGE}</a>]
+		</p>
+	<!-- ENDIF -->
+	<p class="quick">{TOTAL}</p>
+	<table cellspacing="1">
+	<thead>
+	<tr>
+		<th>{L_USERNAME}</th>
+		<th>{L_ACP_PHPBB_API_KEY_TITLE}</th>
+		<th>{L_IP}</th>
+		<th>{L_TIME}</th>
+		<th>{L_ACTION}</th>
+		<!-- IF S_CLEARLOGS -->
+			<th>{L_MARK}</th>
+		<!-- ENDIF -->
+	</tr>
+	</thead>
+	<tbody style="overflow-z: scrool;">
+	<!-- BEGIN log -->
+		<!-- IF log.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<td>
+				{log.USERNAME}
+				<!-- IF log.REPORTEE_USERNAME -->
+				<br />&raquo; {log.REPORTEE_USERNAME}
+				<!-- ENDIF -->
+			</td>
+			<td style="text-align: center;">{log.KEY_ID}</td>
+			<td style="text-align: center;">{log.IP}</td>
+			<td style="text-align: center;">{log.DATE}</td>
+			<td>{log.ACTION}<!-- IF log.DATA --><br /><span>{log.DATA}</span><!-- ENDIF --></td>
+			<!-- IF S_CLEARLOGS -->
+				<td style="text-align: center;"><input type="checkbox" class="radio" name="mark[]" value="{log.ID}" /></td>
+			<!-- ENDIF -->
+		</tr>
+	<!-- END log -->
+	</tbody>
+	</table>
+
+<!-- IF PAGINATION -->
+	<div class="pagination">
+		{TOTAL} &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{S_ON_PAGE}</a> &bull; <span>{PAGINATION}</span>
+	</div>
+<!-- ENDIF -->
+
+<!-- ELSE -->
+<!-- IF S_HARD_LOG -->
+	<p class="download">{S_HARD_LOG_SIZE}&nbsp;<span class="ui-icon ui-icon-info title-tooltip" title="{L_ACP_PHPBB_API_ERR_LOGS_HARD_EXP}"></span><br />
+		[<a href="{S_HARD_LOG_DOWNLOAD}">{L_DOWNLOAD}</a>&nbsp;|&nbsp;<a href="{S_HARD_LOG_PURGE}">{L_ACP_PHPBB_API_ERR_LOGS_PURGE}</a>]
+	</p>
+<!-- ENDIF -->
+<br />
+<div class="errorbox">
+		<p>{L_NO_ENTRIES}</p>
+</div>
+<!-- ENDIF -->
+
+<fieldset class="display-options">
+	{L_DISPLAY_LOG}: &nbsp;{S_LIMIT_DAYS}&nbsp;{L_SORT_BY}: {S_SORT_KEY} {S_SORT_DIR}
+	<input class="button2" type="submit" value="{L_GO}" name="sort" />
+	{S_FORM_TOKEN}
+</fieldset>
+<hr />
+
+<!-- IF .log and S_CLEARLOGS -->
+	<fieldset class="quick">
+		<input class="button2" type="submit" name="delall" value="{L_DELETE_ALL}" />&nbsp;
+		<input class="button2" type="submit" name="delmarked" value="{L_DELETE_MARKED}" /><br />
+		<p class="small"><a href="#" onclick="marklist('list', 'mark', true); return false;">{L_MARK_ALL}</a> &bull; <a href="#" onclick="marklist('list', 'mark', false); return false;">{L_UNMARK_ALL}</a></p>
+	</fieldset>
+<!-- ENDIF -->
+
+</form>
+<div style="text-align:center;padding-top:15px;"><span style="font-size:0.90em;"><em>{ERRORS_VERSION}</em></span></div>
+<script type="text/javascript">
+// <![CDATA[
+//Hook the CSS to the header.
+$('head').append('<link rel="stylesheet" media="all" type="text/css" href="style/jquery_api/css/api/jqueryui.css" />');
+$('head').append('<link rel="stylesheet" media="all" type="text/css" href="style/jquery_api/css/api/jqueryui-timepicker.css" />');
+$('head').append('<style>textarea.logsql{width: 200px; background-color: lightcoral; overflow: hidden; word-wrap: break-word; height: 15px; transition: height 0.2s ease-in-out 0s; border-radius: 5px 5px 5px 5px;}</style>');
+$('.title-tooltip').tooltip({
+content: function(callback) {
+	callback($(this).prop('title').replace('|', '<br />')); 
+},
+show : {duration: 100},
+hide : {duration: 100},
+position: { my: "left+15 center", at: "right center" }
+});
+$('#log_date_from').datetimepicker({
+	defaultDate : 0,
+	changeMonth: true,
+	changeYear: true,
+	prevText: '{L_ACP_PHPBB_API_PREV}',
+	nextText: '{L_ACP_PHPBB_API_NEXT}',
+	timeText: '{L_ACP_PHPBB_API_CLOCK}',
+	secondText: '{L_SECONDS}',
+	minuteText: '{L_MINUTES}',
+	hourText: '{L_HOURS}',
+	dayNames: [{DATETIME_DAY_NAMES}],
+	monthNames: [{DATETIME_MONTH_NAMES}],
+	monthNamesShort: [{DATETIME_MONTH_NAMES_SHORT}],
+	dayNamesMin: [{DATETIME_DAY_NAMES_MIN}],
+	currentText: '{L_ACP_PHPBB_API_NOW}',
+	closeText: '{L_ACP_PHPBB_API_CLOSE}',
+	onClose: function(dateText, inst) {
+		if ($('#log_date_to').val() != '') {
+			var testStartDate = $('#log_date_from').datetimepicker('getDate');
+			var testEndDate = $('#log_date_to').datetimepicker('getDate');
+			if (testStartDate > testEndDate)
+				$('#log_date_to').datetimepicker('setDate', testStartDate);
+		}
+		else {
+			$('#log_date_to').val(dateText);
+		}
+	},
+	onSelect: function (selectedDateTime){
+		$('#log_date_to').datetimepicker('option', 'minDate', $('#log_date_from').datetimepicker('getDate') );
+	}
+});
+$('#log_date_to').datetimepicker({
+	defaultDate : "+1w",
+	changeMonth: true,
+	changeYear: true,
+	prevText: '{L_ACP_PHPBB_API_PREV}',
+	nextText: '{L_ACP_PHPBB_API_NEXT}',
+	timeText: '{L_ACP_PHPBB_API_CLOCK}',
+	secondText: '{L_SECONDS}',
+	minuteText: '{L_MINUTES}',
+	hourText: '{L_HOURS}',
+	dayNames: [{DATETIME_DAY_NAMES}],
+	monthNames: [{DATETIME_MONTH_NAMES}],
+	monthNamesShort: [{DATETIME_MONTH_NAMES_SHORT}],
+	dayNamesMin: [{DATETIME_DAY_NAMES_MIN}],
+	currentText: '{L_ACP_PHPBB_API_NOW}',
+	closeText: '{L_ACP_PHPBB_API_CLOSE}',
+	onClose: function(dateText, inst) {
+		if ($('#log_date_from').val() != '') {
+			var testStartDate = $('#log_date_from').datetimepicker('getDate');
+			var testEndDate = $('#log_date_to').datetimepicker('getDate');
+			if (testStartDate > testEndDate)
+				$('#log_date_from').datetimepicker('setDate', testEndDate);
+		}
+		else {
+			$('#log_date_from').val(dateText);
+		}
+	},
+	onSelect: function (selectedDateTime){
+		$('#log_date_from').datetimepicker('option', 'maxDate', $('#log_date_to').datetimepicker('getDate') );
+	}
+});
+$('textarea').autosize();
+// ]]>
+</script>
+<!-- INCLUDE overall_footer.html -->

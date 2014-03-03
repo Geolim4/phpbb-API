@@ -1,0 +1,151 @@
+<!-- INCLUDE ucp_header.html -->
+<!-- IF S_KEY_EXISTS && S_KEY_SELECTOR -->
+<form id="key" method="post" action="{S_UCP_SELECTOR_ACTION}">
+	<div style="float: right; text-align: right;">
+		{L_UCP_PHPBB_API_KEY_ID}:&nbsp;<select onchange="this.form.submit()" name="key_id">{S_KEY_SELECTOR}</select>
+		<input type="submit" value="{L_GO}" class="button1" />
+		<br /><label for="uncensored">{L_UCP_PHPBB_API_UNCENSORED}</label>&nbsp;<input onclick="this.form.submit()" id="uncensored" type="checkbox" value="1" name="uncensored" class="radio"<!-- IF S_UNCENSORED --> checked="checked"<!-- ENDIF --> />
+	</div>
+</form>
+<!-- ENDIF -->
+<h2>{L_TITLE}</h2>
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+	<div class="panel">
+		<div class="inner"><span class="corners-top"><span></span></span>
+			<fieldset>
+				<!-- IF S_NO_API_KEY -->
+					<dl>
+						<dd><strong>{L_UCP_PHPBB_API_NO_KEY}</strong></dd>
+						<!-- IF S_CAN_GENERATE -->
+							<dd><em>{UCP_PHPBB_API_GENERATE}</em></dd>
+						<!-- ELSE -->
+							<dd><strong class="error">{L_UCP_PHPBB_API_GEN_AUTH}</strong></dd>
+						<!-- ENDIF -->
+					</dl>
+				<!-- ELSE -->
+					<dl>
+						<dt><label for="key_id">{L_UCP_PHPBB_API_KEY_ID}</label><br /><span class="error">{L_UCP_PHPBB_API_KEY_ID_EXP}</span></dt>
+						<dd>
+							<a id="showkey" href="javascript:display_key('showkey', 'key_id');" class="right">{L_DISPLAY}</a>
+							<input id="key_id" type="text" class="inputbox text medium key" onclick="this.select()" readonly="readonly" value="<!-- IF not S_API_MOD_UCP_CRYPT -->{S_REAL_KEY_ID}<!-- ENDIF -->"/>
+							<!-- IF S_IS_ADMIN_KEY and S_CAN_MANAGE_KEYS --><br /><span>{S_IS_ADMIN_KEY}</span><!-- ENDIF -->
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="secret_key">{L_UCP_PHPBB_API_SECRET_KEY}:</label><br />{L_UCP_PHPBB_API_SECRET_KEY_EXP}</dt>
+						<dd>
+							<a id="showsecretkey" href="javascript:display_key('showsecretkey', 'secret_key');" class="right">{L_DISPLAY}</a>
+							<input id="secret_key" type="text" class="inputbox text medium key" onclick="this.select()" readonly="readonly" value="<!-- IF not S_API_MOD_UCP_CRYPT -->{S_KEY_SECRET_KEY}<!-- ENDIF -->"/>
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="email_auth">{L_UCP_PHPBB_API_EMAIL}:</label></dt>
+						<dd>
+							<label><input type="radio" class="radio" name="email_auth" value="1"<!-- IF S_EMAIL_AUTH or S_IS_ADMIN_KEY --> checked="checked" id="email_auth"<!-- ENDIF --><!-- IF S_IS_DEACTIVATED or S_IS_ADMIN_KEY --> disabled="disabled"<!-- ENDIF -->/> {L_YES}</label>
+							<label><input type="radio" class="radio" name="email_auth" value="0"<!-- IF not S_EMAIL_AUTH and not S_IS_ADMIN_KEY --> checked="checked" id="email_auth"<!-- ENDIF --><!-- IF S_IS_DEACTIVATED or S_IS_ADMIN_KEY --> disabled="disabled"<!-- ENDIF -->/> {L_NO}</label>
+							<!-- IF S_IS_ADMIN_KEY --><br /><span>{L_UCP_PHPBB_API_ADMIN_KEY_INFO}</span><!-- ENDIF -->
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="force_post">{L_UCP_PHPBB_API_FORCE_POST}:</label><br />{L_UCP_PHPBB_API_FORCE_POST_EXP}</dt>
+						<dd>
+							<label><input type="radio" class="radio" name="force_post" value="1"<!-- IF S_FORCE_POST --> checked="checked" id="force_post"<!-- ENDIF --><!-- IF S_IS_DEACTIVATED --> disabled="disabled"<!-- ENDIF -->/> {L_YES}</label>
+							<label><input type="radio" class="radio" name="force_post" value="0"<!-- IF not S_FORCE_POST --> checked="checked" id="force_post"<!-- ENDIF --><!-- IF S_IS_DEACTIVATED --> disabled="disabled"<!-- ENDIF -->/> {L_NO}</label>
+						</dd>
+					</dl>
+					<!-- IF S_CAN_SET_KEY_IP -->
+						<dl>
+							<dt><label for="key_ips">{L_ACP_PHPBB_API_KEY_IPS}:</label><br />{L_ACP_PHPBB_API_KEY_IPS_EXP}</dt>
+							<dd>
+								<label><input type="radio" class="radio" name="key_ips_type" onclick="document.getElementById('key_ips').style.backgroundColor='lightgreen';" value="1"<!-- IF S_KEY_IPS_TYPE --> checked="checked" id="key_ips_type"<!-- ENDIF --><!-- IF S_IS_DEACTIVATED --> disabled="disabled"<!-- ENDIF -->/> {L_UCP_PHPBB_API_KEY_IPS_TYPE_A}</label>
+								<label><input type="radio" class="radio" name="key_ips_type" onclick="document.getElementById('key_ips').style.backgroundColor='lightcoral';" value="0"<!-- IF not S_KEY_IPS_TYPE --> checked="checked" id="key_ips_type"<!-- ENDIF --><!-- IF S_IS_DEACTIVATED --> disabled="disabled"<!-- ENDIF -->/> {L_UCP_PHPBB_API_KEY_IPS_TYPE_D}</label>
+								<br /><textarea cols="1" rows="5" style="width: 50%;background-color: <!-- IF S_KEY_IPS_TYPE -->lightgreen<!-- ELSE -->lightcoral<!-- ENDIF -->;" name="key_ips" id="key_ips"<!-- IF S_IS_DEACTIVATED --> disabled="disabled"<!-- ENDIF -->>{S_KEY_IPS}</textarea>
+							</dd>
+						</dl>
+					<!-- ENDIF -->
+					<dl>
+						<dt><label>{L_UCP_PHPBB_API_STATUS}:</label></dt>
+						<dd>
+							{S_UCP_PHPBB_API_STATUS}
+						</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_UCP_PHPBB_API_VALIDITY}:</label></dt>
+						<dd>
+							{S_UCP_PHPBB_API_VALIDITY}<!-- IF not S_IS_DEACTIVATED --><!-- IF S_IS_EXPIRED or S_IS_OUT_OF_QUOTA -->&nbsp;[&nbsp;{UCP_PHPBB_API_REGENERATE}&nbsp;]<!-- ENDIF --><!-- ENDIF -->
+						</dd>
+					</dl>
+				<!-- ENDIF -->
+			</fieldset>
+		<span class="corners-bottom"><span></span></span></div>
+	</div>
+<!-- IF not S_NO_API_KEY and not S_IS_DEACTIVATED -->
+	<fieldset class="submit-buttons">
+		{S_HIDDEN_FIELDS}
+		<input type="hidden" value="{S_KEY_ID}" name="key_id" />
+		<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp; 
+		<input type="submit" name="submit" value="{L_SUBMIT}" class="button1" />
+		{S_FORM_TOKEN}
+	</fieldset>
+<!-- ENDIF -->
+</form>
+<script type="text/javascript">
+// <![CDATA[
+//Hook the CSS to the header
+var head = document.getElementsByTagName('head')[0], style = document.createElement('style');
+var key_id = false;
+var css = 'input.key {text-align: center; letter-spacing: 0.05em; font-weight: bold; display: none;}' +
+'#key_ips {resize: vertical; margin-top: 5px;}';
+style.type = 'text/css';
+if (style.styleSheet){
+	style.styleSheet.cssText = css;
+} else {
+	style.appendChild(document.createTextNode(css));
+}
+head.appendChild(style);
+<!-- IF S_API_MOD_UCP_CRYPT -->
+function get_key(input_id) {
+	var xmlhttp;
+	var url = "{U_AJAX_GET_KEY}";
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	url = url + "&amp;input_id=" + input_id;
+	if (url.indexOf('?') == -1){
+			url = url + "?input_id=" + input_id;
+	}else{
+		url = url + "&amp;input_id=" + input_id;
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			document.getElementById(input_id).value = xmlhttp.responseText;
+		}else if(xmlhttp.readyState < 4){
+			document.getElementById(input_id).value = "{LA_UCP_PHPBB_API_LOADING}";
+		}
+	}
+	xmlhttp.open("POST", url.replace(/&amp;/g, '&'), true);
+	xmlhttp.send();
+}
+<!-- ENDIF -->
+function display_key(id, input_id){
+	<!-- IF S_API_MOD_UCP_CRYPT -->
+	if(!key_id){
+		get_key(input_id);
+	}
+	<!-- ENDIF -->
+	dE(id, 1, 'none');
+	dE(input_id, 1, 'inline-block');
+	setTimeout(function(){
+		dE(id, 1, 'inline');
+		dE(input_id, 1, 'none');
+		<!-- IF S_API_MOD_UCP_CRYPT -->
+		key_id = false;
+		document.getElementById(input_id).value = '';
+		<!-- ENDIF -->
+	}, 6000);
+}
+// ]]>
+</script>
+<!-- INCLUDE ucp_footer.html -->

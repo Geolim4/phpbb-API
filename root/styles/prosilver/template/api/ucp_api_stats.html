@@ -1,0 +1,82 @@
+<!-- INCLUDE ucp_header.html -->
+<!-- IF S_KEY_EXISTS && S_KEY_SELECTOR -->
+<form id="key" method="post" action="{S_UCP_SELECTOR_ACTION}">
+	<div style="float: right; text-align: right;">
+		{L_UCP_PHPBB_API_KEY_ID}:&nbsp;<select onchange="this.form.submit()" name="key_id">{S_KEY_SELECTOR}</select>
+		<input type="submit" value="{L_GO}" class="button1" />
+		<br /><label for="uncensored">{L_UCP_PHPBB_API_UNCENSORED}</label>&nbsp;<input onclick="this.form.submit()" id="uncensored" type="checkbox" value="1" name="uncensored" class="radio"<!-- IF S_UNCENSORED --> checked="checked"<!-- ENDIF --> />
+	</div>
+</form>
+<!-- ENDIF -->
+<h2>{L_TITLE}</h2>
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+		<fieldset class="responsive">
+			<dl>
+				<dt><label>{L_UCP_PHPBB_API_DAILY_USE}:</label></dt>
+				<dd>
+					<div class="stats-container">
+						<span>{S_QUERIES_PER_DAY}<!-- IF S_PERCENT_PER_DAY -->&nbsp;({S_PERCENT_PER_DAY}{L_UCP_PHPBB_API_PERCENT})<!-- ENDIF --></span>
+						<div style="width: {S_PERCENT_PER_DAY}%;">
+							<img src="{T_THEME_PATH}/images/api/full.gif" alt="{S_PERCENT_PER_DAY}{L_UCP_PHPBB_API_PERCENT}" />
+						</div>
+					</div>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label>{L_UCP_PHPBB_API_WEEKLY_USE}:</label></dt>
+				<dd>
+					<div class="stats-container">
+						<span>{S_QUERIES_PER_WEEK}<!-- IF S_PERCENT_PER_WEEK -->&nbsp;({S_PERCENT_PER_WEEK}{L_UCP_PHPBB_API_PERCENT})<!-- ENDIF --></span>
+						<div style="width: {S_PERCENT_PER_WEEK}%;">
+							<img src="{T_THEME_PATH}/images/api/full.gif" alt="{S_PERCENT_PER_WEEK}{L_UCP_PHPBB_API_PERCENT}" />
+						</div>
+					</div>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label>{L_UCP_PHPBB_API_MONTHLY_USE}:</label></dt>
+				<dd>
+					<div class="stats-container">
+						<span>{S_QUERIES_PER_MONTH}<!-- IF S_PERCENT_PER_MONTH -->&nbsp;({S_PERCENT_PER_MONTH}{L_UCP_PHPBB_API_PERCENT})<!-- ENDIF --></span>
+						<div style="width: {S_PERCENT_PER_MONTH}%;">
+							<img src="{T_THEME_PATH}/images/api/full.gif" alt="{S_PERCENT_PER_MONTH}{L_UCP_PHPBB_API_PERCENT}" />
+						</div>
+					</div>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label>{L_UCP_PHPBB_API_TOTAL_USE}:</label></dt>
+				<dd>
+					<div class="stats-container">
+						<span>{S_QUERIES_MAX}<!-- IF S_PERCENT_MAX -->&nbsp;({S_PERCENT_MAX}{L_UCP_PHPBB_API_PERCENT})<!-- ENDIF --></span>
+						<div style="width: {S_PERCENT_MAX}%;">
+							<img src="{T_THEME_PATH}/images/api/full.gif" alt="{S_PERCENT_MAX}{L_UCP_PHPBB_API_PERCENT}" />
+						</div>
+					</div>
+				</dd>
+			</dl>
+			<dl>
+				<dt></dt>
+				<dd>{S_LAST_QUERIES}</dd>
+			</dl>
+		</fieldset>
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+<script type="text/javascript">
+// <![CDATA[
+//Hook the CSS to the header
+var head = document.getElementsByTagName('head')[0], style = document.createElement('style');
+var css = '.stats-container {max-width: 246px; border: 1px solid #000000; position: relative;}' +
+'.stats-container span:first-child{position: absolute; margin-left: 5px; margin-top: 4px; font-weight: bold;}' +
+'.stats-container div{height: 24px; overflow: hidden; max-width: 99.9%;}';
+style.type = 'text/css';
+if (style.styleSheet){
+	style.styleSheet.cssText = css;
+} else {
+	style.appendChild(document.createTextNode(css));
+}
+head.appendChild(style);
+// ]]>
+</script>
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,395 @@
+<!-- IF S_KEYS_HISTORY -->
+	<!-- INCLUDE simple_header.html -->
+		<div id="acp">
+		<div class="panel">
+			<span class="corners-top"><span></span></span>
+				<div id="content">
+					<div id="main">
+						<div style="text-align: center;">
+							<h1>{L_ACP_PHPBB_API_KEY_HISTORY}&nbsp;({S_KEYS_HISTORY})</h1>
+							<hr />
+							<ul>
+							<!-- BEGIN history -->
+								<li>{history.ROW}</li>
+							<!-- END history -->
+							</ul>
+						</div>
+					</div>
+				</div>
+			<span class="corners-bottom"><span></span></span>
+			<div class="clear"></div>
+		</div>
+		</div>
+	<!-- INCLUDE simple_footer.html -->
+<!-- ELSE -->
+	<!-- INCLUDE overall_header.html -->
+	<!-- INCLUDE api/acp_phpbb_api_jquery_package.html -->
+	<!-- * @version $Id: acp_phpbb_api_keys.html v{S_VERSION} 13h13 10/19/2013 Geolim4 Exp $ -->
+	<h1>{TITLE} <img src="{TITLE_IMG}" title="{TITLE}" alt="{TITLE}" class="fright" /></h1>
+	<p>{TITLE_EXPLAIN}</p>
+	<!-- IF S_KEYS_MANAGE -->
+		<!-- IF not S_KEYS_EDIT and not S_KEYS_CREATE -->
+		<form id="create_key" action="{U_ACTION_CREATE}" method="post">
+			<p class="quick inline fright"><input class="button1" type="submit" id="submit" name="create" value="{L_ACP_PHPBB_API_CREATE}"/></p>
+		</form>
+		<!-- IF .api_keys -->
+		<form id="search" action="{U_ACTION_SEARCH}" method="post">
+			<p class="quick inline fright">
+				<input class="inputbox" onclick="if (this.value=='{LA_SEARCH_MINI}')this.value='';" onblur="if (this.value=='')this.value='{LA_SEARCH_MINI}';" type="text" id="search_field" name="search_field" size="40" maxlength="40" value="<!-- IF S_SEARCH_FIELD -->{S_SEARCH_FIELD}<!-- ELSE -->{LA_SEARCH_MINI}<!-- ENDIF -->" />
+				<select name="search_type">
+					<option value="username"<!-- IF S_SEARCH_TYPE == 'username' --> selected="selected"<!-- ENDIF -->>{L_SORT_USERNAME}</option>
+					<option value="key_id"<!-- IF S_SEARCH_TYPE == 'key_id' --> selected="selected"<!-- ENDIF -->>{L_ACP_PHPBB_API_KEY_TITLE}</option>
+				</select>
+				<input class="button2" type="submit" name="search" value="{L_GO}" />&nbsp;&nbsp;
+			</p>
+		</form>
+		<!-- ENDIF -->
+		<form id="keys_list" action="{U_ACTION}" method="post" style="clear: both;">
+			<table cellspacing="1">
+				<thead>
+					<tr>
+						<th style="text-align: center !important; width: 10%;">{L_ACP_PHPBB_API_KEY_TOOLS}</th>
+						<th style="text-align: center !important; width: 14%;">{L_ACP_PHPBB_API_KEY_TITLE}</th>
+						<th style="text-align: center !important; width: 14%;">{L_ACP_PHPBB_API_TYPE}</th>
+						<th style="text-align: center !important; width: 14%;">{L_ACP_PHPBB_API_KEY_ASSIGNED}</th>
+						<th style="text-align: center !important; width: 12%;">{L_ACP_PHPBB_API_MAX_QUERIES_SHORT}</th>
+						<th style="text-align: center !important; width: 8%;">{L_ACP_PHPBB_API_QUERIES}</th>
+						<th style="text-align: center !important; width: 17%;">{L_ACP_PHPBB_API_EXPIRATION_DATE}</th>
+						<th style="text-align: center !important; width: 14%;">{L_ACP_PHPBB_API_KEY_EMAIL}</th>
+						<th style="text-align: center !important; width: 2%;">{L_MARK}</th>
+					</tr>
+				</thead>
+				<tbody id="tbodycount">
+				<!-- IF .api_keys -->
+					<!-- BEGIN api_keys -->
+						<tr class="<!-- IF api_keys.S_ROW_COUNT is even -->row1<!-- ELSE -->row2<!-- ENDIF --><!-- IF api_keys.IS_OUTDATED --> outdated<!-- ENDIF --><!-- IF api_keys.KEY_STATUS == 2 --> suspended<!-- ENDIF --><!-- IF api_keys.IS_OUT_OF_QUOTA --> out-of-quota<!-- ENDIF -->">
+						<td style="text-align: center;"><a href="{api_keys.U_EDIT}">{ICON_EDIT}</a> &nbsp;<a href="{api_keys.U_DELETE}">{ICON_DELETE}</a></td>
+						<td style="text-align: center;"<!-- IF api_keys.KEY_STATUS == 3 --> class="deactivated"<!-- ENDIF -->>{api_keys.KEY_ID}</td>
+						<td style="text-align: center;" class="apitooltip" title="<!-- IF api_keys.KEY_TYPE == 2 -->{L_ACP_PHPBB_API_KEY_QUERY_SQL}: <!-- IF api_keys.QUERY_SQL -->{L_YES}<!-- ELSE -->{L_NO}<!-- ENDIF -->|{L_ACP_PHPBB_API_KEY_QUERY_SQL_API}: <!-- IF api_keys.QUERY_SQL_API -->{L_YES}<!-- ELSE -->{L_NO}<!-- ENDIF --><!-- ENDIF -->"><!-- IF api_keys.KEY_TYPE == 2 --><strong>{L_ACP_PHPBB_API_KEY_TYPE_A}</strong><!-- ELSE -->{L_ACP_PHPBB_API_KEY_TYPE_U}<!-- ENDIF --></td>
+						<td style="text-align: center;">{api_keys.USERNAME_FULL}</td>
+						<td style="text-align: center;">{api_keys.MAX_QUERIES}</td>
+						<td style="text-align: center;">{api_keys.QUERIES}</td>
+						<td style="text-align: center;">{api_keys.EXPIRE_TIME}</td>
+						<td style="text-align: center;"><!-- IF api_keys.EMAIL_AUTH --><strong style="color: green;">{L_YES}</strong><!-- ELSE --><strong style="color: red;">{L_NO}</strong><!-- ENDIF --></td>
+						<td style="text-align: center;"><input type="checkbox" class="radio" name="mark[]" value="{api_keys.KEY_ID}" /></td>
+					</tr>
+					<!-- END api_keys -->
+				<!-- ELSE -->
+				<tr class="row1">	
+					<td style="text-align: center;" colspan="9"><strong class="error">{L_ACP_PHPBB_API_KEY_NO_KEY}</strong></td>
+				</tr>
+				<!-- ENDIF -->
+				</tbody>
+			</table>
+			<!-- IF .api_keys -->
+				<div class="pagination">
+					{TOTAL_MESSAGES} <!-- IF S_ON_PAGE --><!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto();return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+				</div>
+				<fieldset class="quick" style="float: {S_CONTENT_FLOW_END};">
+					{S_HIDDEN_FIELDS}
+					{S_FORM_TOKEN}		
+					<span>{L_ACP_PHPBB_API_SELECTOR}:</span>
+					<select name="action" id="action">
+						<option value="edit">{L_ACP_PHPBB_API_EDIT}</option>
+						<option value="suspend">{L_ACP_PHPBB_API_SUSPEND}</option>
+						<option value="deactivate">{L_ACP_PHPBB_API_DEACTIVATE}</option>
+						<option value="active">{L_ACP_PHPBB_API_ACTIVE}</option>
+						<option value="delete">{L_ACP_PHPBB_API_DELETE}</option>
+					</select>
+					<input class="button2" name="select_submit" type="submit" value="{L_SUBMIT}" />
+					<p class="small">
+						<a href="javascript:void(0);" onclick="marklist('keys_list', 'mark', true);">{L_MARK_ALL}</a> &bull; <a href="javascript:void(0);" onclick="marklist('keys_list', 'mark', false);">{L_UNMARK_ALL}</a>
+					</p>		
+				</fieldset>
+				<div style="margin-top: -40px;">
+					<h3>{L_LEGEND}:</h3>
+					<div><span class="legend outdated"></span>&nbsp;{L_ACP_PHPBB_API_LEGEND_OUTDATED}</div>
+					<div><span class="legend suspended"></span>&nbsp;{L_ACP_PHPBB_API_LEGEND_SUSPENDED}</div>
+					<div><span class="legend out-of-quota">&nbsp;&nbsp;&nbsp;</span>&nbsp;{L_ACP_PHPBB_API_LEGEND_OUT_OF_QUOTA}</div>
+					<div><span class="legend deactivated">&nbsp;&nbsp;&nbsp;</span>&nbsp;{L_ACP_PHPBB_API_LEGEND_DEACTIVATED}</div>
+					
+				</div>
+			<!-- ENDIF -->
+		</form>
+		<!-- ELSE -->
+			<!-- IF .api_keys -->
+			<form id="api_keys" method="post" action="{U_ACTION}">
+				<!-- IF .api_keys > 1 -->
+				<fieldset style="text-align:center;">
+					<a href="javascript:;" onclick="$('#key_index').fadeToggle(200)">{L_ACP_PHPBB_API_KEY_INDEX}</a>&nbsp;-/+<hr />
+					<div style="display: none;" id="key_index">
+						<!-- BEGIN api_keys -->
+						<p>#{api_keys.S_ROW_COUNT}&nbsp;<a class="keyindex" id="{api_keys.KEY_ID}" href="javascript:void(0)">{api_keys.KEY_ID}</a></p>
+						<!-- END api_keys -->
+					<div>
+				</fieldset>
+				<!-- ENDIF -->
+				<!-- BEGIN api_keys -->
+				<fieldset id="goto{api_keys.KEY_ID}">
+						<legend>#{api_keys.S_ROW_COUNT}</legend>
+						<dl>
+							<dt><strong>{L_ACP_PHPBB_API_KEY_TITLE}:</strong></dt>
+							<dd>
+								<p><strong style="color: green; font-size: 1.5em;" class="key_id">{api_keys.KEY_ID}</strong><!-- IF S_KEYS_CREATE -->&nbsp;[&nbsp;<a href="{U_ACTION_CREATE}">{L_ACP_PHPBB_API_CHANGE}</a>&nbsp;]<!-- ENDIF --></p>
+							</dd>
+						</dl>
+						<!-- IF S_KEYS_EDIT -->
+						<dl>
+							<dt><strong>{L_ACP_PHPBB_API_KEY_SECRET_KEY}:</strong></dt>
+							<dd>
+								<p>{L_ACP_PHPBB_API_KEY_SECRET_KEY_EXP}&nbsp;[&nbsp;<a href="{api_keys.U_ACTION_SECRET_KEY_RESET}">{L_ACP_PHPBB_API_CHANGE}</a>&nbsp;]</p>
+							</dd>
+						</dl>
+						<!-- ENDIF -->
+						<dl>
+							<dt><label for="key_id_key_status_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_KEY_STATUS_EXP}:</label></dt>
+							<dd>
+								<label><select name="key_id[{api_keys.KEY_ID}][key_status]" id="key_id_key_status_{api_keys.KEY_ID}">{api_keys.KEY_STATUS}</select></label>
+							</dd>
+						</dl>
+					<!-- IF S_KEYS_EDIT -->
+						<dl>
+							<dt><strong>{L_ACP_PHPBB_API_CREATION_DATE}:</strong></dt>
+							<dd>
+								<p>{api_keys.CREATION_TIME}</p>
+							</dd>
+						</dl>
+						<dl>
+							<dt><strong>{L_ACP_PHPBB_API_QUERIES}:</strong></dt>
+							<dd>
+								<p>{api_keys.QUERIES}<!-- IF api_keys.QUERIES -->&nbsp;[&nbsp;<a href="{api_keys.U_VIEW_HISTORY}" onclick="popup(this.href, 650, 850, ''); return false;">{L_ACP_PHPBB_API_KEY_HISTORY}</a>&nbsp;|&nbsp;<a href="{api_keys.U_VIEW_DETAILED_HISTORY}" onclick="popup(this.href, null, null, ''); return false;">{L_ACP_PHPBB_API_KEY_HISTORY_DET}</a>]<!-- ENDIF --></p>
+								<!-- Using simple quotes here in order to keeping the following char in JS: \n -->
+								<!-- IF api_keys.QUERIES --><p><input class="radio" onclick='if (this.checked){return api_confirm("{L_ACP_PHPBB_API_RESET}")}' type="checkbox" id="key_id_reset_{api_keys.KEY_ID}" name="key_id[{api_keys.KEY_ID}][reset]" value="{api_keys.QUERIES}" />&nbsp;<label for="key_id_reset_{api_keys.KEY_ID}"><strong class="error">{L_RESET}</strong></label></p><!-- ENDIF -->
+							</dd>
+						</dl>
+					<!-- ENDIF -->
+					<dl>
+						<dt><strong>{L_ACP_PHPBB_API_KEY_ASSIGNED}:</strong></dt>
+						<dd>
+							<!-- IF S_KEYS_EDIT --><p>{api_keys.USERNAME_FULL}&nbsp;[&nbsp;<a href="javascript:;" onclick="$('#change_user_{api_keys.KEY_ID}').toggle(200)">{L_ACP_PHPBB_API_CHANGE}</a>&nbsp;]</p><!-- ENDIF -->
+							<div id="change_user_{api_keys.KEY_ID}"<!-- IF S_KEYS_EDIT --> style="display: none;"<!-- ENDIF -->>
+								<!-- IF S_KEYS_EDIT --><span class="ui-icon ui-icon-close" style="float: right; cursor: pointer;" onclick="$('#change_user_{api_keys.KEY_ID}').toggle(200)"></span><!-- ENDIF -->
+								<fieldset class="notice">
+									<input class="text medium" type="text" id="key_id_user_{api_keys.KEY_ID}" name="key_id[{api_keys.KEY_ID}][user_id]" value="{api_keys.USERNAME}" />
+									<br /><span>[ <a href="{api_keys.U_FIND_USERNAME}" title="{L_FIND_USERNAME}" onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a> ]</span>
+									<!-- IF S_KEYS_EDIT --><br /><p>{L_ACP_PHPBB_API_KEY_ASSIGNED_WARNING}</p><!-- ENDIF -->
+								</fieldset>
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="key_ips_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_KEY_IPS}:</label><br />{L_ACP_PHPBB_API_KEY_IPS_EXP}</dt>
+						<dd>
+							<label><input type="radio" class="radio" name="key_id[{api_keys.KEY_ID}][key_ips_type]" onclick="$('#key_ips_{api_keys.KEY_ID}').css({'backgroundColor':'lightgreen'});" value="1"<!-- IF api_keys.KEY_IPS_TYPE --> checked="checked" id="key_ips_type_{api_keys.KEY_ID}"<!-- ENDIF --> /> {L_ACP_PHPBB_API_KEY_IPS_TYPE_A}</label>
+							<label><input type="radio" class="radio" name="key_id[{api_keys.KEY_ID}][key_ips_type]" onclick="$('#key_ips_{api_keys.KEY_ID}').css({'backgroundColor':'lightcoral'});" value="0"<!-- IF not api_keys.KEY_IPS_TYPE --> checked="checked" id="key_ips_type_{api_keys.KEY_ID}"<!-- ENDIF --> /> {L_ACP_PHPBB_API_KEY_IPS_TYPE_D}</label>
+							<br /><textarea cols="1" rows="2" style="width: 50%;background-color: <!-- IF api_keys.KEY_IPS_TYPE -->lightgreen<!-- ELSE -->lightcoral<!-- ENDIF -->;" name="key_id[{api_keys.KEY_ID}][key_ips]" id="key_ips_{api_keys.KEY_ID}">{api_keys.KEY_IPS}</textarea>
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="deactivated_methods_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_DEACTIVATED_METHODS}:</label><br />{L_ACP_PHPBB_API_DEACTIVATED_METHODS_EXP}</dt>
+						<dd>
+							<label><select multiple="multiple" size="8" name="key_id[{api_keys.KEY_ID}][deactivated_methods][]" id="deactivated_methods_{api_keys.KEY_ID}">{api_keys.DEACTIVATED_METHODS}</select></label>
+							<br />[&nbsp;<a href="javascript:reset_selected('{api_keys.KEY_ID}')">{L_RESET}</a>&nbsp;]
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="key_id_key_type_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_TYPE}:</label><br />{L_ACP_PHPBB_API_TYPE_EXP}</dt>
+						<dd>
+							<label><input type="radio" class="radio" name="key_id[{api_keys.KEY_ID}][key_type]" onclick="$('#fs_{api_keys.KEY_ID}').fadeIn(200);$('.email0{api_keys.KEY_ID}').removeAttr('checked');$('.email1{api_keys.KEY_ID}').prop('checked', true);$('.email0{api_keys.KEY_ID}, .email1{api_keys.KEY_ID}').attr('disabled', 'disabled');$('#dlfmec9rvmo524zqiazfbmclcudfbcr2je54dle5e1').effect('highlight', 1500);" value="2"<!-- IF api_keys.KEY_TYPE == 2 --> checked="checked" id="key_id_key_type_{api_keys.KEY_ID}"<!-- ENDIF --> /> <strong>{L_ACP_PHPBB_API_KEY_TYPE_A}</strong></label>
+							<label><input type="radio" class="radio" name="key_id[{api_keys.KEY_ID}][key_type]" onclick="$('#fs_{api_keys.KEY_ID}').fadeOut(200);$('.email0{api_keys.KEY_ID}, .email1{api_keys.KEY_ID}').removeAttr('disabled');" value="1"<!-- IF api_keys.KEY_TYPE == 1 --> checked="checked" id="key_id_key_type_{api_keys.KEY_ID}"<!-- ENDIF --> /> {L_ACP_PHPBB_API_KEY_TYPE_U}</label>
+						</dd>
+					</dl>
+					<fieldset id="fs_{api_keys.KEY_ID}" style="display: <!-- IF api_keys.KEY_TYPE == 2 -->block<!-- ELSE -->none<!-- ENDIF -->;background-color: lightpink;">
+						<legend>{L_ACP_PHPBB_API_LEGEND}</legend>
+						<dl>
+							<dt><label for="key_id_query_sql_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_KEY_QUERY_SQL}:</label><br /><span style="padding: 0; float: left;" class="ui-icon ui-icon-alert" ></span><span class="error">{L_ACP_PHPBB_API_KEY_QUERY_SQL_EXP}</span></dt>
+							<dd>
+								<label><input type="radio" class="radio" name="key_id[{api_keys.KEY_ID}][query_sql]" value="1"<!-- IF api_keys.QUERY_SQL --> checked="checked" id="key_id_query_sql_{api_keys.KEY_ID}"<!-- ENDIF --> /> {L_YES}</label>
+								<label><input type="radio" class="radio" name="key_id[{api_keys.KEY_ID}][query_sql]" value="0"<!-- IF not api_keys.QUERY_SQL --> checked="checked" id="key_id_query_sql_{api_keys.KEY_ID}"<!-- ENDIF --> /> {L_NO}</label>
+							</dd>
+						</dl>
+						<dl>
+							<dt><label for="key_id_query_sql_api_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_KEY_QUERY_SQL_API}:</label><br /><span style="padding: 0; float: left;" class="ui-icon ui-icon-alert" ></span><span class="error">{L_ACP_PHPBB_API_KEY_QUERY_SQL_API_EXP}</span></dt>
+							<dd>
+								<label><input type="radio" class="radio" name="key_id[{api_keys.KEY_ID}][query_sql_api]" value="1"<!-- IF api_keys.QUERY_SQL_API --> checked="checked" id="key_id_query_sql_api_{api_keys.KEY_ID}"<!-- ENDIF --> /> {L_YES}</label>
+								<label><input type="radio" class="radio" name="key_id[{api_keys.KEY_ID}][query_sql_api]" value="0"<!-- IF not api_keys.QUERY_SQL_API --> checked="checked" id="key_id_query_sql_api_{api_keys.KEY_ID}"<!-- ENDIF --> /> {L_NO}</label>
+							</dd>
+						</dl>
+					</fieldset>
+					<dl id="dl{api_keys.KEY_ID}">
+						<dt><label for="key_id_email_auth_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_KEY_EMAIL}:</label><br />{L_ACP_PHPBB_API_KEY_EMAIL_EXP}</dt>
+						<dd>
+							<label><input type="radio" class="radio email1{api_keys.KEY_ID}" name="key_id[{api_keys.KEY_ID}][email_auth]" value="1"<!-- IF api_keys.EMAIL_AUTH or api_keys.KEY_TYPE == 2 --> checked="checked" id="key_id_email_auth_{api_keys.KEY_ID}"<!-- IF api_keys.KEY_TYPE == 2 --> disabled="disabled"<!-- ENDIF --><!-- ENDIF --> /> {L_YES}</label>
+							<label><input type="radio" class="radio email0{api_keys.KEY_ID}" name="key_id[{api_keys.KEY_ID}][email_auth]" value="0"<!-- IF not api_keys.EMAIL_AUTH and api_keys.KEY_TYPE <> 2--> checked="checked" id="key_id_email_auth_{api_keys.KEY_ID}"<!-- ENDIF --><!-- IF api_keys.KEY_TYPE == 2 --> disabled="disabled"<!-- ENDIF --> /> {L_NO}</label>
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="key_id_force_post_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_KEY_FORCE_POST}:</label><br />{L_ACP_PHPBB_API_KEY_FORCE_POST_EXP}</dt>
+						<dd>
+							<label><input type="radio" class="radio" name="key_id[{api_keys.KEY_ID}][force_post]" value="1"<!-- IF api_keys.FORCE_POST --> checked="checked" id="key_id_force_post_{api_keys.KEY_ID}"<!-- ENDIF --> /> {L_YES}</label>
+							<label><input type="radio" class="radio" name="key_id[{api_keys.KEY_ID}][force_post]" value="0"<!-- IF not api_keys.FORCE_POST --> checked="checked" id="key_id_force_post_{api_keys.KEY_ID}"<!-- ENDIF --> /> {L_NO}</label>
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="key_id_expire_time_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_EXPIRATION_DATE}:</label></dt>
+						<dd>
+							<label><input<!-- IF not api_keys.KEY_TIME --> checked="checked"<!-- ENDIF --> onclick="if (this.checked){timepicker_status('key_id_expire_time_{api_keys.KEY_ID}', false)}else{timepicker_status('key_id_expire_time_{api_keys.KEY_ID}', true)}" class="radio" type="checkbox" id="key_id_lifetime_{api_keys.KEY_ID}" name="key_id[{api_keys.KEY_ID}][lifetime]" value="1" />&nbsp;{L_ACP_PHPBB_API_LIFETIME}</label><br />
+							<p<!-- IF not api_keys.KEY_TIME --> style="display: none;"<!-- ENDIF -->>
+								<input type="text" class="text timepicker" id="key_id_expire_time_{api_keys.KEY_ID}" name="key_id[{api_keys.KEY_ID}][expire_time]" readonly="readonly" maxlength="18" size="18" value="{api_keys.KEY_TIME}" />&nbsp;<em>{L_MONTH}/{L_DAY}/{L_YEAR}&nbsp;{L_HOURS}:{L_MINUTES}</em>
+							</p>
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="key_id_max_queries_per_day_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_MQPD}:</label><br />{L_ACP_PHPBB_API_MQ_EXPLAIN}</dt>
+						<dd>
+							<input type="text" class="spinner" id="key_id_max_queries_per_day_{api_keys.KEY_ID}" name="key_id[{api_keys.KEY_ID}][max_queries_per_day]" maxlength="8" size="8" value="<!-- IF api_keys.MAX_QUERIES_PER_DAY -->{api_keys.MAX_QUERIES_PER_DAY}<!-- ELSE -->0<!-- ENDIF -->" onkeypress="return numbersonly(this, event)" />
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="key_id_max_queries_per_week_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_MQPW}:</label><br />{L_ACP_PHPBB_API_MQ_EXPLAIN}</dt>
+						<dd>
+							<input type="text" class="spinner" id="key_id_max_queries_per_week_{api_keys.KEY_ID}" name="key_id[{api_keys.KEY_ID}][max_queries_per_week]" maxlength="8" size="8" value="<!-- IF api_keys.MAX_QUERIES_PER_WEEK -->{api_keys.MAX_QUERIES_PER_WEEK}<!-- ELSE -->0<!-- ENDIF -->" onkeypress="return numbersonly(this, event)" />
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="key_id_max_queries_per_month_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_MQPM}:</label><br />{L_ACP_PHPBB_API_MQ_EXPLAIN}</dt>
+						<dd>
+							<input type="text" class="spinner" id="key_id_max_queries_per_month_{api_keys.KEY_ID}" name="key_id[{api_keys.KEY_ID}][max_queries_per_month]" maxlength="8" size="8" value="<!-- IF api_keys.MAX_QUERIES_PER_MONTH -->{api_keys.MAX_QUERIES_PER_MONTH}<!-- ELSE -->0<!-- ENDIF -->" onkeypress="return numbersonly(this, event)" />
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="key_id_max_queries_{api_keys.KEY_ID}">{L_ACP_PHPBB_API_MAX_QUERIES}:</label><br />{L_ACP_PHPBB_API_MQ_EXPLAIN}</dt>
+						<dd>
+							<input type="text" class="spinner" id="key_id_max_queries_{api_keys.KEY_ID}" name="key_id[{api_keys.KEY_ID}][max_queries]" maxlength="8" size="8" value="<!-- IF api_keys.MAX_QUERIES -->{api_keys.MAX_QUERIES}<!-- ELSE -->0<!-- ENDIF -->" onkeypress="return numbersonly(this, event)" />
+						</dd>
+					</dl>
+				</fieldset>
+				<!-- END api_keys -->
+				<fieldset style="text-align: center;" id="psubmit">
+					<legend>{L_SUBMIT}</legend>
+					{S_HIDDEN_FIELDS}
+					{S_FORM_TOKEN}
+					<input class="button1" type="submit" id="submit" name="update" onclick="$('#psubmit').fadeOut(200)" value="{L_SUBMIT}" />&nbsp
+					<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" /><br />
+				</fieldset>
+			</form>
+			<!-- ENDIF -->
+		<!-- ENDIF -->
+	<!-- ENDIF -->
+
+	<div style="text-align:center;padding-top:15px;"><span style="font-size:0.90em;"><em>{ERRORS_VERSION}</em></span></div>
+	<script type="text/javascript">
+	// <![CDATA[
+	//Hook the CSS to the header.
+	$('head').append('<link rel="stylesheet" media="all" type="text/css" href="style/jquery_api/css/api/jqueryui.css" />');
+	$('head').append('<link rel="stylesheet" media="all" type="text/css" href="style/jquery_api/css/api/jqueryui-timepicker.css" />');
+	$('head').append(
+		'<style>' +
+			'span.legend{width: 16px; height: 16px;display: inline-block;}' +
+			'.suspended{background-color: lightsalmon !important;}' +
+			'.deactivated{text-decoration: line-through !important;}' +
+			'.out-of-quota{background-color: mistyrose;}' +
+			'.outdated{background-color: lightgrey;}' +
+			'.spinner:focus,.spinner:hover {background-color: transparent;border: 0px;color: none;height: 10px;}' +
+			'.spinner{margin: -2px 22px 0.4em 0.4em !important;}' +
+			'p.inline{display: inline;}' +
+			'.fleft{float: left;}' +
+			'.fright{float: right;}' +
+			'input, textarea {vertical-align: top;}' +
+		'</style>'
+	);
+	$('.timepicker').datetimepicker({
+		minDate : 0,// :mrgreen:
+		changeMonth: true,
+		changeYear: true,
+		prevText: '{L_ACP_PHPBB_API_PREV}',
+		nextText: '{L_ACP_PHPBB_API_NEXT}',
+		timeText: '{L_ACP_PHPBB_API_CLOCK}',
+		secondText: '{L_SECONDS}',
+		minuteText: '{L_MINUTES}',
+		hourText: '{L_HOURS}',
+		dayNames: [{DATETIME_DAY_NAMES}],
+		monthNames: [{DATETIME_MONTH_NAMES}],
+		monthNamesShort: [{DATETIME_MONTH_NAMES_SHORT}],
+		dayNamesMin: [{DATETIME_DAY_NAMES_MIN}],
+		currentText: '{L_ACP_PHPBB_API_NOW}',
+		closeText: '{L_ACP_PHPBB_API_CLOSE}'
+	});
+	$(".keyindex").click(function (){
+		$('html, body').animate({
+			scrollTop: $("#goto" + $(this).attr('id')).offset().top
+		}, 800);
+	});
+	$(".spinner").spinner({
+		spin: function( event, ui ) {
+			if (ui.value < 0 ) {
+				$( this ).spinner( "value", 0 );
+				return false;
+			}
+		}
+	});
+	$('textarea').autosize();
+	$('textarea').css({
+		"transition":" height 0.2s ease-in-out 0s",
+		"border-radius" : "5px",
+		"resize" : "horizontal"
+	});
+	$('.key_id').effect('highlight', 800);
+	$('.apitooltip').tooltip({
+		content: function(callback) { 
+			callback($(this).prop('title').replace('|', '<br />')); 
+		}
+	});
+	function timepicker_status(id, status){
+		if (status){
+			$('#' + id).parent('p').css({'display' : 'inline'});
+			$('#' + id).focus();
+		}else{
+			$('#' + id).parent('p').css({'display' : 'none'});
+		}
+	}
+	function reset_selected(id){
+		$("#deactivated_methods_" + id).children('option').each(function(index) {
+			this.selected = false;
+		});
+	}
+	function api_confirm(msg){
+		return confirm(msg);
+	}
+	function numbersonly(myfield, e){
+		var key;
+		var keychar;
+
+		if (window.event)
+		{
+		   key = window.event.keyCode;
+		}
+		else if (e)
+		{
+		   key = e.which;
+		}
+		else
+		{
+			return true;
+		}
+		keychar = String.fromCharCode(key);
+		if ((key==null) || (key==0) || (key==8) || (key==9) || (key==13) || (key==27) ){
+		   return true;
+		}else if ((('0123456789').indexOf(keychar) > -1) ){
+		   return true;
+		}else{
+		   return false;
+		}
+
+	}
+	function phpbb_api(){
+		if (confirm('{LA_CONFIRM_OPERATION}')){
+			return true;
+		}else{
+			return false;
+		} 
+	}
+	// ]]>
+	</script>
+	<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

@@ -1,0 +1,394 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE api/acp_phpbb_api_jquery_package.html -->
+<!-- * @version $Id: acp_phpbb_api_config.html v{S_VERSION} 13h13 10/19/2013 Geolim4 Exp $ -->
+<script type="text/javascript">
+// <![CDATA[
+//Hook the CSS to the header, it avoid us to modify admin.css ;)
+$('head').append('<link rel="stylesheet" media="all" type="text/css" href="style/jquery_api/css/api/jqueryui.css" />');
+$('head').append(
+'<style>' + 
+		'html.busy, html.busy * {cursor: wait !important;}' +
+		'.success{color: #228822;}' +
+		'#div_ucp_keys {margin: 15px; padding: 5px; border: #D7D7D7 1px solid;}' +
+		'.ui-password-tips{cursor: help; display: inline-block; margin: 0 0 -3px;}' +
+		'.legend {color: #115098; font-family: Tahoma,arial,Verdana,Sans-serif; font-size: 0.9em; font-weight: bold; line-height: 1.2em; margin-top: -0.4em; padding: 1px 0; position: relative; text-transform: none; top: -0.2em; vertical-align: middle;}'+
+		'.spinner:focus,.spinner:hover {background-color: transparent;border: 0px;color: none;height: 10px;}' +
+		'.spinner{margin: -2px 22px 0.4em 0.4em !important;}' +
+	'</style>'
+);
+$(document).ready(function(){
+	//Stay xHTML compliant
+	$('#api_mod_db_username, #api_mod_db_password').attr('autocomplete', 'off');
+});
+// ]]>
+</script>
+<a name="maincontent"></a>
+<h1>{TITLE} <img src="{TITLE_IMG}" title="{TITLE}" alt="{TITLE}" style="float:right" /></h1>
+<p>{TITLE_EXPLAIN}</p>
+	<!-- IF S_UP_TO_DATE -->
+	<div class="successbox">
+		<p>{UP_TO_DATE_MSG}</p>
+	</div>
+	<!-- ELSE IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+	<!-- ENDIF -->
+
+	<fieldset>
+		<legend></legend>
+	<dl>
+		<dt><label>{L_API_CURRENT_VERSION}:</label></dt>
+		<dd><strong>{CURRENT_VERSION}</strong></dd>
+	</dl>
+	<dl>
+		<dt><label>{L_API_LATEST_VERSION}:</label></dt>
+		<dd><strong>{LATEST_VERSION}</strong></dd>
+	</dl>
+	</fieldset>
+
+	{UPDATE_INSTRUCTIONS}
+	<br />
+
+	<form id="api_settings" method="post" action="{U_ACTION}">
+		<fieldset>
+			<legend>{L_GENERAL_SETTINGS}</legend>
+			<dl>
+				<dt><label for="api_mod_enable">{L_ACP_PHPBB_API_MOD}:</label></dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_enable" value="1"<!-- IF API_MOD_ENABLE --> checked="checked" id="api_mod_enable"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="api_mod_enable" value="0"<!-- IF not API_MOD_ENABLE --> checked="checked" id="api_mod_enable"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_force_logout">{L_ACP_PHPBB_API_FORCE_LOGOUT}:</label><br />{L_ACP_PHPBB_API_FORCE_LOGOUT_EXP}</dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_force_logout" value="1"<!-- IF API_MOD_FORCE_LOGOUT --> checked="checked" id="api_mod_force_logout"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="api_mod_force_logout" value="0"<!-- IF not API_MOD_FORCE_LOGOUT --> checked="checked" id="api_mod_force_logout"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_force_ssl">{L_ACP_PHPBB_API_FORCE_SSL}:</label><br />{L_ACP_PHPBB_API_FORCE_SSL_EXP}</dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_force_ssl" value="1"<!-- IF API_MOD_FORCE_SSL --> checked="checked" id="api_mod_force_ssl"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="api_mod_force_ssl" value="0"<!-- IF not API_MOD_FORCE_SSL --> checked="checked" id="api_mod_force_ssl"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_origin_header">{L_ACP_PHPBB_API_ORIGIN_HEADER}:</label><br />{L_ACP_PHPBB_API_ORIGIN_HEADER_EXP}</dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_origin_header" value="1"<!-- IF API_MOD_ORIGIN_HEADER --> checked="checked" id="api_mod_origin_header"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="api_mod_origin_header" value="0"<!-- IF not API_MOD_ORIGIN_HEADER --> checked="checked" id="api_mod_origin_header"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_cron_task">{L_ACP_PHPBB_API_CRON_TASK}:</label><br />{L_ACP_PHPBB_API_CRON_TASK_EXP}</dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_cron_task" value="1"<!-- IF API_MOD_CRON_TASK --> checked="checked" id="api_mod_cron_task"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="api_mod_cron_task" value="0"<!-- IF not API_MOD_CRON_TASK --> checked="checked" id="api_mod_cron_task"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_max_attempts">{L_ACP_PHPBB_API_MAX_ATTEMPS}:</label><br />{L_ACP_PHPBB_API_MAX_ATTEMPS_EXP}</dt>
+				<dd>
+					<input class="spinner" type="text" id="api_mod_max_attempts" name="api_mod_max_attempts" maxlength="3" size="3" value="{API_MOD_MAX_ATTEMPTS}" onkeypress="return numbersonly(this, event)" />
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_max_attempts_time">{L_ACP_PHPBB_API_MAX_ATTEMPS_TIME}:</label><br />{L_ACP_PHPBB_API_MAX_ATTEMPS_TIME_EXP}</dt>
+				<dd>
+					<input class="spinner" type="text" id="api_mod_max_attempts_time" name="api_mod_max_attempts_time" maxlength="6" size="6" value="{API_MOD_MAX_ATTEMPTS_TIME}" onkeypress="return numbersonly(this, event)" />&nbsp;{L_SECONDS}
+				</dd>
+			</dl>
+			<fieldset>
+				<legend>{L_ACP_PHPBB_API_UNBANNING}</legend>
+				<dl>
+					<dt><label for="api_mod_purge_bans">{L_ACP_PHPBB_API_PURGE_BANS}:</label></dt>
+					<dd>
+						<p><input type="checkbox" class="radio" name="api_mod_purge_bans" value="1" id="api_mod_purge_bans"/>&nbsp;<label for="api_mod_purge_bans">{API_MOD_BAN_RECORDED}</label></p>
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_unban_ipbans">{L_ACP_PHPBB_API_UNBAN}:</label><br />{L_ACP_PHPBB_API_UNBAN_EXP}</dt>
+					<dd>
+						<select multiple="multiple" name="api_mod_unban_ipbans[]">{API_MOD_UNBAN_IPBANS}</select>
+					</dd>
+				</dl>
+			</fieldset>
+			<dl>
+				<dt><label for="api_mod_whitelist">{L_ACP_PHPBB_API_WHITELIST}:</label><br />{L_ACP_PHPBB_API_WHITELIST_EXP}</dt>
+				<dd>
+					<br /><textarea cols="1" rows="2" name="api_mod_whitelist" id="api_mod_whitelist" style="width: 45%;">{API_MOD_WHITELIST}</textarea>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_query_limit">{L_ACP_PHPBB_API_QUERY_LIMIT}:</label><br />{L_ACP_PHPBB_API_QUERY_LIMIT_EXP}</dt>
+				<dd>
+					<input class="spinner" type="text" id="api_mod_query_limit" name="api_mod_query_limit" maxlength="3" size="3" value="{API_MOD_QUERY_LIMIT}" onkeypress="return numbersonly(this, event)" />
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_wildcard_char">{L_ACP_PHPBB_API_WILDCARD_CHAR}:</label><br />{L_ACP_PHPBB_API_WILDCARD_CHAR_EXP}</dt>
+				<dd>
+					<input type="text" id="api_mod_wildcard_char" name="api_mod_wildcard_char" maxlength="1" size="1" value="{API_MOD_WILDCARD_CHAR}" />
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_header">{L_ACP_PHPBB_API_HEADER}:</label><br />{L_ACP_PHPBB_API_HEADER_EXP}</dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_header" value="1"<!-- IF API_MOD_HEADER --> checked="checked" id="api_mod_header"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="api_mod_header" value="0"<!-- IF not API_MOD_HEADER --> checked="checked" id="api_mod_header"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_crypto_enabled">{L_ACP_PHPBB_API_CRYPTO_ENABLED}:</label><br />{L_ACP_PHPBB_API_CRYPTO_ENABLED_EXP}</dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_crypto_enabled" value="1"<!-- IF API_MOD_CRYPTO_ENABLED --> checked="checked" id="api_mod_crypto_enabled"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="api_mod_crypto_enabled" value="0"<!-- IF not API_MOD_CRYPTO_ENABLED --> checked="checked" id="api_mod_crypto_enabled"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_purge_api">{L_ACP_PHPBB_API_PURGE_API}:</label></dt>
+				<dd>
+					<p><input type="checkbox" class="radio" name="api_mod_purge_api" value="1" id="api_mod_purge_api"/>&nbsp;<label for="api_mod_purge_api">{API_MOD_CACHED_FILES}</label></p>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_time_type">{L_ACP_PHPBB_API_TIME_TYPE}:</label></dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_time_type" value="1"<!-- IF API_MOD_TIME_TYPE == 1 --> checked="checked" id="api_mod_time_type"<!-- ENDIF --> /> {L_ACP_PHPBB_API_TIME_CALENDAR}</label>
+					<label><input type="radio" class="radio" name="api_mod_time_type" value="2"<!-- IF API_MOD_TIME_TYPE == 2 --> checked="checked" id="api_mod_time_type"<!-- ENDIF --> /> {L_ACP_PHPBB_API_TIME_ROLLING}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_db_credentials">{L_ACP_PHPBB_API_DB_SETTINGS}:</label></dt>
+				<dd>
+						<label><input type="radio" class="radio" onclick="$('#api_mod_db_username, #api_mod_db_password').removeAttr('disabled');" name="api_mod_db_credentials" value="1"<!-- IF API_MOD_DB_CREDENTIALS --> checked="checked" id="api_mod_db_credentials"<!-- ENDIF --> /> {L_YES}</label>
+						<label><input type="radio" class="radio" onclick="$('#api_mod_db_username, #api_mod_db_password').attr('disabled', 'disabled');" name="api_mod_db_credentials" value="0"<!-- IF not API_MOD_DB_CREDENTIALS --> checked="checked" id="api_mod_db_credentials"<!-- ENDIF --> /> {L_NO}</label>
+						<p><input type="checkbox" class="radio" onclick="if (this.checked){$('#fs_api_mod_credentials').fadeOut(200);}else{$('#fs_api_mod_credentials').fadeIn(200);}" name="api_mod_db_no_change" value="1" checked="checked" id="api_mod_db_no_change"/>&nbsp;<label for="api_mod_db_no_change">{L_ACP_PHPBB_API_DB_NO_CHANGE}</label></p>
+				</dd>
+			</dl>
+			<fieldset id="fs_api_mod_credentials" style="display: none;">
+				<legend>{L_ACP_PHPBB_API_DB_CREDENTIALS}</legend>
+				<div class="errorbox">{L_ACP_PHPBB_API_DB_WARNING}&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"><label for="api_mod_db_no_change">{L_CANCEL}</label></a></div>
+				<dl>
+					<dt><label>{L_TABLE_PREFIX}:</label></dt>
+					<dd>{S_TABLE_PREFIX}</dd>
+				</dl>
+				<dl>
+					<dt><label>{L_DB_NAME}:</label></dt>
+					<dd>{S_DB_NAME}</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_db_username">{L_ACP_PHPBB_API_DB_USERNAME}:</label></dt>
+					<dd>
+						<input type="text" id="api_mod_db_username" name="api_mod_db_username" size="15" value=""<!-- IF not API_MOD_DB_CREDENTIALS --> disabled="disabled"<!-- ENDIF -->/>
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_db_password">{L_ACP_PHPBB_API_DB_PASSWORD}:</label></dt>
+					<dd>
+						<input type="password" id="api_mod_db_password" name="api_mod_db_password" size="15" value=""<!-- IF not API_MOD_DB_CREDENTIALS --> disabled="disabled"<!-- ENDIF -->/>&nbsp;<span onmousedown="$('#api_mod_db_password').attr('type', 'text');" onmouseup="$('#api_mod_db_password').attr('type', 'password');" style="padding: 0;" class="ui-password-tips ui-icon ui-icon-zoomin" ></span>
+					</dd>
+				</dl>
+				<p style="text-align: center;">
+					<input class="button1" onclick="test_db()" type="button" id="db_test" name="db_test" value="{L_DB_TEST}" />
+					<br /><span id="test-db_results"></span>
+				</p>
+			</fieldset>
+		</fieldset>
+		<fieldset>
+			<legend>{L_ACP_PHPBB_API_ERRORS_HANDLER}</legend>
+			<dl>
+				<dt><label for="api_mod_backtrace">{L_ACP_PHPBB_API_BACKTRACE}:</label><br />{L_ACP_PHPBB_API_BACKTRACE_EXP}</dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_backtrace" value="1"<!-- IF API_MOD_BACKTRACE --> checked="checked" id="api_mod_backtrace"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="api_mod_backtrace" value="0"<!-- IF not API_MOD_BACKTRACE --> checked="checked" id="api_mod_backtrace"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="api_mod_fatal_html">{L_ACP_PHPBB_API_FATAL_HTML}:</label><br />{L_ACP_PHPBB_API_FATAL_HTML_EXP}</dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_fatal_html" value="1"<!-- IF API_MOD_FATAL_HTML --> checked="checked" id="api_mod_fatal_html"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="api_mod_fatal_html" value="0"<!-- IF not API_MOD_FATAL_HTML --> checked="checked" id="api_mod_fatal_html"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>{L_ACP_PHPBB_API_SETTINGS_ACP}</legend>
+				<dl>
+					<dt><label for="api_mod_acp_pagination">{L_ACP_PHPBB_API_PAGINATION}:</label></dt>
+					<dd>
+						<input class="spinner" type="text" id="api_mod_acp_pagination" name="api_mod_acp_pagination" maxlength="4" size="4" value="{API_MOD_ACP_PAGINATION}" onkeypress="return numbersonly(this, event)" />
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_stat_limit">{L_ACP_PHPBB_API_STAT_LIMIT}:</label></dt>
+					<dd>
+						<input class="spinner" type="text" id="api_mod_stat_limit" name="api_mod_stat_limit" maxlength="4" size="4" value="{API_MOD_STAT_LIMIT}" onkeypress="return numbersonly(this, event)" />
+					</dd>
+				</dl>
+			<dl>
+				<dt><label for="api_mod_cache_stats">{L_ACP_PHPBB_API_CACHE_STATS}:</label><br />{L_ACP_PHPBB_API_CACHE_STATS_EXP}</dt>
+				<dd>
+					<label><input type="radio" class="radio" name="api_mod_cache_stats" value="1"<!-- IF API_MOD_CACHE_STATS --> checked="checked" id="api_mod_cache_stats"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="api_mod_cache_stats" value="0"<!-- IF not API_MOD_CACHE_STATS --> checked="checked" id="api_mod_cache_stats"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+				<dl>
+					<dt><label for="api_mod_purge_temp">{L_ACP_PHPBB_API_PURGE_TEMP}:</label></dt>
+					<dd>
+						<p><input type="checkbox" class="radio" name="api_mod_purge_temp" value="1" id="api_mod_purge_temp"/>&nbsp;<label for="api_mod_purge_temp">{API_MOD_STATS_FILES}</label></p>
+					</dd>
+				</dl>
+		</fieldset>
+		<fieldset>
+			<legend>{L_ACP_PHPBB_API_SETTINGS_UCP}</legend>
+			<dl>
+				<dt><label for="api_mod_ucp_keys">{L_ACP_PHPBB_API_UCP_KEYS}:</label><br />{L_ACP_PHPBB_API_UCP_KEYS_EXP}</dt>
+				<dd>
+					<label><input type="radio" onclick="$('#div_ucp_keys').fadeIn(200);" class="radio" name="api_mod_ucp_keys" value="1"<!-- IF API_MOD_UCP_KEYS --> checked="checked" id="api_mod_ucp_keys"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" onclick="$('#div_ucp_keys').fadeOut(200);" class="radio" name="api_mod_ucp_keys" value="0"<!-- IF not API_MOD_UCP_KEYS --> checked="checked" id="api_mod_ucp_keys"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<div id="div_ucp_keys"<!-- IF not API_MOD_UCP_KEYS --> style="display: none;"<!-- ENDIF -->>
+				<strong class="legend">{L_ACP_PHPBB_API_DEFAULT_SETTINGS}:</strong>
+				<p class="clear"></p>
+				<dl>
+					<dt><label for="api_mod_ucp_expire_value">{L_ACP_PHPBB_API_VALIDITY_DATE}:</label></dt>
+					<dd>
+						<select id="api_mod_ucp_expire_value" name="api_mod_ucp_expire_value"<!-- IF API_MOD_UCP_EXPIRE_TYPE == 'lifetime' --> style="display: none;"<!-- ENDIF -->>{S_API_MOD_UCP_EXPIRE_VALUE}</select>&nbsp;<select id="api_mod_ucp_expire_type" name="api_mod_ucp_expire_type" onchange="if (this.value == 'lifetime'){$('#api_mod_ucp_expire_value').hide()}else{$('#api_mod_ucp_expire_value').show()}">{S_API_MOD_UCP_EXPIRE_TYPE}</select>
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_max_queries">{L_ACP_PHPBB_API_MAX_QUERIES}:<sup class="error">*</sup></label></dt>
+					<dd>
+						<input class="spinner" type="text" id="api_mod_max_queries" name="api_mod_max_queries" maxlength="6" size="6" value="{API_MOD_MAX_QUERIES}" onkeypress="return numbersonly(this, event)" />
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_mqpd">{L_ACP_PHPBB_API_MQPD}:<sup class="error">*</sup></label></dt>
+					<dd>
+						<input class="spinner" type="text" id="api_mod_mqpd" name="api_mod_mqpd" maxlength="6" size="6" value="{API_MOD_MQPD}" onkeypress="return numbersonly(this, event)" />
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_mqpw">{L_ACP_PHPBB_API_MQPW}:<sup class="error">*</sup></label></dt>
+					<dd>
+						<input class="spinner" type="text" id="api_mod_mqpw" name="api_mod_mqpw" maxlength="6" size="6" value="{API_MOD_MQPW}" onkeypress="return numbersonly(this, event)" />
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_mqpm">{L_ACP_PHPBB_API_MQPM}:<sup class="error">*</sup></label></dt>
+					<dd>
+						<input class="spinner" type="text" id="api_mod_mqpm" name="api_mod_mqpm" maxlength="6" size="6" value="{API_MOD_MQPM}" onkeypress="return numbersonly(this, event)" />
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_deactivated_methods">{L_ACP_PHPBB_API_DEACTIVATED_METHODS}:</label><br />{L_ACP_PHPBB_API_DEACTIVATED_METHODS_EXP}</dt>
+					<dd>
+						<label><select multiple="multiple" size="8" name="api_mod_deactivated_methods[]" id="api_mod_deactivated_methods">{API_MOD_DEACTIVATED_METHODS}</select></label>
+						<br />[&nbsp;<a href="javascript:reset_selected('api_mod_deactivated_methods')">{L_RESET}</a>&nbsp;]
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_list_ip">{L_ACP_PHPBB_API_LIST_IP}:</label></dt>
+					<dd>
+						<label><input type="radio" class="radio" name="api_mod_list_ip" value="1"<!-- IF API_MOD_LIST_IP --> checked="checked" id="api_mod_list_ip"<!-- ENDIF --> /> {L_YES}</label>
+						<label><input type="radio" class="radio" name="api_mod_list_ip" value="0"<!-- IF not API_MOD_LIST_IP --> checked="checked" id="api_mod_list_ip"<!-- ENDIF --> /> {L_NO}</label>
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_ucp_pagination">{L_ACP_PHPBB_API_PAGINATION}:</label></dt>
+					<dd>
+						<input class="spinner" type="text" id="api_mod_ucp_pagination" name="api_mod_ucp_pagination" maxlength="4" size="4" value="{API_MOD_UCP_PAGINATION}" onkeypress="return numbersonly(this, event)" />
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_ucp_crypt">{L_ACP_PHPBB_API_UCP_URL_CRYPT}:</label><br />{L_ACP_PHPBB_API_UCP_URL_CRYPT_EXP}</dt>
+					<dd>
+						<label><input type="radio" class="radio" name="api_mod_ucp_crypt" value="1"<!-- IF API_MOD_UCP_CRYPT --> checked="checked" id="api_mod_ucp_crypt"<!-- ENDIF --> /> {L_YES}</label>
+						<label><input type="radio" class="radio" name="api_mod_ucp_crypt" value="0"<!-- IF not API_MOD_UCP_CRYPT --> checked="checked" id="api_mod_ucp_crypt"<!-- ENDIF --> /> {L_NO}</label>
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="api_mod_faq_multi_column">{L_ACP_PHPBB_API_FAQ_MULTI_COLUMN}:</label></dt>
+					<dd>
+						<label><input type="radio" class="radio" name="api_mod_faq_multi_column" value="1"<!-- IF API_MOD_FAQ_MULTI_COLUMN --> checked="checked" id="api_mod_faq_multi_column"<!-- ENDIF --> /> {L_YES}</label>
+						<label><input type="radio" class="radio" name="api_mod_faq_multi_column" value="0"<!-- IF not API_MOD_FAQ_MULTI_COLUMN --> checked="checked" id="api_mod_faq_multi_column"<!-- ENDIF --> /> {L_NO}</label>
+					</dd>
+				</dl>
+				<div><sup class="error">*</sup><em>{L_ACP_PHPBB_API_IGNORE_COUNTER}</em></div>
+			</div>
+		</fieldset>
+		<fieldset style="text-align: center;" id="psubmit">
+			<legend>{L_SUBMIT}</legend>
+			{S_HIDDEN_FIELDS}
+			{S_FORM_TOKEN}
+			<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" onclick="$('#psubmit').fadeOut(200)" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" /><br />
+		</fieldset>
+	</form>
+<script type="text/javascript">
+// <![CDATA[
+var ajax_process = false, url = '{U_ACTION}';
+$(".spinner").spinner({
+	spin: function( event, ui ) {
+		if (ui.value < 0 ) {
+			$( this ).spinner( "value", 0 );
+			return false;
+		}
+	}
+});
+function reset_selected(id){
+	$("#" + id).children('option').each(function(index) {
+		this.selected = false;
+	});
+}
+function test_db(){
+	//test_db() is already busy, skip. //
+	if (ajax_process){
+		return false;
+	}
+	var db_username = $('#api_mod_db_username').val();
+	var db_password = $('#api_mod_db_password').val();
+	if (!db_username){
+		ajax_process = true;
+		$('#test-db_results').html('<strong class="error">{LA_NO_USER_SPECIFIED}</strong>');
+		setTimeout(function(){
+			$('#test-db_results').html('');
+			ajax_process = false;
+		}, 5000);
+		return;
+	}
+	$.ajax({
+		type: 'POST',
+		url: url.replace(/&amp;/g, '&'),
+		data: {'ajax' : 1, 'api_mod_db_username': db_username, 'api_mod_db_password' : db_password},
+		timeout: 5000,
+		dataType: 'json',
+		beforeSend: function(){
+			$('html, body').addClass('busy');
+			$('#test-db_results').html('{LA_ACP_PHPBB_API_LOADING}');
+			ajax_process = true;
+		},
+		success: function(data, textStts, errThrown) {
+			$('#test-db_results').html(data['msg']);
+		},
+		complete: function(data, textStts, errThrown) {
+			$('html, body').removeClass('busy');
+			ajax_process = false;
+			setTimeout(function(){
+				$('#test-db_results').html('');
+			}, 5000);
+		},
+		error: function(data, textStts, errThrown) {
+			$('#test-db_results').html('<strong class="error">{LA_ERR_CONNECTING_SERVER}</strong>');
+		},
+	});
+}
+
+// ]]>
+</script>
+<!-- INCLUDE overall_footer.html -->
