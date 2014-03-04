@@ -394,7 +394,6 @@ function ssort($ary, $sort_flags = SORT_REGULAR)
 ***
 *****/
 
-
 /****
 * api_err_log()
 * API error log function, here we write a physical log file in case of unrecordable error
@@ -411,10 +410,32 @@ function api_err_log($errstr, $include_server_vars = true, $include_env_vars = t
 	$logdata .= "\n" . (is_array($errstr) ? current($errstr) : $errstr);
 	$logdata .= "\n\n" . '[BEGIN: Debugging data]';
 
-	if(!empty($debug_backtrace))
+	if(!empty($debug_backtrace) && is_array($debug_backtrace))
 	{
-		$debug_backtrace = @array_reverse($debug_backtrace);
-		$logdata .= "\n	Backtrace: " . json_encode($debug_backtrace, JSON_FORCE_OBJECT);
+		$debug = array();
+		$i = 0;
+		foreach ($debug_backtrace as $trace)
+		{
+			if (isset($trace['function']) && $trace['function'] == 'api_error_handler')
+			{
+				continue;
+			}
+			$debug[$i] = array(
+				'file' => isset($trace['file']) ? htmlspecialchars(phpbb_filter_root_path($trace['file'])) : "-",
+				'line' => isset($trace['line']) ? $trace['line'] : "-",
+				'function' => isset($trace['function']) ? $trace['function'] : "-",
+				'class' => isset($trace['class']) ? $trace['class'] : "-",
+				'type' => isset($trace['type']) ? $trace['type'] : "-",
+			);
+			if (!empty($trace['args'][0]) && in_array($trace['function'], array('include', 'require', 'include_once', 'require_once')))
+			{
+				$debug[$i] = array(
+					'args' => $trace['args'],
+				);
+			}
+			$i++;
+		}
+		$logdata .= "\n	Backtrace: " . json_encode($debug, JSON_FORCE_OBJECT);
 	}
 	if (!empty($config))
 	{

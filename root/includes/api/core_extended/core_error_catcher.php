@@ -290,8 +290,15 @@ function fatal_api_error_handler($buffer)
 			);
 
 			$error['message'] = e_user_level($error['type'], true) . ' ' . $error['message'];
-			@apiFN\api_err_log($user->lang('API_ERROR_INTERNAL', strip_tags($error['message']), htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line']));
-			@apiFN\api_add_log('API_LOG_FATAL_ERROR', request_var('k', ''), array(htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line'], strip_tags($error['message'])));
+			try 
+			{
+				apiFN\api_err_log($user->lang('API_ERROR_INTERNAL', strip_tags($error['message']), htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line']));
+				apiFN\api_add_log('API_LOG_FATAL_ERROR', request_var('k', ''), array(htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line'], strip_tags($error['message'])));
+			} 
+			catch (Exception $e) 
+			{
+				error_handling\unrecoverable_fatal_error($e);
+			}
 			@header('Content-Length2: ' . strlen($buffer_handled));
 			return $buffer_handled;
 		}
@@ -341,8 +348,15 @@ function fatal_api_error_handler($buffer)
 
 					$result['status'] = '503 Service Unavailable';
 				}
-				@apiFN\api_err_log($api->user->lang('API_ERROR_INTERNAL', strip_tags($result['msg']), htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line']));
-				@apiFN\api_add_log('API_LOG_FATAL_ERROR', $api->api_key, array(htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line'], strip_tags($result['msg'])));
+				try 
+				{
+					apiFN\api_err_log($api->user->lang('API_ERROR_INTERNAL', strip_tags($result['msg']), htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line']));
+					apiFN\api_add_log('API_LOG_FATAL_ERROR', $api->api_key, array(htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line'], strip_tags($result['msg'])));
+				} 
+				catch (Exception $e) 
+				{
+					error_handling\unrecoverable_fatal_error($e);
+				}
 				$result = $api->display($result, true, true);
 				//Here we bypass CDN like Cloudflare... So you can get it even if your CDN remove "Content-Length" header.
 				header('Content-Length2: ' . strlen($result));
@@ -357,19 +371,20 @@ function fatal_api_error_handler($buffer)
 	return $buffer;
 }
 //Something went very wrong
-//At this moment we cannot recover nothing anymore :'(
+//At this moment we cannot recover nothing anymore, we need to show a last message to the user :'(
 function unrecoverable_fatal_error($message, $return = false)
 {
+	$message = "Unrecoverable fatal error: «{$message}» Please report that error to an administrator, including all parameters you passed into the API.";
 	if($return)
 	{
-		return "Unrecoverable fatal error: {$message}";
+		return $message;
 	}
 
 	if(!headers_sent())
 	{
 		send_status_line(503, 'Service Unavailable');
 	}
-	echo("Unrecoverable fatal error: {$message}");
+	echo $message;
 
 	garbage_collection();
 	exit_handler();

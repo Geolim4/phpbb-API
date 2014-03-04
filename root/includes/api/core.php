@@ -974,7 +974,7 @@ class api
 					// Here we don't skip the first one.
 					$debug_backtrace = array_reverse($debug_backtrace);
 
-					foreach ($debug_backtrace as $trace)
+					foreach ($debug_backtrace AS $trace)
 					{
 						if ($trace['function'] == 'api_error_handler' || (empty($trace['file']) && empty($trace['line'])))
 						{
@@ -1004,10 +1004,26 @@ class api
 					$trace = debug_backtrace();
 					$caller = array_shift($trace);
 
-					$result['msg'] = $this->user->lang('API_ERROR_INTERNAL', error_handling\e_user_level($errno), $caller['file'], $caller['line'], strip_tags($msg));
+					//If $errno != E_USER_ERROR we display a nicely formated error.
+					if ($errno != E_USER_ERROR)
+					{
+						$result['msg'] = $this->user->lang('API_ERROR_INTERNAL', error_handling\e_user_level($errno), $caller['file'], $caller['line'], strip_tags($msg));
+					}
+					else
+					{
+						//But in case of E_USER_ERROR we display the error code in logs
+						$msg = error_handling\e_user_level($errno, true) . ' ' . $msg;
+					}
 
-					functions\api_err_log($this->user->lang('API_ERROR_INTERNAL', strip_tags($msg), htmlspecialchars(phpbb_filter_root_path($caller['file'])), $caller['line']));
-					functions\api_add_log('API_LOG_FATAL_ERROR', $this->api_key, array(htmlspecialchars(phpbb_filter_root_path($caller['file'])), $caller['line'], strip_tags($msg)));
+					try 
+					{
+						functions\api_err_log($this->user->lang('API_ERROR_INTERNAL', strip_tags($msg), htmlspecialchars(phpbb_filter_root_path($caller['file'])), $caller['line']));
+						functions\api_add_log('API_LOG_FATAL_ERROR', $this->api_key, array(htmlspecialchars(phpbb_filter_root_path($caller['file'])), $caller['line'], strip_tags($msg)));
+					} 
+					catch (Exception $e) 
+					{
+						error_handling\unrecoverable_fatal_error($e);
+					}
 				}
 
 				if ($errno == E_RECOVERABLE_ERROR || $errno == E_CORE_ERROR || $errno == E_USER_ERROR || $errno ==  E_ERROR || $errno ==  E_COMPILE_ERROR)
@@ -1233,9 +1249,6 @@ class api
 		}
 		if (!$return)
 		{
-			//header('Content-Length: ' . strlen($output));
-			//Here we bypass CDN like cloudflare...
-			//header('Content-Length2: ' . strlen($output));
 			$output = $this->encrypt($output, $this->api_secret_key, true);
 			echo $output;
 		}

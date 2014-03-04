@@ -47,7 +47,9 @@ trait core_crypto
 						}
 						header('Content-Disposition: attachment; ' . $header_filename);
 					}
-					return $this->_encrypt($string, $key);
+					$string = $this->_encrypt($string, $key);
+					header('Content-Length: ' . utf8_strlen($string));
+					return $string;
 				}
 				else
 				{
@@ -61,6 +63,7 @@ trait core_crypto
 				$this->trigger_error('API_ERROR_CRYPTO_DISABLED', E_USER_WARNING);
 			}
 		}
+		header('Content-Length: ' . utf8_strlen($string));
 		return $string;
 	}
 
