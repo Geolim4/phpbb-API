@@ -5,7 +5,6 @@
 ^>@version $Id: info_ucp_phpbb_api.php v0.0.1 00h11 12/20/2013 Geolim4 Exp $
 * @copyright (c) 2012 - 2014 Geolim4.com http://geolim4.com
 * @bug/function request: http://geolim4.com/tracker
-* @translator papicx 05/12/2013 09h53  version b papicx@phpbb-fr.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
