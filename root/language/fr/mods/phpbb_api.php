@@ -36,17 +36,18 @@ if (empty($lang) || !is_array($lang))
 //
 $lang = array_merge($lang, array(
 	'API_CACHED_PURGED'			=> 'Le cache a été purgé',
-	'API_DEACTIVATED'			=> 'Cette clé a été désactivée, veuillez contacter un Administrateur pour plus d’informations.',
+	'API_CRYPTO_PRIVATE'		=> 'Privée. Allez dans votre panneau d’utilisateur pour l’obtenir.',
+	'API_DEACTIVATED'			=> 'Cette clé a été désactivée, veuillez contacter un administrateur pour plus d’informations.',
 	'API_GENERATE_TIME'			=> 'Page générée en %s secondes.',
 	'API_LIFETIME'				=> 'A vie',
 	'API_ITEM_KEYWORD'			=> 'objet',//Should uppercase without special chars unless underscore: _
-	'API_LOGIN_WAIT'			=> 'Connexion, veuillez patienter…',
+	'API_LOGIN_WAIT'			=> 'Connexion, veuillez patienter …',
 	'API_NO_RECORD'				=> 'Aucun enregistrement trouvé',
 	'API_INCORRECT_DATA'		=> 'Données incorrectes envoyées',
 	'API_SUCCESS'				=> 'Opération terminée avec succès',
 	'API_SUCCESS_CRON'			=> 'Tâche cron exécutée avec succès, un email a été envoyé à tous les fondateurs.',
 	'API_SUCCESS_QUERY'			=> 'Requête executée avec succès : %s',
-	'API_SUSPENDED'				=> 'Cette clé a été suspendue, veuillez contacter un Administrateur pour plus d’informations.',
+	'API_SUSPENDED'				=> 'Cette clé a été suspendue, veuillez contacter un administrateur pour plus d’informations.',
 	'API_STATUS_DISABLE'		=> 'Desactiver',//No special chars(é,à,è)
 	'API_STATUS_ENABLE'			=> 'Activer',//No special chars(é,à,è)
 
@@ -71,26 +72,28 @@ $lang = array_merge($lang, array(
 		'set_config'		=> 'changement_config',
 		'board_status'		=> 'forum_statut',
 		'php_configuration'	=> 'configuration_php',
+		'search_ip'			=> 'recherche_ip',
 	),
 	//Short methods description
 	'API_FULL_TRANSLATED_METHOD'		=> array(
 		'login'				=> 'Connexion au compte',
-		'post'				=> 'Récupération de données de messages',
-		'topic'				=> 'Récupération de données de sujet',
-		'forum'				=> 'Récupération de données de forum',
-		'group'				=> 'Récupération de données de groupe',
+		'post'				=> 'Récupération des données d’un message',
+		'topic'				=> 'Récupération des données d’un sujet',
+		'forum'				=> 'Récupération des données d’un forum',
+		'group'				=> 'Récupération des données d’un groupe',
 		'perm_ban'			=> 'Bannissement permanent',
 		'unban'				=> 'Débannissement',
 		'get_bans'			=> 'Récupération des bannissements',
 		'key_options'		=> 'Récupération des options de la clé',
-		'key_stats'			=> 'Récupération des statistiques de la clé',//Sooo freeencch *.*
-		'sql_query'			=> 'Exécution d’une Requête SQL',
+		'key_stats'			=> 'Récupération des statistiques de la clé',
+		'sql_query'			=> 'Exécution d’une requête SQL',
 		'get_constants'		=> 'Récupération des constantes locales',
 		'refresh_stats'		=> 'Rafraîchissement des statistiques',
-		'get_config'		=> 'Récupération de configuration',
-		'set_config'		=> 'Changement de configuration',
-		'board_status'		=> 'Changement de statut du forum',
+		'get_config'		=> 'Récupération de la configuration',
+		'set_config'		=> 'Changement de la configuration',
+		'board_status'		=> 'Changement du statut du forum',
 		'php_configuration'	=> 'Récupération de la configuration de PHP',
+		'search_ip'			=> 'Rechercher une IP',
 	),
 
 	//Full submethods translation
@@ -103,7 +106,7 @@ $lang = array_merge($lang, array(
 		'user_type'			=> 'Type d’utilisateur',
 		'user_regdate'		=> 'Date d’enregistrement (Temps UNIX)',
 		'user_ip'			=> 'IP d’enregistrement',
-		'user_passchg'		=> 'Dernier changement m.d.p (Temps UNIX)',
+		'user_passchg'		=> 'Dernier changement du mot de passe (Temps UNIX)',
 		//Topic table translation
 		'topic_id'			=> 'Identifiant du sujet',
 		'topic_title'		=> 'Titre du sujet',
@@ -127,10 +130,11 @@ $lang = array_merge($lang, array(
 		'serialize'			=> 'Chaîne linéarisé (PHP)',
 		'ban_id'			=> 'Identifiant du ban',
 		'userid'			=> 'Identifiant utilisateur',
-		'email'				=> 'Email',
+		'email'				=> 'E-mail',
 	),
-	
+
 	'API_UNAUTHORIZED'			=> 'Clé non autorisée !',
+	'API_UNAUTHORIZED_USER'		=> 'Le compte liée à cette clé a été supprimée.',
 	'API_UNAUTHORIZED_AUTH'		=> 'Vous n’avez pas les permissions requises',
 	'API_UNAUTHORIZED_FN'		=> 'Fonctionnalité désactivée sur cette clé !',
 	'API_UNAUTHORIZED_PVG'		=> 'Privilège refusé : %s',
@@ -138,31 +142,34 @@ $lang = array_merge($lang, array(
 
 	//API errors...
 	'API_BAD_EMAIL'					=> 'Cette clé est sécurisée avec l’adresse e-mail de son propriétaire. Veuillez vous référer au manuel de l’API pour vous authentifier avec l’adresse e-mail.',
-	'API_BAD_IP'					=> 'Cette clé ne peut pas être utilisée avec cette adresse IP (votre IP actuelle: %s)',
+	'API_BAD_IP'					=> 'Cette clé ne peut pas être utilisée avec cette adresse IP (votre IP actuelle : %s)',
 	'API_BAN_REASON'				=> 'Vous avez été banni définitivement de ce forum via l’API.',
 
+	'API_ERROR_ATTEMPTS'			=> 'Vous avez dépasser le nombre maximum de connection autorisée avec cette IP ce qui résulte d’un bannissement temporaire de l’API.',
+	'API_ERROR_CRYPTO_DISABLED'		=> 'Le chiffrement a été désactivé par l’administrateur.',
 	'API_ERROR_DEACTIVATED_METHOD'	=> 'Cette méthode a été désactivée sur cette clé, veuillez contacter un Administrateur pour plus d’informations.',
 	'API_ERROR_EXCEEDED'			=> 'Vous avez dépassé votre quota maximum de requêtes sur cette clé (%s)',
 	'API_ERROR_EXPIRED'				=> 'Cette clé est périmée depuis le %s',
 	'API_ERROR_HOOK_OUTDATED'		=> 'Ce hook n’est plus a jour. La dernière version de l’API est : %1$s, la version de ce hook est : %2$s',
 	'API_ERROR_HOOK_NOCONST'		=> 'Constante de mise à jour manquante : %s',
-	'API_ERROR_INTERNAL'			=> '[ %1$s ] Fichier : %2$s, ligne : %3$s : Un événement inattendu de l’API est survenu : %4$s',
+	'API_ERROR_INTERNAL'			=> 'Message : %1$s Fichier : %2$s Ligne : %3$s ', // That key is used to fill the physical log
 	'API_ERROR_METHOD'				=> 'Erreur critique : Méthode « %s » non trouvée ! Le nom de la méthode peut varier selon le language défini dans le compte rattaché à votre clé.',
 	'API_ERROR_METHOD_DISPLAY'		=> 'Format de sortie « %s » non trouvé !',
 	'API_ERROR_METHOD_REQUEST'		=> 'Impossible de procéder à la requête en mode %s',
+	'API_ERROR_DISABLED'			=> 'L’API a été désactivé par un administrateur.',
 	'API_ERROR_NO_SSL'				=> 'La requête doit être ré-adressé en utilisant le protocole SSL',
-	'API_ERROR_NO_METHOD'			=> 'Aucune méthode sélectionnée!',
-	'API_ERROR_NO_SUBMETHOD'		=> 'Aucune sous-méthode sélectionnée!',
+	'API_ERROR_NO_METHOD'			=> 'Aucune méthode sélectionnée !',
+	'API_ERROR_NO_SUBMETHOD'		=> 'Aucune sous-méthode sélectionnée !',
 	'API_ERROR_PER_DAY'				=> 'Vous avez dépassé votre quota maximum de requêtes par jour (%s)',
 	'API_ERROR_PER_MONTH'			=> 'Vous avez dépassé votre quota maximum de requêtes par mois (%s)',
 	'API_ERROR_PER_WEEK'			=> 'Vous avez dépassé votre quota maximum de requêtes par semaine (%s)',
-	'API_ERROR_PHP_VERSION'			=> 'L’API requiert PHP %1$s ou ultérieur, votre version de PHP version est la %2$s',
+	'API_ERROR_PHP_VERSION'			=> 'L’API requiert PHP %1$s ou ultérieur, votre version de PHP est la %2$s',
 	'API_ERROR_TYPE'				=> 'Colonne SQL « %s » inconnue dans la table « %s »',
 
 	'API_FATAL_ERROR'				=> 'Erreur fatale',
 	'API_FATAL_ERROR_DATE'			=> 'Date',
 	'API_FATAL_ERROR_FILE'			=> 'Fichier',
-	'API_FATAL_ERROR_INTERNAL'		=> '[ %1$s ] Fichier: %2$s, ligne: %3$s : Message: %4$s',
+	'API_FATAL_ERROR_INTERNAL'		=> '[ %1$s ] Fichier: %2$s, Ligne : %3$s : Message : %4$s',
 	'API_FATAL_ERROR_LINE'			=> 'Ligne',
 	'API_FATAL_ERROR_MSG'			=> 'Message',
 	'API_FATAL_ERROR_PHP_VERSION'	=> 'Version de PHP',
