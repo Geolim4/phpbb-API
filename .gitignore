@@ -1,2 +1,3 @@
 ~*
 /root/includes/api/cache/*.php
+/root/includes/api/error.log
