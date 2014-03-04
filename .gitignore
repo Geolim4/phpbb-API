@@ -1,3 +1,4 @@
 ~*
 /root/includes/api/cache/*.php
 error.log
+*.nppsession
