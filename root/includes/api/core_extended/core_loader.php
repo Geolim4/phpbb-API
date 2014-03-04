@@ -38,7 +38,7 @@ trait core_loader
 		$this->load_acls();
 		$this->load_privileges();
 		$this->load_hooks();
-		$this->load_login_attempts();
+		$this->load_login_attempts($key);
 		$this->authenticate_key($key);
 		$this->load_methods_type();
 

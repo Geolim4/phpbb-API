@@ -404,12 +404,18 @@ function api_err_log($errstr, $include_server_vars = true, $include_env_vars = t
 {
 	global $phpbb_root_path, $phpEx, $user, $api, $config;
 
+	$debug_backtrace = debug_backtrace();
 	$logfile = API_ERR_LOG_FILE;
 	$handle = fopen($logfile, "ab");
 	$logdata = str_repeat('=', 25) . date("Y-m-d H:i:s") . str_repeat('=', 25);
 	$logdata .= "\n" . (is_array($errstr) ? current($errstr) : $errstr);
-	$logdata .= "\n" . '[BEGIN: Debugging data]';
+	$logdata .= "\n\n" . '[BEGIN: Debugging data]';
 
+	if(!empty($debug_backtrace))
+	{
+		$debug_backtrace = @array_reverse($debug_backtrace);
+		$logdata .= "\n	Backtrace: " . json_encode($debug_backtrace, JSON_FORCE_OBJECT);
+	}
 	if (!empty($config))
 	{
 		$api_config = array();

@@ -9,14 +9,16 @@
 *
 */
 namespace phpbb_api\hooks\displays;
+use \phpbb_api\api AS api_master;
+
 /**
  * @ignore
  */
-if (!defined('IN_PHPBB') || !defined('IN_PHPBB_API') )
+if (!defined('IN_PHPBB') || !defined('IN_PHPBB_API'))
 {
 	exit;
 }
-if (!defined(__NAMESPACE__ . '\DISPLAY_RAW_API_TARGET_VERSION') )
+if (!defined(__NAMESPACE__ . '\DISPLAY_RAW_API_TARGET_VERSION'))
 {
 	//Define hook version here (MANDATORY)
 	define(__NAMESPACE__ . '\DISPLAY_RAW_API_TARGET_VERSION', '0.0.1');
@@ -50,6 +52,7 @@ if (!defined(__NAMESPACE__ . '\DISPLAY_RAW_API_TARGET_VERSION') )
 			// https://geolim4.com/centre-de-documentations/phpbb-api-version-checker-instructions-t1763.html
 			//'vchecker'=> array('yourwebsite.com', '/subpath', 'display_raw.txt'),
 			'download'	=> 'http://geolim4.com/api-hooks.html?h=hook_display_raw',
+			'website'	=> 'http://geolim4.com',
 			'author'	=> 'Geolim4',
 			'version'	=> DISPLAY_RAW_API_TARGET_VERSION,
 			'name'		=> 'ACP_API_MANAGE_HOOK_DISPLAY_RAW',//Hey hook, what is your name?
@@ -58,7 +61,7 @@ if (!defined(__NAMESPACE__ . '\DISPLAY_RAW_API_TARGET_VERSION') )
 		return;
 	}
 
-	function hook_display_raw($array, $api)
+	function hook_display_raw($array, api_master $api)
 	{
 		//$template_content = $api->template_content;
 		header('Content-Type: text/plain; charset=UTF-8');

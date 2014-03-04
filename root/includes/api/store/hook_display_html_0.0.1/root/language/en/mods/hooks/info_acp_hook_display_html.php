@@ -43,3 +43,20 @@ $lang = array_merge($lang, array(
 	'ACP_API_OUTPUT_HTML_TITLE' => 'API gateway interface',
 	'ACP_API_OUTPUT_HTML_ROOT' => 'root',
 ));
+
+$lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'][] = array(
+		//'method' => '',//Not translatable
+		//'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
+		0 => 'Récupérer les données au format HTML',
+		1 => 'Cette extension vous permettra de récupérer les données au format HTML sous forme de liste de données.
+			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
+		"k" => "{KB_API_KEY}",
+		"e" => "{KB_USER_EMAIL}",
+		"a" => "topic",
+		"m" =>  false,
+		"t" => "topic_id",
+		"s" => "operator:LIKE",
+		"d" => "Bienvenue",
+		"o" => "html",
+));[/code]'
+);

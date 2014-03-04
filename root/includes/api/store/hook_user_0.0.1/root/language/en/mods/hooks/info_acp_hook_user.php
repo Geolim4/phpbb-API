@@ -43,8 +43,27 @@ $lang = array_merge($lang, array(
 ));
 
 $lang['API_FULL_TRANSLATED_METHOD']	+= array(
-		'user'			=> 'User data',
+		'user'			=> 'Get user data',
 );
 $lang['API_TRANSLATED_METHOD']	+= array(
 		'user'			=> 'user',
+);
+
+$lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'][] = array(
+		//'cfg' => 'api_config_name',////Require that the specified config must be true to show that part
+		'method' => 'user',//Not translatable
+		//'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
+		0 => 'Récupérer des données d’utilisateur',
+		1 => 'L’API de récupérer quelques données basiques d’utilisateur.
+			<br />Récupérons ici quelques données de profil de l’utilisateur [i]Geolim4[/i]:
+			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
+		"k" => "{KB_API_KEY}",
+		"e" => "{KB_USER_EMAIL}",
+		"a" => "{METHOD}",
+		"m" =>  false,
+		"t" => "username",
+		"s" => "",
+		"d" => "Geolim4",
+		"o" => "json",
+));[/code]'
 );

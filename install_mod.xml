@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[phpBB API]]></title>
+		<description lang="en"><![CDATA[That MOD will provide to your board a RESTfull API able to communicate in many format: JSON, XML, HTML etc.
+
+You can grab some posts/topics/forums/groups infos etc... The API will provide a special administrator access using admin-key privileges like:
+-Cache purge
+-Statistics refreshing , 
+-Board disabling/enabling 
+-(Un)Banning
+-Board configuration altering
+-SQL querying
+-...
+The embedded FAQ will provide much more details. You can also extend the API functionalities using a complete hook system.
+
+The API has been made in order to complete a crucial need in phpBB: A strong & secure API.]]></description>
+		<author-notes lang="en"><![CDATA[/!\ phpBB API will require PHP 5.4.1 /!\]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[Georges.L]]></realname>
+				<username><![CDATA[Geolim4]]></username>
+				<homepage><![CDATA[http://geolim4.com]]></homepage>
+				<email><![CDATA[contact@geolim4.com]]></email>
+			</author>
+		</author-group>
+		<mod-version>0.0.1</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>120</time>
+			<target-version>3.0.12</target-version>
+		</installation>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/*.*" to="*.*"/>
+		</copy>
+		<open src=".htaccess">
+			<edit>
+				<find><![CDATA[<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>]]></find>
+				<action type="after-add"><![CDATA[##Mod begin: phpBB API
+RewriteEngine On
+#param pattern		#k			#e					#a			#m				#t			#s					#d		#o
+RewriteRule ^api/([a-z0-9_-]{40})\(?(.*[^/\(\)])?\)?/([a-z0-9_]+)(\([A-Za-z]+\))?/([a-z0-9_-]+)?\(?(.*[^/\(\)])?\)?/(.*[^/])?/([A-Za-z0-9_-]+)?$ api.php?k=$1&e=$2&a=$3&m=$4&t=$5&s=$6&d=$7&o=$8 [QSA,L,NC]
+RewriteRule ^api/?$ api.php [QSA,L,NC]
+#Example: http://yourwebsite.com/api/fmec9rvmo336zqiazfbmclcudfbcr2je54dle5e1(email@emil.com)/topic/forum_id(limit:5,start:0:operator:=)/2/xml
+#Using cURL:
+# curl_setopt($handle, CURLOPT_POSTFIELDS, array(
+#		k => '(string)',//Api Key, used to authenticate the user/admin (e.g "fmec9rvmo336zqiazfbmclcudfbcr2je54dle5e") (mandatory)
+#		e => '(string)',//Email attached to the API KEY (e.g "admin@admin.com") (optional)
+#		a => '(string)',//Action/Function to call (e.g "topic") (mandatory)
+#		m => '(string)',//Enable multibyte for the type of data (e.g "(multibyte)") (optional)
+#		t => '(string)',//Type of data to call (e.g "topic_id") (mandatory)
+#		s => '(string)',//SQL sort statement (e.g "start:10,limit:10")
+#		d => '(string/int)',//Data to inject as to be the data of "t" param (e.g "51") (mandatory)
+#		o => '(string)',//Output display mode (e.g "json") (mandatory)
+#	));
+##Mod end: phpBB API]]></action>
+			</edit>
+		</open>
+		<php-installer><![CDATA[phpbb_api_install.php]]></php-installer>
+	</action-group>
+</mod>

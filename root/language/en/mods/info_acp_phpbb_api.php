@@ -119,8 +119,8 @@ $lang = array_merge($lang, array(
 	'API_LOG_CONFIG_UPDATED'		=> 'Updated settings of phpBB API',
 	'API_LOG_DEACTIVATED_METHOD'	=> '<strong>Attempting to use a deactivated method</strong><br />» %s' . $api_lang_suffix,
 	'API_LOG_DENIED_PRIVILEGE'		=> '<strong>Denied privilege</strong><br />» %s' . $api_lang_suffix,
-	'API_LOG_FATAL_ERROR'			=> '<strong>A PHP fatal error occurred:</strong><br />»<code>%s</code>' . $api_lang_suffix,
-	'API_LOG_NON_FATAL_ERROR'		=> '<strong>An error has been returned from the debugger:</strong><br />» %1$s' . $api_lang_suffix,
+	'API_LOG_FATAL_ERROR'			=> '<strong>A PHP fatal error occurred:</strong><br /><strong>File: </strong><code>%1$s</code><br /><strong>Line: </strong><code>%2$s</code><br /><strong>Message: </strong><code>%3$s</code>' . $api_lang_suffix,
+	'API_LOG_NON_FATAL_ERROR'		=> '<strong>An error has been returned from the debugger:</strong><br /><strong>File: </strong><code>%1$s</code><br /><strong>Line: </strong><code>%2$s</code><br /><strong>Message: </strong><code>%3$s</code>' . $api_lang_suffix,
 	'API_LOG_GET_CONFIG'			=> '<strong>Retrieving configuration data:</strong> %s' . $api_lang_suffix,
 	'API_LOG_KEY_ACTIVE'			=> '<strong>Re-activated API key <em>%s</em></strong>',
 	'API_LOG_KEY_CREATED'			=> '<strong>Created the API key <em>%s</em></strong>',
@@ -144,7 +144,7 @@ $lang = array_merge($lang, array(
 
 	'ACP_PHPBB_API_BACKTRACE'			=> 'Enable API backtrace',
 	'ACP_PHPBB_API_BACKTRACE_EXP'		=> 'This feature allow you to trace potential errors of the API.
-											<br />Note that only administrator keys have this privilege.',
+											<br />Note that only administrator keys have the privilege to see exceptions in API response. In all case, the exceptions will be still logged in logs',
 	'ACP_PHPBB_API_BAN_RECORDED'		=> '%d expired ban recorded',
 	'ACP_PHPBB_API_BANS_RECORDED'		=> '%d expired bans recorded',
 

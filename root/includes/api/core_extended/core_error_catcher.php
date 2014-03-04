@@ -131,7 +131,7 @@ function generate_warning($errstr, $errfile, $errline)
 	}
 }
 
-function e_user_level($type)
+function e_user_level($type, $use_bracket = false)
 {
 	$return = "";
 	if ($type & E_ERROR) // 1 //
@@ -198,7 +198,13 @@ function e_user_level($type)
 	{
 		$return .= '& E_UNKNOW_ERRNO ';
 	}
-	return substr($return, 2, -1); 
+	$return = substr($return, 2, -1);
+
+	if($use_bracket)
+	{
+		$return = "[ {$return} ]";
+	}
+	return $return; 
 }
 
 //try to catch up that fatal error !!
@@ -283,8 +289,9 @@ function fatal_api_error_handler($buffer)
 				$buffer_handled
 			);
 
-			@apiFN\api_err_log($user->lang('API_FATAL_ERROR_INTERNAL', e_user_level($error['type']), htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line'], strip_tags($error['message'])));
-			@apiFN\api_add_log('API_LOG_FATAL_ERROR', request_var('k', ''), $user->lang('API_FATAL_ERROR_INTERNAL', e_user_level($error['type']), htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line'], strip_tags($error['message'])));
+			$error['message'] = e_user_level($error['type'], true) . ' ' . $error['message'];
+			@apiFN\api_err_log($user->lang('API_ERROR_INTERNAL', strip_tags($error['message']), htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line']));
+			@apiFN\api_add_log('API_LOG_FATAL_ERROR', request_var('k', ''), array(htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line'], strip_tags($error['message'])));
 			@header('Content-Length2: ' . strlen($buffer_handled));
 			return $buffer_handled;
 		}
@@ -294,7 +301,7 @@ function fatal_api_error_handler($buffer)
 			if (!empty($api))
 			{
 				$result = array(
-					'msg' => $api->user->lang('API_FATAL_ERROR_INTERNAL', e_user_level($error['type']), htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line'], strip_tags($error['message'])),
+					'msg' => e_user_level($error['type'], true) . ' ' . $error['message'],
 					'errno' => $error['type'],
 				);
 				if ($api->backtrace)
@@ -334,9 +341,8 @@ function fatal_api_error_handler($buffer)
 
 					$result['status'] = '503 Service Unavailable';
 				}
-
-				@apiFN\api_err_log($result['msg']);
-				@apiFN\api_add_log('API_LOG_FATAL_ERROR', $api->api_key, $result['msg']);
+				@apiFN\api_err_log($api->user->lang('API_ERROR_INTERNAL', strip_tags($result['msg']), htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line']));
+				@apiFN\api_add_log('API_LOG_FATAL_ERROR', $api->api_key, array(htmlspecialchars(phpbb_filter_root_path($error['file'])), $error['line'], strip_tags($result['msg'])));
 				$result = $api->display($result, true, true);
 				//Here we bypass CDN like Cloudflare... So you can get it even if your CDN remove "Content-Length" header.
 				header('Content-Length2: ' . strlen($result));

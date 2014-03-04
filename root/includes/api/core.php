@@ -210,9 +210,9 @@ class api
 	/****
 	* load_login_attempts()
 	* Check login attempts from this IP
-	* @param string $key key to authenticate
+	* @param string $key key to log in case of ban
 	****/
-	protected function load_login_attempts()
+	protected function load_login_attempts($key)
 	{
 
 		if (empty($this->config['api_mod_max_attempts']))
@@ -939,7 +939,7 @@ class api
 	* @param string $msg message do display
 	* @param int $errno errno
 	****/
-	public function trigger_error($msg, $errno = E_USER_NOTICE)
+	public function trigger_error($msg, $errno = E_USER_NOTICE, $line = '', $file = '')
 	{
 		$this->error_triggered = true;
 		$this->errno = $errno;
@@ -958,7 +958,14 @@ class api
 					'msg' => isset($this->user->lang[$msg]) ? $this->user->lang[$msg] : $msg,
 					'errno' => $errno,
 				);
-
+				if($errno == E_WARNING || $errno == E_NOTICE)
+				{
+					$result['msg'] = error_handling\e_user_level($errno, true) . ' ' . $result['msg'];
+					$result += array(
+						'line' => $line,
+						'file' => $file
+					);
+				}
 				if (($errno == E_RECOVERABLE_ERROR || $errno == E_CORE_ERROR || $errno == E_USER_ERROR || $errno ==  E_ERROR || $errno ==  E_COMPILE_ERROR) && $this->config['api_mod_backtrace'] && $this->backtrace)
 				{
 					$debug_backtrace = debug_backtrace();
@@ -998,8 +1005,9 @@ class api
 					$caller = array_shift($trace);
 
 					$result['msg'] = $this->user->lang('API_ERROR_INTERNAL', error_handling\e_user_level($errno), $caller['file'], $caller['line'], strip_tags($msg));
-					functions\api_err_log($this->user->lang('API_FATAL_ERROR_INTERNAL', error_handling\e_user_level($errno), htmlspecialchars(phpbb_filter_root_path($caller['file'])), $caller['line'], strip_tags($msg)));
-					functions\api_add_log('API_LOG_FATAL_ERROR', $this->api_key, $this->user->lang('API_FATAL_ERROR_INTERNAL', error_handling\e_user_level($errno), htmlspecialchars(phpbb_filter_root_path($caller['file'])), $caller['line'], strip_tags($msg)));
+
+					functions\api_err_log($this->user->lang('API_ERROR_INTERNAL', strip_tags($msg), htmlspecialchars(phpbb_filter_root_path($caller['file'])), $caller['line']));
+					functions\api_add_log('API_LOG_FATAL_ERROR', $this->api_key, array(htmlspecialchars(phpbb_filter_root_path($caller['file'])), $caller['line'], strip_tags($msg)));
 				}
 
 				if ($errno == E_RECOVERABLE_ERROR || $errno == E_CORE_ERROR || $errno == E_USER_ERROR || $errno ==  E_ERROR || $errno ==  E_COMPILE_ERROR)
@@ -1045,11 +1053,11 @@ class api
 		if (isset($this->user->lang[$errstr]))
 		{
 			//Handle trigger_error() from phpBB too. You must declare the language key to use them, else API_ERROR_INTERNAL will be triggered instead.
-			$this->trigger_error($this->user->lang[$errstr], $errno);
+			$this->trigger_error($this->user->lang[$errstr], $errno, $line, $file);
 		}
 		else
 		{
-			$this->trigger_error($errstr, $errno);
+			$this->trigger_error($errstr, $errno, $line, $file);
 		}
 	}
 
@@ -1119,8 +1127,8 @@ class api
 			}
 			foreach ($this->api_exceptions AS $api_exceptions_)
 			{
-				functions\api_err_log($api_exceptions_);
-				functions\api_add_log('API_LOG_NON_FATAL_ERROR', $this->api_key, $api_exceptions_);
+				functions\api_err_log($this->user->lang('API_ERROR_INTERNAL', $api_exceptions_['msg'], $api_exceptions_['file'], $api_exceptions_['line']));
+				functions\api_add_log('API_LOG_NON_FATAL_ERROR', $this->api_key, array($api_exceptions_['file'], $api_exceptions_['line'], $api_exceptions_['msg']));
 			}
 		}
 
