@@ -67,21 +67,21 @@ if (empty($lang) || !is_array($lang))
 $lang['permission_cat']['api'] = 'API';
 $lang = array_merge($lang, array(
 	//ACP acl
-	'acl_a_phpbb_api_config'		=> array('lang' => 'Can manage API configuration', 'cat' => 'api'),
-	'acl_a_phpbb_api_hooks'			=> array('lang' => 'Can manage API hooks, including installation, uninstall, and hooks deletion.<br /><em>The hooks may allow execution of arbitrary code, so you must grant this permission only to trusted users!</em>', 'cat' => 'api'),	
-	'acl_a_phpbb_api_keys'			=> array('lang' => 'Can manage the keys of API, including Administrators keys', 'cat' => 'api'),	
-	'acl_a_phpbb_api_logs'			=> array('lang' => 'Can manage API logs', 'cat' => 'api'),
-	'acl_a_phpbb_api_stats'			=> array('lang' => 'Can manage API statistics', 'cat' => 'api'),
+	'acl_a_phpbb_api_config'		=> array('lang' => 'Peut gérer la configuration de l’API', 'cat' => 'api'),
+	'acl_a_phpbb_api_hooks'			=> array('lang' => 'Peut gérer les hooks de l’API, y compris l’installation, la désinstallation et la suppression des hooks.<br /><em>Les hooks permettent l’execution de code arbitraire, donc vous devriez accorder cette permission uniquement aux utilisateurs de confiance !</em>', 'cat' => 'api'),	
+	'acl_a_phpbb_api_keys'			=> array('lang' => 'Peut gérer les clés de l’API, y compris les clés d’administrateur', 'cat' => 'api'),	
+	'acl_a_phpbb_api_logs'			=> array('lang' => 'Peut gérer les journaux de l’API', 'cat' => 'api'),
+	'acl_a_phpbb_api_stats'			=> array('lang' => 'Peut gérer les statistiques de l’API', 'cat' => 'api'),
 	//UCP acl
-	'acl_u_phpbb_api_history'		=> array('lang' => 'Can view the key use history', 'cat' => 'api'),
-	'acl_u_phpbb_api_ignore_day'	=> array('lang' => 'Can ignore the daily request limit', 'cat' => 'api'),
-	'acl_u_phpbb_api_ignore_max'	=> array('lang' => 'Can ignore the maximum request limit', 'cat' => 'api'),	
-	'acl_u_phpbb_api_ignore_month'	=> array('lang' => 'Can ignore the monthly request limit', 'cat' => 'api'),
-	'acl_u_phpbb_api_ignore_week'	=> array('lang' => 'Can ignore the weekly request limit', 'cat' => 'api'),
-	'acl_u_phpbb_api_ips'			=> array('lang' => 'Can set allowed/disallowed IPs to use the key', 'cat' => 'api'),	// à mettre en concordance avec la fr
-	'acl_u_phpbb_api_regenerate'	=> array('lang' => 'Can regenerate a new key when the current key is expired or has reached its maximum quota of request', 'cat' => 'api'),
-	'acl_u_phpbb_api_stats'			=> array('lang' => 'Can view the key statistics', 'cat' => 'api'),
-	'acl_u_phpbb_api_use'			=> array('lang' => 'Can use the API', 'cat' => 'api'),	
+	'acl_u_phpbb_api_history'		=> array('lang' => 'Peut voir l’historique d’utilisation d’une clé', 'cat' => 'api'),
+	'acl_u_phpbb_api_ignore_day'	=> array('lang' => 'Peut ignorer les limites de requêtes journalières', 'cat' => 'api'),
+	'acl_u_phpbb_api_ignore_max'	=> array('lang' => 'Peut ignorer les limites de requêtes maximum', 'cat' => 'api'),	
+	'acl_u_phpbb_api_ignore_month'	=> array('lang' => 'Peut ignorer les limites de requêtes mensuelles', 'cat' => 'api'),
+	'acl_u_phpbb_api_ignore_week'	=> array('lang' => 'Peut ignorer les limites de requêtes hebdomadaire', 'cat' => 'api'),
+	'acl_u_phpbb_api_ips'			=> array('lang' => 'Peut modifier la liste des adresses IPs autorisées/interdites à utiliser la clé', 'cat' => 'api'),	// à mettre en concordance avec la fr
+	'acl_u_phpbb_api_regenerate'	=> array('lang' => 'Peut générer une nouvelle clé quand la clé actuelle est expirée ou a atteind le quota maximum de requête.', 'cat' => 'api'),
+	'acl_u_phpbb_api_stats'			=> array('lang' => 'Peut voir les statistiques de la clé', 'cat' => 'api'),
+	'acl_u_phpbb_api_use'			=> array('lang' => 'Peut utiliser l’API', 'cat' => 'api'),	
 	
 ));
 ?>
