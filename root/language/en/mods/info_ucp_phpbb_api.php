@@ -60,7 +60,7 @@ $lang = array_merge($lang, array(
 	'UCP_PHPBB_API_KEYS'			=> 'Keys management',
 	'UCP_PHPBB_API_KEY_ID'			=> 'Key',
 	'UCP_PHPBB_API_SECRET_KEY'		=> 'Secret key',
-	'UCP_PHPBB_API_SECRET_KEY_EXP'	=> 'The secret key is useful only if you use the cryptographic functionality of the API. Like the API key, that key is strictly personal and you must not share it to untrusted people. 
+	'UCP_PHPBB_API_SECRET_KEY_EXP'	=> 'The secret key is useful only if you use the cryptographic functionality of the API. Like the API key, that key is strictly personal and you must not share it to untrusted people.
 										<br />In case you compromise this key, ask an administrator to reinitialize it.',
 	'UCP_PHPBB_API_KEY_ID_EXP'		=> 'This key is strictly personal, it is your username to be able to operate on the API and identifies you as such, for more security, you can force authentication of this key by email.',
 	'UCP_PHPBB_API_LAST_QUERIES'	=> 'Last queries was: %s',
@@ -92,7 +92,7 @@ $lang = array_merge($lang, array(
 ));
 
 $lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'] = array();//Init the KB hooks array
-// Important note to translators & users: 
+// Important note to translators & users:
 // BBCODE is supported only on key ID: 1
 // Use [adminkey][/adminkey] bbcode to add admin-key-only text.
 $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
@@ -388,7 +388,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		0 => 'Modifier des données de configuration',
 		1 => 'L’API permet également de modifier les données de configuration. Attention toutefois aux mauvaises manipulations !
 			<br />Modifions ici quelques variables de configuration, nous devons donc faire appel au paramètre [b]d[/b].
-			Vous ne pouvez utiliser que deux formats pour envoyer une donnée de configuration: JSON et serialize(PHP). 
+			Vous ne pouvez utiliser que deux formats pour envoyer une donnée de configuration: JSON et serialize(PHP).
 			<br />Les données de configuration à modifier sont envoyées par paire « nom de configuration/valeur »
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
