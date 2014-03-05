@@ -42,11 +42,11 @@ $lang = array_merge($lang, array(
 	'UCP_PHPBB_API_ADMIN_KEY_ONLY'	=> 'Disponible uniquement sur les clés d’administrateur actives.',
 	'UCP_PHPBB_API_ADMIN_KEY_INFO'	=> 'Impossible de désactiver l’authentification par email pour les clés d’administrateur.',
 	'UCP_PHPBB_API_CONFIRM_EXPLAIN'	=> 'Cela va désactiver la clé <em>%s</em> et en recréer une nouvelle par la suite.',
-	'UCP_PHPBB_API_DAILY_USE'		=> 'Utilisation journalière', // quotidienne ? 
+	'UCP_PHPBB_API_DAILY_USE'		=> 'Utilisation quotidienne',
 	'UCP_PHPBB_API_EMAIL'			=> 'Authentifier la clé avec l’e-mail',
 	'UCP_PHPBB_API_KB'				=> 'Base de connaissance',
-	'UCP_PHPBB_API_FORCE_POST'		=> 'Méthode HTTP « POST » seulement',
-	'UCP_PHPBB_API_FORCE_POST_EXP'	=> 'Forcer la clé a être utilisée en <a href="http://fr.wikipedia.org/wiki/M%C3%A9thode_de_requ%C3%AAte#M.C3.A9thodes">POST</a> uniquement.',
+	'UCP_PHPBB_API_FORCE_POST'		=> 'Méthode HTTP «&nbsp;POST&nbsp;» seulement',
+	'UCP_PHPBB_API_FORCE_POST_EXP'	=> 'Forcer la clé a être utilisée en <a href="http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M.C3.A9thodes">POST</a> uniquement.',
 	'UCP_PHPBB_API_GENERATE'		=> '<a href="%s">En générer une nouvelle ?</a>',
 	'UCP_PHPBB_API_GEN_AUTH'		=> 'Vous n’avez pas la permission de générer une nouvelle clé, contactez un Administrateur pour plus d’informations.',
 	'UCP_PHPBB_API_HISTORY'			=> 'Historique',
@@ -59,15 +59,18 @@ $lang = array_merge($lang, array(
 	'UCP_PHPBB_API_KEY_IPS_TYPE_D'	=> 'IPs interdites',
 	'UCP_PHPBB_API_KEYS'			=> 'Gestion des clés',
 	'UCP_PHPBB_API_KEY_ID'			=> 'Clé',
+	'UCP_PHPBB_API_SECRET_KEY'		=> 'Clé secrète',
+	'UCP_PHPBB_API_SECRET_KEY_EXP'	=> 'La clé secrète est utile uniquement si vous utilisez la fonctionnalité de chiffrage de l’API. Comme la clé API, cette clé est strictement personnelle et vous ne devez pas la partager à des personnes qui ne sont pas de confiance.
+										<br />Si vous oubliez cette clé ou si vous pensez qu’elle a été compromise, demandez à un administrateur de la réinitialiser.',
 	'UCP_PHPBB_API_KEY_ID_EXP'		=> 'Cette clé est strictement confidentielle, elle est votre identifiant pour pouvoir opérer sur l’API et vous identifie en tant que tel, pour plus de sécurité, vous pouvez forcer l’authentification de cette clé par votre e-mail.',
 	'UCP_PHPBB_API_LAST_QUERIES'	=> 'Dernière requête : %s',
-	'UCP_PHPBB_API_LOADING'			=> 'Chargement…',
+	'UCP_PHPBB_API_LOADING'			=> 'Chargement …',
 	'UCP_PHPBB_API_MONTHLY_USE'		=> 'Utilisation mensuelle',
 	'UCP_PHPBB_API_NO_KEY'			=> 'Aucune clé trouvée.',
 	'UCP_PHPBB_API_NO_REQUEST'		=> 'Aucune',
 	'UCP_PHPBB_API_PERCENT'			=> '%',
 	'UCP_PHPBB_API_QUERIE'			=> '%1$s/%2$s requête',
-	'UCP_PHPBB_API_QUERIES'			=> '%1$s/%2$s  requêtes',
+	'UCP_PHPBB_API_QUERIES'			=> '%1$s/%2$s requêtes',
 	'UCP_PHPBB_API_REGENERATE'		=> '<a href="%s">Regénérer une nouvelle clé</a>',
 	'UCP_PHPBB_API_STATS'			=> 'Statistiques',
 	'UCP_PHPBB_API_STATUS'			=> 'Statut de la clé',
@@ -89,7 +92,7 @@ $lang = array_merge($lang, array(
 ));
 
 $lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'] = array();//Init the KB hooks array
-// Important note to translators & users: 
+// Important note to translators & users:
 // BBCODE is supported only on key ID: 1
 // Use [adminkey][/adminkey] bbcode to add admin-key-only text.
 $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
@@ -137,7 +140,9 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 			[*][b]u[/b]: Jointure de données sur l’utilisateur courant (optionnel, désactivé par défaut): Joint à la requête des données sur le propriétaire de la clé. Exemple: [i]u=true[/i]
 			[*][b]h[/b]: Active la conversion des temps UNIX en temps textuel (optionnel, désactivé par défaut): Retourne un temps textuel plutôt qu’un entier. Exemple: [i]h=true[/i]
 			[*][b]p[/b]: Paramètres GET/POST envoyés (optionnel, désactivé par défaut): Retourne la liste des paramètres GET et POST envoyés au serveur. Exemple: [i]p=true[/i]
-			[adminkey][*][b]v[/b]: Active la prise en charge des constantes systèmes (optionnelles, activées par défaut). Exemple: [i]v=true[/i][/adminkey][/list]'
+			[adminkey][*][b]v[/b]: Active la prise en charge des constantes systèmes (optionnelles, activées par défaut). Exemple: [i]v=true[/i]
+			[*][b]i[/b]: Utilise la clé sans privilège d’administrateur, elle seras donc utilisée en tant que clé d’utilisateur (optionnel, désactivé par défaut). Exemple: [i]i=true[/i][/adminkey]
+			[*][b]n[/b]: Active les communications cryptées (optionnel, désactivé par défaut). Exemple: [i]n=true[/i]. Veuillez lire attentivement la section [i]Support du chiffrement[/i].[/list]'
 	),
 	array(
 		0 => 'Traductions des méthodes',
@@ -244,8 +249,36 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 Ici nous avons recherché un sujet dont son identifiant de sujet [b]contient[/b] un entier de 3 chiffres de long compris entre 0 et 5.
 <br />Exemple de correspondance: [color=#00BF40]345[/color], [color=#00BF40]1259413[/color], [color=#00BF40]550[/color]
 Exemple de non-correspondance: [color=#FF0000]725[/color], [color=#FF0000]05[/color], [color=#FF0000]1358[/color]
-Si vous souhaitez que la correspondance se fasse sur la chaîne entière et non une partie de celle-ci vous devez le préciser comme ceci: [b]^[0-5]{3}$[/b]'
+Si vous souhaitez que la correspondance se fasse sur la chaîne entière et non une partie de celle-ci vous devez le préciser comme ceci : [b]^[0-5]{3}$[/b]'
 	),
+	array(
+		'cfg' => 'api_mod_crypto_enabled',
+		0 => 'upport du chiffrement',
+		1 => 'L’API fournit un support basic du chiffrement. Pour démarrer une communication cryptée, vous devez activer le paramètre [b]n[/b].
+			L’algorithme de chiffrement actuel est {KB_CRYPTO_CIPHER} (mode : [i]{KB_CRYPTO_MODE}[/i]), mais vous pouvez l’obtenir depuis l’API en utilisant la méthode [b]get_crypto_config[/b].
+			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/get_crypto_config/-/-/json[/code]
+			[size=100][u]Demander une réponse ciffrée à l’API :[/u][/size]
+			La syntaxe est presque la même que d’habitude, à l’exception du paramètre [b]n[/b] qui est activé.
+			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
+		"k" => "{KB_API_KEY}",
+		"e" => "{KB_USER_EMAIL}",
+		"a" => "topic",
+		"m" =>  false,
+		"n" => true,
+		"t" => "topic_id",
+		"s" => "s=operator:<>,start:5,limit:10",
+		"d" => "2",
+		"o" => "json",
+));[/code]
+[b][color=#BC2A4D]/!\[/color][/b] L’API retournera un fichier nommé [b]{KB_CRYPTO_FILENAME}[/b] à la place d’une réponse HTTP standard. Ce fichier est chiffrée et vous ne pouvez le déchiffrer qu’avec votre clé secrète.
+[br][size=100][u]Déchiffrer une réponse chiffrée de l’API (méthode PHP):[/u][/size]
+[code=php]$handle = fopen("{KB_CRYPTO_FILENAME}", "rb");
+$encrypted_content = fread($handle, filesize("api.response"));
+fclose($handle);
+$decrypted_content = mcrypt_decrypt({KB_CRYPTO_CIPHER}, "your_secret_key", $encrypted_content, {KB_CRYPTO_MODE}, "{KB_CRYPTO_IV}");[/code]
+Comme vous pouvez le voir ci-dessus, le code utilisé pour déchiffrer le fichier est assez simple. Si l’algorithme de chiffrement a changé depuis votre dernière utilisation, contactez un administrateur pour plus d’informations.'
+	),
+
 	array(
 		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
 		0 => 'Recherche par constantes systèmes',
@@ -287,7 +320,7 @@ Bien sûr à vous d’adapter le code si vous souhaitez récupérer des données
 		'method' => 'get_config',//Not translatable
 		0 => 'Récupérer des données de configuration',
 		1 => 'L’API de récupérer quelques données basiques de configuration.
-			<br />Récupérons ici toutes les données de configurations basique, comme par exemple la taille maximum des avatars, la description du site ou encore la date d’ouverture du forum:
+			<br />Récupérons ici toutes les données de configurations basique, comme par exemple la taille maximum des avatars, la description du site ou encore la date d’ouverture du forum :
 			[code] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -298,8 +331,8 @@ Bien sûr à vous d’adapter le code si vous souhaitez récupérer des données
 		"d" => "",
 		"o" => "json",
 ));[/code][adminkey]
-Vous pouvez également récupérer différents types de configuration avec trois modes différents: « cached », « dynamic », « custom ».
-			<br />Récupérons ici toutes les variables de configuration en cache:
+Vous pouvez également récupérer différents types de configuration avec trois modes différents : « cached », « dynamic », « custom ».
+			<br />Récupérons ici toutes les variables de configuration en cache :
 			[code] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -310,7 +343,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		"d" => "",
 		"o" => "json",
 ));[/code]
-			<br />Récupérons ici toutes les variables de configuration dynamiques:
+			<br />Récupérons ici toutes les variables de configuration dynamiques :
 			[code] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -355,7 +388,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		0 => 'Modifier des données de configuration',
 		1 => 'L’API permet également de modifier les données de configuration. Attention toutefois aux mauvaises manipulations !
 			<br />Modifions ici quelques variables de configuration, nous devons donc faire appel au paramètre [b]d[/b].
-			Vous ne pouvez utiliser que deux formats pour envoyer une donnée de configuration: JSON et serialize(PHP). 
+			Vous ne pouvez utiliser que deux formats pour envoyer une donnée de configuration: JSON et serialize (PHP).
 			<br />Les données de configuration à modifier sont envoyées par paire « nom de configuration/valeur »
 			[code] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
@@ -373,7 +406,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
 		0 => 'Actualiser les statistiques du forum',
 		1 => 'Vous pouvez actualiser les statistiques de votre forum directement via l’API, attention toutefois à la fréquence de ces actualisations qui sont gourmandes en ressources.
-			<br />Le paramètre [b]t[/b] vous permettra de choisir le type d’actualisation:
+			<br />Le paramètre [b]t[/b] vous permettra de choisir le type d’actualisation :
 			[list]
 				[*][b]all[/b]: Force la ré-actualisation de toutes les statistiques.
 				[*][b]num_posts[/b]: Force la ré-actualisation des statistiques de messages.
@@ -399,7 +432,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
 		0 => 'Effectuer une requête SQL',
 		1 => 'Vous pouvez effectuer des requêtes SQL directement via l’API (méthode POST uniquement), cependant selon la configuration de votre clé vous pouvez ne pas être en mesure de pouvoir modifier les tables sécurisées qui comprennent les tables des logs et de l’API.
-			<br />Le paramètre [b]s[/b] est disponible pour les clauses <em>start</em> et <em>limit</em>, il vous permettra de choisir le type d’actualisation:
+			<br />Le paramètre [b]s[/b] est disponible pour les clauses <em>start</em> et <em>limit</em>, il vous permettra de choisir le type d’actualisation :
 			<br />Il est préférable d’activer le paramètre [b]m[/b] pour des raisons de compatibilité.
 			<br />Soyez très prudent lors d’exécution de requêtes sensibles telles que [b]DELETE/DROP/TRUNCATE[/b].
 			<br />[b][color=#BC2A4D]Pour des raisons de sécurité, toutes les requêtes SQL sont archivées dans les logs après exécution.[/color][/b]
@@ -471,7 +504,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 	array(
 		'method' => 'key_stats',//Not translatable
 		0 => 'Récupérer les statistiques d’utilisation de ma clé',
-		1 => 'A tout moment vous pouvez consulter le taux d’utilisation de votre clé soi depuis votre panneau de contrôle d’utilisateur soi depuis l’API directement:
+		1 => 'A tout moment vous pouvez consulter le taux d’utilisation de votre clé soi depuis votre panneau de contrôle d’utilisateur soi depuis l’API directement :
 			La consultation de vos statistiques n’est pas comptabilisé en tant que requête. Il en est de même pour la consultation des options de votre clé.
 			[code] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
@@ -487,7 +520,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 	array(
 		'method' => 'key_options',//Not translatable
 		0 => 'Récupérer les options disponibles de ma clé',
-		1 => 'A tout moment vous pouvez consulter les options disponibles de votre clé soi depuis votre panneau de contrôle d’utilisateur soi depuis l’API directement:
+		1 => 'A tout moment vous pouvez consulter les options disponibles de votre clé soi depuis votre panneau de contrôle d’utilisateur soi depuis l’API directement :
 			A noter que cette requête n’est pas comptabilisé sur votre compteur de requête.
 			[code] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
@@ -523,7 +556,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 	),
 	array(
 		0 => '--',
-		1 => 'Foire aux questions (Questions posées fréquemment)'
+		1 => 'FAQ (Questions posées fréquemment)'
 	),
 	array(
 		0 => 'Ou puis-je consulter mon quota de requêtes ?',
@@ -567,11 +600,11 @@ Vous pouvez également récupérer différents types de configuration avec trois
 	),
 	array(
 		0 => 'O.S.S',
-		1 => 'Abréviation de <em>Opérateur SQL Sécurisé</em>: Opérateurs SQL parsés afin de sécuriser les requêtes SQL.'
+		1 => 'Abréviation de <em>Opérateur SQL Sécurisé</em> : Opérateurs SQL parsés afin de sécuriser les requêtes SQL.'
 	),
 	array(
 		0 => 'REGEXP',
-		1 => 'Acronyme de <em>expressions régulières</em> ou <em> expressions rationnelles</em>: masque de caractère permettant de faire correspondre une chaine de caractère. <a href="https://fr.wikipedia.org/wiki/Expression_rationnelle">Plus de détails</a>.'
+		1 => 'Acronyme de <em>expressions régulières</em> ou <em> expressions rationnelles</em> : masque de caractère permettant de faire correspondre une chaine de caractère. <a href="https://fr.wikipedia.org/wiki/Expression_rationnelle">Plus de détails</a>.'
 	),
 	array(
 		0 => 'cURL',
