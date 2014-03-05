@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package language [English] phpBB API
+* @package language [Standard french] phpBB API
 * @version $Id: phpbb_api.php v1.0.0 16:55 02/11/2012 Geolim4 Exp $
 * @copyright (c) 2012 Geolim4.com  http://Geolim4.com
 * @bug/function request: http://geolim4.com/tracker.php
@@ -38,5 +38,5 @@ if (empty($lang) || !is_array($lang))
 //For add Color
 //
 $lang = array_merge($lang, array(
-	'ACP_API_MANAGE_HOOK_DISPLAY_INI' => 'INI format output',
+	'ACP_API_MANAGE_HOOK_DISPLAY_INI' => 'Sortie au format INI',
 ));
