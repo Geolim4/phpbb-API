@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package language [English] phpBB API
+* @package language [Standard french] phpBB API
 * @version $Id: phpbb_api.php v1.0.0 16:55 02/11/2012 Geolim4 Exp $
 * @copyright (c) 2012 Geolim4.com  http://Geolim4.com
 * @bug/function request: http://geolim4.com/tracker.php
@@ -38,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 //For add Color
 //
 $lang = array_merge($lang, array(
-	'ACP_API_MANAGE_HOOK_DISPLAY_HTML' => 'HTML format output',
-	'ACP_API_OUTPUT_HTML_TITLE' => 'API gateway interface',
-	'ACP_API_OUTPUT_HTML_ROOT' => 'root',
+	'ACP_API_MANAGE_HOOK_DISPLAY_HTML' => 'Sortie au format HTML',
+	'ACP_API_OUTPUT_HTML_TITLE' => 'Interface de la passerelle de l’API',
+	'ACP_API_OUTPUT_HTML_ROOT' => 'racine',
 ));
 
 $lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'][] = array(
