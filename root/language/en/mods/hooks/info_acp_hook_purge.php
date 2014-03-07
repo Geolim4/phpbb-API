@@ -50,10 +50,10 @@ $lang['API_TRANSLATED_METHOD']	+= array(
 );
 $lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'][] = array(
 		//'cfg' => 'api_config_name',////Require that the specified config must be true to show that part
-		'method' => 'purge',//Not translatable
-		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
-		0 => 'Purger le cache du forum',
-		1 => 'Vous pouvez purger le cache de votre forum rapidement avec la méthode [i]{METHOD}[/i].
+		'method' => 'purge',//Automatically translated
+		'a_'	=> true,//require the user to have at least an administrator key to view that part!
+		0 => 'Purge the cache',
+		1 => 'You can quickly purge the cache using the [i]{METHOD}[/i] method.
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",

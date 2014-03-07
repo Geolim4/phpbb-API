@@ -39,5 +39,29 @@ if (empty($lang) || !is_array($lang))
 //For add Color
 //
 $lang = array_merge($lang, array(
-	'ACP_API_MANAGE_HOOK_DISPLAY_RAW' => 'RAW format output',
+	'ACP_API_MANAGE_HOOK_PURGE'		=> 'Cache purging',
 ));
+
+$lang['API_FULL_TRANSLATED_METHOD']	+= array(
+		'purge'			=> 'Cache purge',
+);
+$lang['API_TRANSLATED_METHOD']	+= array(
+		'purge'			=> 'purge',
+);
+$lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'][] = array(
+		//'cfg' => 'api_config_name',////Require that the specified config must be true to show that part
+		'method' => 'purge',//Automatically translated
+		'a_'	=> true,//require the user to have at least an administrator key to view that part!
+		0 => 'Purge the cache',
+		1 => 'You can quickly purge the cache using the [i]{METHOD}[/i] method.
+			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
+		"k" => "{KB_API_KEY}",
+		"e" => "{KB_USER_EMAIL}",
+		"a" => "{METHOD}",
+		"m" => false,
+		"t" => "all",
+		"s" => "",
+		"d" => "",
+		"o" => "json",
+));[/code]'
+);

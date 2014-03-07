@@ -104,7 +104,7 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 	array(
 		0 => 'Interaction with the API',
 		1 => 'Unless otherwise specified on the key, all requests must be done in GET or POST (recommended).
-			<br />All request must be sent using the HTTP protocol, or HTTPS if the administrator has forced SSL.'
+			[br]All request must be sent using the HTTP protocol, or HTTPS if the administrator has forced SSL.'
 	),
 	array(
 		0 => 'Communicate with the API',
@@ -148,23 +148,23 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 	array(
 		0 => 'Methods translation',
 		1 => 'Most API methods are translated and therefore can be used in the default language set on your user control panel.
-			<br />Note that methods are always available in their origin name. Below you can get the list of methods currently translated.
+			[br]Note that methods are always available in their origin name. Below you can get the list of methods currently translated.
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/get_methods/-/-/json[/code]
 			Note that this method is not translatable and must be called as is.'
 	),
 	array(
 		0 => 'Sub-methods translation',
 		1 => 'Most API sub-methods are also translated and therefore can be used in the default language set on your user control panel.
-			<br />Note that sub-methods are always available in their origin name. Below you can get the list of sub-methods currently translated for a certain method.
+			[br]Note that sub-methods are always available in their origin name. Below you can get the list of sub-methods currently translated for a certain method.
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/get_submethods/topic/-/json[/code]
 			[b][color=#BC2A4D]/!\[/color][/b] The translated sub-method cannot be called in [b]GET[/b] mode, you must call it in his origin name. Example: <em>topic_id</em>
 			Note that this method is not translatable and must be called as is.'
 	),
 	array(
 		0 => 'Simplified access with GET mode',
-		1 => 'Pour les requêtes simples la méthode GET peut être utilisée, tentons de récupérer les informations du sujet avec l’ID N°24 au format JSON:
+		1 => 'For simple requests the GET mode can be used, trying to retrieve information from the topic with the ID N°24 in JSON format:
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/topic/topic_id/24/json[/code]
-			<br />Si la requête s’est bien passée, le serveur retournera une réponse similaire:
+			[br]If the request was successful, the server will return a similar response:
 			[code]{
 	results: {
 		item0: {
@@ -174,7 +174,7 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 		topic_attachment: "0",
 		topic_approved: "1",
 		topic_reported: "0",
-		topic_title: "Bienvenue sur phpBB3",
+		topic_title: "Welcome on phpBB3",
 		topic_poster: "2",
 		topic_time: "1352406260",
 		topic_time_limit: "0",
@@ -190,7 +190,7 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 		topic_last_poster_id: "2",
 		topic_last_poster_name: "Geolim4",
 		topic_last_poster_colour: "AA0000",
-		topic_last_post_subject: "Re: Bienvenue sur phpBB3",
+		topic_last_post_subject: "Re: Welcome on phpBB3",
 		topic_last_post_time: "1373142670",
 		topic_last_view_time: "1373142670",
 		poll_title: ""
@@ -199,34 +199,34 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 	timing: 0.215,
 	status: "200 OK"
 }[/code]
-		<br />Toutefois si la requête s’est mal déroulée une réponse similaire sera retournée:
+		[br]However, if the request went wrong, a similar response will be returned:
 			[code]{
-	msg: "Clé API non autorisée !",
+	msg: "Unauthorized API key !",
 	timing: 0.0056s,
 	status: "200 OK"
 }[/code]
-			En cas d’erreur critique ou fatale, l’API joindra le degré d’erreur selon les normes de [url=http://php.net/manual/fr/errorfunc.constants.php]PHP[/url]:
+			In case of fatal error, the API will join the error value according [url=http://php.net/manual/en/errorfunc.constants.php]PHP manual[/url]:
 	[code]{
-	msg: "Clé API suspendue !",
-	errno: 512,
+	msg: "Critical error: Method "api_xxxxx" not found ! The name of the method can vary depending the language set in the account attached to your key.",
+	errno: 256,
 	timing: 0.0056s,
-	status: "200 OK"
-}[/code]Sur l’exemple ci-dessus le degré de l’erreur est de type [i]E_USER_WARNING[/i].
-			<br />Si la clé requiert une authentification par e-mail elle devra être suffixée à la clé entre parenthèse:
+	status: "503 Service Unavailable"
+}[/code]In the example above the level of the error is [i]E_USER_ERROR[/i].
+			[br]If the key requires authentication by e-mail ([b]e[/b]) it will be suffixed with the key wrapped with brackets:
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/topic/topic_id/24/json[/code]
-			<br />La méthode GET prends aussi en charge quelques opérateurs de tri et de comparaison sur le mode de la méthode courante (voir chapitre sur les accès en « POST »).
-				Les opérateurs doivent être suffixés au mode de la méthode courante, ici nous recherchons seulement les 10 sujets où l’ID de sujet est différent de 24 en ignorant les 5 premiers sujets.
+			[br]The GET mode also take care of some secured sort operators (S.S.O) and comparison on the sub-method of the current method (see «Advanced access with POST mode» chapter).
+				S.S.O must be suffixed to the sub-method the current method wrapped with brackets, here we only look for the ten topics where the topic_id is different of 24 while ignoring the first five topics.
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/topic/topic_id(operator:<>,start:5,limit:10)/24/json[/code]
-			[b][color=#BC2A4D]/!\[/color][/b] Il est toutefois hautement recommandé d’utiliser la méthode POST pour les requêtes compliquées.
-			Seul les opérateurs suivants sont supportés: <em>NOT LIKE,LIKE,REGEXP,&nbsp;&lt;&gt;,&nbsp;&gt;,&nbsp;&lt;,&nbsp;=,&nbsp;&lt;=,&nbsp;&gt;=</em><br />
-			<br />Si le type de données et la valeur recherchée sont facultatifs, vous pouvez les remplacer par le caractère générique suivant: [b]{KB_WILDCARD_CHAR}[/b]
+			[b][color=#BC2A4D]/!\[/color][/b] However, it is highly recommended to use the POST mode for hard requests.
+			Only the following S.S.O are supported: [i]NOT LIKE,LIKE,REGEXP,&nbsp;&lt;&gt;,&nbsp;&gt;,&nbsp;&lt;,&nbsp;=,&nbsp;&lt;=,&nbsp;&gt;=[/i]
+			[br]If the sub-methods ([b]t[/b]) and the value ([b]d[/b]) are optionals you can replace them using the generic char: [b]{KB_WILDCARD_CHAR}[/b]
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/key_stats/{KB_WILDCARD_CHAR}/{KB_WILDCARD_CHAR}/json[/code]'
 	),
 	array(
 		0 => 'Advanced access with POST mode',
-		1 => 'La méthode POST est [b]chaudement recommandée[/b] de manière générale surtout pour les requêtes utilisant des opérateurs et/ou des caractères spéciaux comme des accents.
-			Les exemples ci-dessous seront représentés sous forme d’un tableau cURL (PHP).
-			<br />Récupérons ici le sujet dont le titre contient le mot « élémentaire »
+		1 => 'The POST mode is [b][u]highly[/u][/b] recommended especially for general requests using S.S.O and/or special characters such as accents.
+			The examples below will be represented as a cURL array (PHP).
+			[br]Here we retrieve the topic subject which contain the « elementary » word
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -234,10 +234,10 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 		"m" => true,
 		"t" => "topic_id",
 		"s" => "operator:LIKE",
-		"d" => "élémentaire",
+		"d" => "elementary",
 		"o" => "json",
-));[/code]Nous avons donc utilisé l’O.S.S "LIKE". L’ajout du masque "%" est ajouté automatiquement par l’API.
-<br />Vous pouvez également utiliser une REGEXP pour affiner les critères de recherche:[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
+));[/code]We used the "LIKE" S.S.O. The "%" mask is automatically added by the API.
+[br]You can also use a REGEXP to improve the search accuracy:[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
 		"a" => "topic",
@@ -247,10 +247,10 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 		"d" => "[0-5]{3}",
 		"o" => "json",
 ));[/code]
-Ici nous avons recherché un sujet dont son identifiant de sujet [b]contient[/b] un entier de 3 chiffres de long compris entre 0 et 5.
-<br />Exemple de correspondance: [color=#00BF40]345[/color], [color=#00BF40]1259413[/color], [color=#00BF40]550[/color]
-Exemple de non-correspondance: [color=#FF0000]725[/color], [color=#FF0000]05[/color], [color=#FF0000]1358[/color]
-Si vous souhaitez que la correspondance se fasse sur la chaîne entière et non une partie de celle-ci vous devez le préciser comme ceci: [b]^[0-5]{3}$[/b]'
+Here we searched a topic which his subject identifier [b]contain[/b] a three lenght digit integer between 0 and 5.
+[br]Matching example: [color=#00BF40]345[/color], [color=#00BF40][u]125[/u]9[u]413[/u][/color], [color=#00BF40]550[/color]
+Non-matching example: [color=#FF0000]725[/color], [color=#FF0000]05[/color], [color=#FF0000]1385[/color]
+If you want the matching is done on the entire string and not a part only you need to specify like this: [b]^[0-5]{3}$[/b]'
 	),
 	array(
 		'cfg' => 'api_mod_crypto_enabled',
@@ -281,9 +281,9 @@ As you can see above the code used to decrypt the file is pretty simple. If the 
 	),
 
 	array(
-		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
+		'a_'	=> true,//require the user to have at least an administrator key to view that part
 		0 => 'Search by system constants',
-		1 => 'Vous pouvez utiliser des constantes de phpBB (et uniquement celles-ci) afin d’effectuer des recherches plus poussées. Vous devez la préfixer avec le signe [b]$[/b]
+		1 => 'You can use phpBB constants (and only them) to improve significantly the search accuracy. You must prefix the sign [b]$[/b]
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -294,17 +294,17 @@ As you can see above the code used to decrypt the file is pretty simple. If the 
 		"d" => "$item_locked",
 		"o" => "json",
 ));[/code]
-Vous pouvez modifier le paramètre [b]v[/b] afin de désactiver ces dernières (activées par défaut).'
+You can modify the [b]v[/b] parameter to disable phpBB constants (enabled by default).'
 	),
 	array(
 		0 => '--',
 		1 => 'Functionalities'
 	),
 	array(
-		'method' => 'topic,post,forum,group',//Not translatable
-		0 => 'Get data of topics/posts/forums/groups',
-		1 => 'L’API d’en récupérer quelques données basiques.
-			<br />Sur l’exemple ci-dessous, nous tentons de récupérer les données du forum dont l’identifiant est "1"
+		'method' => 'topic,post,forum,group',//Automatically translated
+		0 => 'Get topics/posts/forums/groups data',
+		1 => 'The API allow you to get some basic topics/posts/forums/groups data.
+			[br]On the example below, we will try to get data from the forum with the following forum ID: [b]1[/b]
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -315,13 +315,13 @@ Vous pouvez modifier le paramètre [b]v[/b] afin de désactiver ces dernières (
 		"d" => "1",
 		"o" => "json",
 ));[/code]
-Bien sûr à vous d’adapter le code si vous souhaitez récupérer des données de sujets, de messages ou encore de groupes.'
+Of course you can alter the code if you want to retrieve data from topics, posts, or groups.'
 	),
 	array(
-		'method' => 'get_config',//Not translatable
+		'method' => 'get_config',//Automatically translated
 		0 => 'Get configuration data',
-		1 => 'L’API de récupérer quelques données basiques de configuration.
-			<br />Récupérons ici toutes les données de configurations basique, comme par exemple la taille maximum des avatars, la description du site ou encore la date d’ouverture du forum:
+		1 => 'The API allow you to get some basic configuration data.
+			[br]Here we will get all basic configuration data, like maximum avatar size, website description, or board’s opening date:
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -332,8 +332,8 @@ Bien sûr à vous d’adapter le code si vous souhaitez récupérer des données
 		"d" => "",
 		"o" => "json",
 ));[/code][adminkey]
-Vous pouvez également récupérer différents types de configuration avec trois modes différents: « cached », « dynamic », « custom ».
-			<br />Récupérons ici toutes les variables de configuration en cache:
+You can also get different types of configuration with three different modes: « cached », « dynamic », « custom ».
+			[br]Here we get all cached configuration data:
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -344,7 +344,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		"d" => "",
 		"o" => "json",
 ));[/code]
-			<br />Récupérons ici toutes les variables de configuration dynamiques:
+			[br]Here we get all dynamic configuration data:
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -355,7 +355,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		"d" => "",
 		"o" => "json",
 ));[/code]
-			Récupérons ici des variables de configuration personnalisées, nous faisons donc appel au paramètre [b]d[/b] en séparant chaque nom de données de configuration par une virgule.
+			Here we get custom configuration data, using the [b]d[/b] parameter separating each configuration name with a comma.
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -368,10 +368,10 @@ Vous pouvez également récupérer différents types de configuration avec trois
 ));[/code][/adminkey]'
 	),
 	array(
-		'method' => 'get_constants',//Not translatable
-		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
+		'method' => 'get_constants',//Automatically translated
+		'a_'	=> true,//require the user to have at least an administrator key to view that part
 		0 => 'Get available system constants',
-		1 => 'Vous pouvez récupérer la liste des constantes système disponibles en utilisant la méthode [b]{METHOD}[/b]
+		1 => 'You can retrieve the list of available phpBB constants using the [b]{METHOD}[/b] method
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -384,13 +384,13 @@ Vous pouvez également récupérer différents types de configuration avec trois
 ));[/code]'
 	),
 	array(
-		'method' => 'set_config',//Not translatable
-		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
-		0 => 'Alter configuration data',
-		1 => 'L’API permet également de modifier les données de configuration. Attention toutefois aux mauvaises manipulations !
-			<br />Modifions ici quelques variables de configuration, nous devons donc faire appel au paramètre [b]d[/b].
-			Vous ne pouvez utiliser que deux formats pour envoyer une donnée de configuration: JSON et serialize(PHP). 
-			<br />Les données de configuration à modifier sont envoyées par paire « nom de configuration/valeur »
+		'method' => 'set_config',//Automatically translated
+		'a_'	=> true,//require the user to have at least an administrator key to view that part
+		0 => 'Alter configuration variables',
+		1 => 'The API also allows you to [u]alter[/u] the configuration variables. [color=red]Be careful with mishandling![/color]
+			[br]Altering a some configuration variables, so we need to use the [b]d[/b] parameter.
+			You can only use two formats to send a new configuration value: JSON and serialize(PHP). 
+			[br]The configuration data to modify must be sent as a pair « config name/value »
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -398,24 +398,24 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		"m" =>  false,
 		"t" => "json",
 		"s" => "",
-		"d" => \'{"board_email_sig": "Merci, l’équipe du forum", "max_filesize" : 262144}\',
+		"d" => \'{"board_email_sig": "Thanks, the great team.", "max_filesize" : 262144}\',
 		"o" => "json",
 ));[/code]'
 	),
 	array(
-		'method' => 'refresh_stats',//Not translatable
-		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
-		0 => 'Refresh forum’s statistics',
-		1 => 'Vous pouvez actualiser les statistiques de votre forum directement via l’API, attention toutefois à la fréquence de ces actualisations qui sont gourmandes en ressources.
-			<br />Le paramètre [b]t[/b] vous permettra de choisir le type d’actualisation:
+		'method' => 'refresh_stats',//Automatically translated
+		'a_'	=> true,//require the user to have at least an administrator key to view that part
+		0 => 'Refresh board’s statistics',
+		1 => 'You can refresh the statistics of your board directly via the API, but beware the frequency of these refresh that are resource intensive.
+			[br]The [b]t[/b] parameter will allow you to choose the type of refresh:
 			[list]
-				[*][b]all[/b]: Force la ré-actualisation de toutes les statistiques.
-				[*][b]num_posts[/b]: Force la ré-actualisation des statistiques de messages.
-				[*][b]num_topics[/b]: Force la ré-actualisation des statistiques de sujets.
-				[*][b]num_users[/b]: Force la ré-actualisation des statistiques du nombre d’utilisateurs.
-				[*][b]num_files[/b]: Force la ré-actualisation des statistiques du nombre de fichiers-joints.
-				[*][b]upload_dir_size[/b]: Force la ré-actualisation des statistiques de la taille du répertoire des fichiers-joints.
-				[*][b]update_last_username[/b]: Force la ré-actualisation des statistiques du dernier utilisateur inscrit.
+				[*][b]all[/b]: Force the refresh of [b]ALL[/b] statistics (Not recommended in high hourly traffic).
+				[*][b]num_posts[/b]: Force the refresh of the posts number statistics.
+				[*][b]num_topics[/b]: Force the refresh of the topics number statistics.
+				[*][b]num_users[/b]: Force the refresh of the users number statistics.
+				[*][b]num_files[/b]: Force the refresh of the attachments number statistics.
+				[*][b]upload_dir_size[/b]: Force the refresh of the attachments directory size statistics.
+				[*][b]update_last_username[/b]: Force the refresh of the latest user’s registration
 			[/list]
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
@@ -429,14 +429,14 @@ Vous pouvez également récupérer différents types de configuration avec trois
 ));[/code]'
 	),
 	array(
-		'method' => 'sql_query',//Not translatable
-		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
-		0 => 'Perform a SQL query',
-		1 => 'Vous pouvez effectuer des requêtes SQL directement via l’API (méthode POST uniquement), cependant selon la configuration de votre clé vous pouvez ne pas être en mesure de pouvoir modifier les tables sécurisées qui comprennent les tables des logs et de l’API.
-			<br />Le paramètre [b]s[/b] est disponible pour les clauses <em>start</em> et <em>limit</em>, il vous permettra de choisir le type d’actualisation:
-			<br />Il est préférable d’activer le paramètre [b]m[/b] pour des raisons de compatibilité.
-			<br />Soyez très prudent lors d’exécution de requêtes sensibles telles que [b]DELETE/DROP/TRUNCATE[/b].
-			<br />[b][color=#BC2A4D]Pour des raisons de sécurité, toutes les requêtes SQL sont archivées dans les logs après exécution.[/color][/b]
+		'method' => 'sql_query',//Automatically translated
+		'a_'	=> true,//require the user to have at least an administrator key to view that part
+		0 => 'Perform an SQL query',
+		1 => 'You can perform SQL queries directly via the API (POST mode only), however depending on the configuration of your key you may not be able to modify sensible tables like API/logs table.
+			[br]The [b]s[/b] parameter is available for clauses such <em>start</em> and <em>limit</em>.
+			[br]It is preferable to enable the multibyte ([b]m[/b]) parameter for compatibility reasons.
+			[br]Be very careful when running sensitive queries such as [b]DELETE/DROP/TRUNCATE[/b].
+			[br][b][color=#BC2A4D]For security reasons, all SQL statements are stored in logs after execution.[/color][/b]
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -444,17 +444,17 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		"m" => true,
 		"t" => "all",
 		"s" => "start:5,limit:10",
-		"d" => "SELECT * FROM phpbb_user_group WHERE group_leader = 1",
+		"d" => \'SELECT * FROM $USERS_TABLE WHERE user_id = 1\',//You can safely use phpBB constants here, but do not forget to use simple quotes to avoid bad PHP interpretation
 		"o" => "json",
 ));[/code]'
 	),
 	array(
-		'method' => 'perm_ban',//Not translatable
-		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
+		'method' => 'perm_ban',//Automatically translated
+		'a_'	=> true,//require the user to have at least an administrator key to view that part
 		0 => 'Permanent banning',
-		1 => 'Vous pouvez bannir définitivement une entité telle qu’une IP, un nom d’utilisateur ou bien encore une adresse e-mail.
-			Utilisez le paramètre [b]t[/b] pour définir le type d’entité à bannir tels que <em>user/ip/email</em>.
-			Le paramètre [b]d[/b] représentera l’entité à bannir.
+		1 => 'You can permanently ban an entity such an IP, an username or even an email address.
+			Use the sub-method ([b]t[/b]) to define the entity that you will ban. Possible values: <em>user/ip/email</em>.
+			The value ([b]d[/b]) is the entity to ban.
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -467,12 +467,12 @@ Vous pouvez également récupérer différents types de configuration avec trois
 ));[/code]'
 	),
 	array(
-		'method' => 'unban',//Not translatable
-		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
+		'method' => 'unban',//Automatically translated
+		'a_'	=> true,//require the user to have at least an administrator key to view that part
 		0 => 'Unbanning',
-		1 => 'Vous pouvez dé-bannir une entité telle qu’une IP, un nom d’utilisateur ou bien encore une adresse e-mail.
-			Utilisez le paramètre [b]t[/b] pour définir le type d’entité à dé-bannir tels que <em>user/ip/email</em>.
-			Le paramètre [b]d[/b] représentera l’entité à dé-bannir.
+		1 => 'Conversely, can unban an entity such an IP, an username or even an email address.
+			Use the sub-method ([b]t[/b]) to define the entity that you will unban. Possible values: <em>user/ip/email</em>.
+			The value ([b]d[/b]) is the entity to unban.
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -485,59 +485,27 @@ Vous pouvez également récupérer différents types de configuration avec trois
 ));[/code]'
 	),
 	array(
-		'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
-		'method' => 'board_status',//Not translatable
+		'a_'	=> true,//require the user to have at least an administrator key to view that part
+		'method' => 'board_status',//Automatically translated
 		0 => 'Enable/disable board',
-		1 => 'Vous pouvez activer ou désactiver le forum pour des manipulations sensibles par exemple.
-			Utilisez le paramètre [b]t[/b] pour définir le statut du forum <em>activer/désactiver</em> ou <em>1/0</em>.
-			Le paramètre [b]d[/b] représentera le message que vous souhaitez afficher en conséquence. Il ne doit cependant pas dépasser 255 caractère au risque d’être tronqué
+		1 => 'You can disable the board for example during a maintenance operation.
+			Use the sub-method ([b]t[/b]) to define the board status <em>enable/disable</em> or <em>true/false</em>.
+			The value ([b]d[/b]) will define your custom message that will displayed publicly. However, it must not exceed 255 characters, else it may be truncated..
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
 		"a" => "{METHOD}",
 		"m" => false,
-		"t" => "désactiver",
+		"t" => "disable",//Possible values: false/true/enable/disable
 		"s" => "",
-		"d" => "Le forum a été désactivé via phpBB API.",
+		"d" => "The board has been disable using API",//Your custom message that will displayed publicly
 		"o" => "json",
 ));[/code]'
 	),
 	array(
-		'method' => 'key_stats',//Not translatable
+		'method' => 'key_stats',//Automatically translated
 		0 => 'Retrieve key use statistics',
-		1 => 'A tout moment vous pouvez consulter le taux d’utilisation de votre clé soi depuis votre panneau de contrôle d’utilisateur soi depuis l’API directement:
-			La consultation de vos statistiques n’est pas comptabilisé en tant que requête. Il en est de même pour la consultation des options de votre clé.
-			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
-		"k" => "{KB_API_KEY}",
-		"e" => "{KB_USER_EMAIL}",
-		"a" => "{METHOD}",
-		"m" =>  false,
-		"t" => "",
-		"s" => "",
-		"d" => "",
-		"o" => "json",
-));[/code]'
-	),
-	array(
-		'method' => 'key_options',//Not translatable
-		0 => 'Retrieve available key options',
-		1 => 'A tout moment vous pouvez consulter les options disponibles de votre clé soi depuis votre panneau de contrôle d’utilisateur soi depuis l’API directement:
-			A noter que cette requête n’est pas comptabilisé sur votre compteur de requête.
-			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
-		"k" => "{KB_API_KEY}",
-		"e" => "{KB_USER_EMAIL}",
-		"a" => "{METHOD}",
-		"m" =>  false,
-		"t" => "",
-		"s" => "",
-		"d" => "",
-		"o" => "json",
-));[/code]'
-	),
-	array(
-		'method' => 'login',//Not translatable
-		0 => 'Connect to your account using API',
-		1 => 'Vous pouvez vous connecter à votre compte via l’API en utilisant la méthode [i]{METHOD}[/i] sans aucun argument supplémentaire. (Hormis l’email si besoin)
+		1 => 'At any time you can look at the current use average of your key from your user control panel or from the API directly:
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -548,7 +516,39 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		"d" => "",
 		"o" => "json",
 ));[/code]
-[b][color=#BC2A4D]/!\[/color][/b] Cette fonction ignorera le paramètre [b]o[/b] en retournant des données au format HTML!'
+Please note that viewing your statistics from the API will [b]not[/b] be deducted from your day/week/month/total counter. '
+	),
+	array(
+		'method' => 'key_options',//Automatically translated
+		0 => 'Retrieve available key options',
+		1 => 'At any time you can look at the current available options of your key from your user control panel or from the API directly:
+			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
+		"k" => "{KB_API_KEY}",
+		"e" => "{KB_USER_EMAIL}",
+		"a" => "{METHOD}",
+		"m" =>  false,
+		"t" => "",
+		"s" => "",
+		"d" => "",
+		"o" => "json",
+));[/code]
+Please note that viewing your statistics from the API will [b]not[/b] be deducted from your day/week/month/total counter. '
+	),
+	array(
+		'method' => 'login',//Automatically translated
+		0 => 'Connect to your account using API',
+		1 => 'You can connect to your account via the l’API using the [i]{METHOD}[/i] method without sub-method ([b]t[/b]) or value ([b]d[/b]) required. (Unless email ([b]e[/b]) if required)
+			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
+		"k" => "{KB_API_KEY}",
+		"e" => "{KB_USER_EMAIL}",
+		"a" => "{METHOD}",
+		"m" =>  false,
+		"t" => "",
+		"s" => "",
+		"d" => "",
+		"o" => "json",
+));[/code]
+[b][color=#BC2A4D]/!\[/color][/b] This function will violate the output format ([b]o[/b]) as returning HTML data!'
 	),
 	// This block will switch the knowledge to the second template column
 	array(
@@ -560,23 +560,23 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		1 => 'FAQ (Frequently Asked Questions)'
 	),
 	array(
-		0 => 'Ou puis-je consulter mon quota de requêtes ?',
-		1 => 'Vous pouvez consulter celui-ci dans votre panneau d’utilisateur dans l’onglet API » Statistiques.'
+		0 => 'Where can i see my request quota ?',
+		1 => 'You can see it in your user control panel, tab «Statistics».'
 	),
 	array(
-		0 => 'J’ai atteint mon quota de requêtes totales, comment continuer à utiliser l’API ?',
+		0 => 'I reached my quota of total requests, how to continue to use the API?',
 		1 => 'Vous pouvez demander à un administrateur d’augmenter votre quota de requête totales ou, si vous en avez la permission, générer une nouvelle clé depuis votre panneau de contrôle de l’utilisateur.'
 	),
 	array(
-		0 => 'Ma clé a expirée, que dois-je faire ?',
+		0 => 'My key has expired has expired, what can i do ?',
 		1 => 'Vous pouvez demander à un administrateur de rallonger la durée de vie de votre clé ou, si vous en avez la permission, en générer une nouvelle clé depuis votre panneau de contrôle de l’utilisateur.'
 	),
 	array(
-		0 => 'Ma clé a été désactivée ou suspendue, que dois-je faire ?',
+		0 => 'My key has been disabled or is suspended, what can i do ?',
 		1 => 'Votre clé à peut-être été suspendue par un administrateur à la suite d’un abus. Notez qu’une clé est automatiquement désactivée lorsque vous en générez une nouvelle.'
 	),
 	array(
-		0 => 'Quel est l’encodage de réponse de l’API ?',
+		0 => 'What is the API response encoding ?',
 		1 => 'Sauf spécifications contraire, toutes les réponses de L’API sont encodés en UTF-8 (sans BOM).'
 	),
 	array(
@@ -620,7 +620,7 @@ Vous pouvez également récupérer différents types de configuration avec trois
 		1 => 'Fonction de retour executée en cas de requête échouée.'
 	),
 	array(
-		0 => '--HOOKS--',//Not translatable
+		0 => '--HOOKS--',
 		1 => 'Additional functionalities [i](extensions)[/i]'
 	),
 );

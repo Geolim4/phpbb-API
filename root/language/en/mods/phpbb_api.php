@@ -49,8 +49,8 @@ $lang = array_merge($lang, array(
 	'API_SUCCESS_CRON'			=> 'Cron task successfully running, an email has been sent to all founders.',
 	'API_SUCCESS_QUERY'			=> 'Query successfully executed: %s',
 	'API_SUSPENDED'				=> 'This key has been suspended, contact an administrator for more informations.',
-	'API_STATUS_DISABLE'		=> 'Disable',//No special chars(é,à,è)
-	'API_STATUS_ENABLE'			=> 'Enable',//No special chars(é,à,è)
+	'API_STATUS_DISABLE'		=> 'disable',//No special chars(é,à,è)
+	'API_STATUS_ENABLE'			=> 'enable',//No special chars(é,à,è)
 
 	//Here we allow to translate some method we pass through the URL
 	//You cannot use é è à ï etc.
@@ -149,6 +149,7 @@ $lang = array_merge($lang, array(
 	'API_ERROR_ATTEMPTS'			=> 'You exceeded the maximum allowed number of login attempts with this IP resulting a temporary ban from the API.',
 	'API_ERROR_CRYPTO_DISABLED'		=> 'The cryptographic functionality has been disabled by an Administrator.',
 	'API_ERROR_DEACTIVATED_METHOD'	=> 'That method has been deactivated on this key, contact an administrator for more informations.',
+	'API_ERROR_EMPTY_SQL'			=> 'Empty SQL query',
 	'API_ERROR_EXCEEDED'			=> 'You have exceeded your maximum quota of queries on this key (%s)',
 	'API_ERROR_EXPIRED'				=> 'This key is expired since %s',
 	'API_ERROR_HOOK_OUTDATED'		=> 'This hook is outdated, last version of the API: %1$s, hook version: %2$s',

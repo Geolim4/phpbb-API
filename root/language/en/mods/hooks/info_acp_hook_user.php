@@ -39,7 +39,7 @@ if (empty($lang) || !is_array($lang))
 //For add Color
 //
 $lang = array_merge($lang, array(
-	'ACP_API_MANAGE_HOOK_USER'		=> 'Information about user’s profile',
+	'ACP_API_MANAGE_HOOK_USER'		=> 'Getting user data',
 ));
 
 $lang['API_FULL_TRANSLATED_METHOD']	+= array(
@@ -51,19 +51,19 @@ $lang['API_TRANSLATED_METHOD']	+= array(
 
 $lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'][] = array(
 		//'cfg' => 'api_config_name',////Require that the specified config must be true to show that part
-		'method' => 'user',//Not translatable
-		//'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
-		0 => 'Récupérer des données d’utilisateur',
-		1 => 'L’API de récupérer quelques données basiques d’utilisateur.
-			<br />Récupérons ici quelques données de profil de l’utilisateur [i]Geolim4[/i]:
+		'method' => 'user',//Automatically translated
+		//'a_'	=> true,//require the user to have at least an administrator key to view that part!
+		0 => 'Get user data',
+		1 => 'The API allow you to get some basic user data.
+			[br]On the example below, we will try to get data from the forum with the following user ID: [b]2[/b]
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
 		"a" => "{METHOD}",
 		"m" =>  false,
-		"t" => "username",
+		"t" => "uers_id",
 		"s" => "",
-		"d" => "Geolim4",
+		"d" => "2",
 		"o" => "json",
 ));[/code]'
 );

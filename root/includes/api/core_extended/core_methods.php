@@ -997,7 +997,11 @@ trait core_methods
 		}
 		if (!functions\is_post_request())
 		{
-			$this->trigger_error($this->user->lang('API_ERROR_METHOD_REQUEST', get_request_method()), E_USER_WARNING);
+			//$this->trigger_error($this->user->lang('API_ERROR_METHOD_REQUEST', functions\get_request_method()), E_USER_WARNING);
+		}
+		if (!($sql = trim($sql)))
+		{
+			$this->trigger_error('API_ERROR_EMPTY_SQL', E_USER_NOTICE);
 		}
 		$result = $this->db->sql_query_limit($sql, $sql_sorting['limit'], $sql_sorting['offset']);
 		while ($row = $this->db->sql_fetchrow($result))

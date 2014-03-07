@@ -47,8 +47,8 @@ $lang = array_merge($lang, array(
 $lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'][] = array(
 		//'method' => '',//Not translatable
 		//'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
-		0 => 'Récupérer les données au format HTML',
-		1 => 'Cette extension vous permettra de récupérer les données au format HTML sous forme de liste de données.
+		0 => 'Get data to HTML format',
+		1 => 'This extension will allow you to retrieve data in HTML (Unordered list).
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -56,7 +56,7 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'][] = array(
 		"m" =>  false,
 		"t" => "topic_id",
 		"s" => "operator:LIKE",
-		"d" => "Bienvenue",
+		"d" => "Welcome",
 		"o" => "html",
 ));[/code]'
 );
