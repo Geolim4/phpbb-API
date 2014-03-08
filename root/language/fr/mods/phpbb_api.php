@@ -2,7 +2,7 @@
 /**
 *
 * @package language [Standard french] phpBB API
-^>@version $Id: phpbb_api.php v0.0.1 05h12 01/17/2013 Geolim4 Exp $
+^>@version $Id: phpbb_api.php v0.0.1 18h35 03/08/2014 Zoddo Exp $
 * @copyright (c) 2012 - 2014 Geolim4.com http://geolim4.com
 * @bug/function request: http://geolim4.com/tracker
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
