@@ -48,8 +48,8 @@ $lang = array_merge($lang, array(
 	'API_SUCCESS_CRON'			=> 'Tâche cron exécutée avec succès, un email a été envoyé à tous les fondateurs.',
 	'API_SUCCESS_QUERY'			=> 'Requête executée avec succès : %s',
 	'API_SUSPENDED'				=> 'Cette clé a été suspendue, veuillez contacter un administrateur pour plus d’informations.',
-	'API_STATUS_DISABLE'		=> 'Desactiver',//No special chars(é,à,è)
-	'API_STATUS_ENABLE'			=> 'Activer',//No special chars(é,à,è)
+	'API_STATUS_DISABLE'		=> 'desactiver',//No special chars(é,à,è)
+	'API_STATUS_ENABLE'			=> 'activer',//No special chars(é,à,è)
 
 	//Here we allow to translate some method we pass through the URL
 	//You cannot use é è à ï etc.
@@ -148,6 +148,7 @@ $lang = array_merge($lang, array(
 	'API_ERROR_ATTEMPTS'			=> 'Vous avez dépasser le nombre maximum de connection autorisée avec cette IP ce qui résulte d’un bannissement temporaire de l’API.',
 	'API_ERROR_CRYPTO_DISABLED'		=> 'Le chiffrement a été désactivé par l’administrateur.',
 	'API_ERROR_DEACTIVATED_METHOD'	=> 'Cette méthode a été désactivée sur cette clé, veuillez contacter un Administrateur pour plus d’informations.',
+	'API_ERROR_EMPTY_SQL'			=> 'Requête SQL vide',
 	'API_ERROR_EXCEEDED'			=> 'Vous avez dépassé votre quota maximum de requêtes sur cette clé (%s)',
 	'API_ERROR_EXPIRED'				=> 'Cette clé est périmée depuis le %s',
 	'API_ERROR_HOOK_OUTDATED'		=> 'Ce hook n’est plus a jour. La dernière version de l’API est : %1$s, la version de ce hook est : %2$s',
