@@ -5,7 +5,6 @@
 ^>@version $Id: info_acp_phpbb_api.php v0.0.1 13h37 03/08/2014 Geolim4 Exp $
 * @copyright (c) 2012 - 2014 Geolim4.com http://geolim4.com
 * @bug/function request: http://geolim4.com/tracker
-* @translator papicx 28/11/2013 14h25  version e papicx@phpbb-fr.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
@@ -56,7 +55,7 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_CONFIG_UMIL_CURL'			=> 'cURL Extension',
 	'ACP_PHPBB_API_CONFIG_UMIL_CURL_OK'			=> 'The <em><a href="http://php.net/manual/en/book.curl.php">cURL</a></em> extension is present.',
 	'ACP_PHPBB_API_CONFIG_UMIL_CURL_NO'			=> 'The <em><a href="http://php.net/manual/en/book.curl.php">cURL</a></em> extension is missing, contact your hosting provider.',
-	'ACP_PHPBB_API_CONFIG_UMIL_MCRYPT'			=> 'Mcrypt  Extension',
+	'ACP_PHPBB_API_CONFIG_UMIL_MCRYPT'			=> 'Mcrypt Extension',
 	'ACP_PHPBB_API_CONFIG_UMIL_MCRYPT_OK'		=> 'The <em><a href="http://php.net/manual/en/book.mcrypt.php">Mcrypt</a></em> extension is present.',
 	'ACP_PHPBB_API_CONFIG_UMIL_MCRYPT_NO'		=> 'The <em><a href="http://php.net/manual/en/book.mcrypt.php">Mcrypt</a></em> extension is missing, you wont be able to use the cryptographie feature, contact your hosting provider if you want to use it.',
 
@@ -283,48 +282,48 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_MQPW'				=> 'Maximum number of requests per week',
 	'ACP_PHPBB_API_MQ_EXPLAIN'			=> 'Set 0 to disable this restriction.',
 
-	'ACP_PHPBB_API_NEXT'			=> 'Next',
-	'ACP_PHPBB_API_NOW'				=> 'Now',
-	'ACP_PHPBB_API_NO_BAN_FOUND'	=> '---No ban found---',
+	'ACP_PHPBB_API_NEXT'				=> 'Next',
+	'ACP_PHPBB_API_NOW'					=> 'Now',
+	'ACP_PHPBB_API_NO_BAN_FOUND'		=> '---No ban found---',
 
 	'ACP_PHPBB_API_OPERATION_SUCCESS'	=> 'Operation terminated successfully.',
 	'ACP_PHPBB_API_ORIGIN_HEADER'		=> 'Same-origin policy',
 	'ACP_PHPBB_API_ORIGIN_HEADER_EXP'	=> 'If enabled the API will return a same-origin header, which mean that the API will be protected against most CSRF exploits.',
 
-	'ACP_PHPBB_API_PAGINATION'		=> 'Number of element per page',
-	'ACP_PHPBB_API_PAGINATION_KEY'	=> '%s key',
-	'ACP_PHPBB_API_PAGINATION_KEYS'	=> '%s keys',
-	'ACP_PHPBB_API_PCHART_CHECK'	=> 'Check pChart installation',
-	'ACP_PHPBB_API_PCHART_CHECKED'	=> 'Checking completed without problems.',
-	'ACP_PHPBB_API_PREV'			=> 'Previous',
-	'ACP_PHPBB_API_PURGE_FILES'		=> '%1$s file(s), %2$s',
-	'ACP_PHPBB_API_PURGE_API'		=> 'Purge API temporary files',
-	'ACP_PHPBB_API_PURGE_BANS'		=> 'Purge expired bans',
-	'ACP_PHPBB_API_PURGE_TEMP'		=> 'Purge statistics temporary files',
+	'ACP_PHPBB_API_PAGINATION'			=> 'Number of element per page',
+	'ACP_PHPBB_API_PAGINATION_KEY'		=> '%s key',
+	'ACP_PHPBB_API_PAGINATION_KEYS'		=> '%s keys',
+	'ACP_PHPBB_API_PCHART_CHECK'		=> 'Check pChart installation',
+	'ACP_PHPBB_API_PCHART_CHECKED'		=> 'Checking completed without problems.',
+	'ACP_PHPBB_API_PREV'				=> 'Previous',
+	'ACP_PHPBB_API_PURGE_FILES'			=> '%1$s file(s), %2$s',
+	'ACP_PHPBB_API_PURGE_API'			=> 'Purge API temporary files',
+	'ACP_PHPBB_API_PURGE_BANS'			=> 'Purge expired bans',
+	'ACP_PHPBB_API_PURGE_TEMP'			=> 'Purge statistics temporary files',
 	
-	'ACP_PHPBB_API_QUERIES'			=> 'Requests',
-	'ACP_PHPBB_API_QUERIES_EXP'		=> 'Current total count of requests with this key.',
-	'ACP_PHPBB_API_QUERY_LIMIT'		=> 'Database fetch result limit',
-	'ACP_PHPBB_API_QUERY_LIMIT_EXP'	=> 'Cette fonctionnalité permettra de définir le nombre de résultat maximum renvoyé par la base de données dans certaines méthodes de l’API',
+	'ACP_PHPBB_API_QUERIES'				=> 'Requests',
+	'ACP_PHPBB_API_QUERIES_EXP'			=> 'Current total count of requests with this key.',
+	'ACP_PHPBB_API_QUERY_LIMIT'			=> 'Database fetch result limit',
+	'ACP_PHPBB_API_QUERY_LIMIT_EXP'		=> 'Cette fonctionnalité permettra de définir le nombre de résultat maximum renvoyé par la base de données dans certaines méthodes de l’API',
 
-	'ACP_PHPBB_API_RESET'			=> 'This will reset the request counter of this key.\nAre you sure to continue?',
-	'ACP_PHPBB_API_RESULT'			=> 'Results per pages',
+	'ACP_PHPBB_API_RESET'				=> 'This will reset the request counter of this key.\nAre you sure to continue?',
+	'ACP_PHPBB_API_RESULT'				=> 'Results per pages',
 
-	'ACP_PHPBB_API_SELECTOR'		=> 'Action',
-	'ACP_PHPBB_API_SETTINGS_ACP'	=> 'ACP API Settings',
-	'ACP_PHPBB_API_SETTINGS_UCP'	=> 'UCP API Settings',
-	'ACP_PHPBB_API_SHA1'			=> 'SHA1',
-	'ACP_PHPBB_API_STAT_LIMIT'		=> 'Limite du nombre d’évènements affichés dans les statistiques',
-	'ACP_PHPBB_API_STATS'			=> 'Statistics',
-	'ACP_PHPBB_API_SUSPEND'			=> 'Suspend',
-	'ACP_PHPBB_API_TIME_TYPE'		=> 'Time based',
-	'ACP_PHPBB_API_TIME_CALENDAR'	=> 'On a per calendar basis',
-	'ACP_PHPBB_API_TIME_ROLLING'	=> 'Within delay (recommended)',
-	'ACP_PHPBB_API_TYPE'			=> 'Key type',
-	'ACP_PHPBB_API_TYPE_EXP'		=> 'Note that the administrator keys can not be managed from the user control panel.',
+	'ACP_PHPBB_API_SELECTOR'			=> 'Action',
+	'ACP_PHPBB_API_SETTINGS_ACP'		=> 'ACP API Settings',
+	'ACP_PHPBB_API_SETTINGS_UCP'		=> 'UCP API Settings',
+	'ACP_PHPBB_API_SHA1'				=> 'SHA1',
+	'ACP_PHPBB_API_STAT_LIMIT'			=> 'Limite du nombre d’évènements affichés dans les statistiques',
+	'ACP_PHPBB_API_STATS'				=> 'Statistics',
+	'ACP_PHPBB_API_SUSPEND'				=> 'Suspend',
+	'ACP_PHPBB_API_TIME_TYPE'			=> 'Time based',
+	'ACP_PHPBB_API_TIME_CALENDAR'		=> 'On a per calendar basis',
+	'ACP_PHPBB_API_TIME_ROLLING'		=> 'Within delay (recommended)',
+	'ACP_PHPBB_API_TYPE'				=> 'Key type',
+	'ACP_PHPBB_API_TYPE_EXP'			=> 'Note that the administrator keys can not be managed from the user control panel.',
 
-	'ACP_PHPBB_API_UCP_KEYS'		=> 'Enable users keys',
-	'ACP_PHPBB_API_UCP_KEYS_EXP'	=> 'This will allow your users to manage their keys in an autonomous way.',
+	'ACP_PHPBB_API_UCP_KEYS'			=> 'Enable users keys',
+	'ACP_PHPBB_API_UCP_KEYS_EXP'		=> 'This will allow your users to manage their keys in an autonomous way.',
 	'ACP_PHPBB_API_UCP_URL_CRYPT'		=> 'Crypt the key into the URL',
 	'ACP_PHPBB_API_UCP_URL_CRYPT_EXP'	=> 'This functionality will hide the keys of your users from prying eyes and their browsing history.
 										<br />It also adds extra security against third party script by making the key hard to recover',
@@ -344,19 +343,20 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_WILDCARD_CHAR_EXP'=> 'This char send alone on the API will be treated as a wildcard and so will be treated as an empty string.',
 
 //Mod error
-	'ACP_PHPBB_API_CRYPTO_ERROR'			=> 'The mcrypt extension is missing. Cannot activate that setting.',
-	'ACP_PHPBB_API_ERR_INSTALL'				=> 'The MOD is now disabled for security reasons until its installation is complete.',
-	'ACP_PHPBB_API_ERR_NOCONST'				=> '<em>API_KEYS_TABLE</em> Constant is missing… Check file in “/includes/api/constants.php” file',
-	'ACP_PHPBB_API_INSTALL_NO_COLLUMN'		=> 'The SQL column <strong>“ %1$s ”</strong> from the <strong>“ %2$s ”</strong> table is missing.',
-	'ACP_PHPBB_API_INSTALL_NO_FILE'			=> 'The file<strong>“ %s ”</strong> is missing.',
-	'ACP_PHPBB_API_INSTALL_NO_DIRECTORY'	=> 'The directory<strong>“ %s ”</strong> is missing.',
-	'ACP_PHPBB_API_INSTALL_NO_TABLE'		=> 'The SQL table <strong>“ %1$s ”</strong> is missing.',
-	'ACP_PHPBB_API_NO_JAVASCRIPT'			=> 'Administration of this MOD require Javascript for better performances, please enable it!',
-       'ACP_PHPBB_API_NO_PCHART'		=> 'The pChart library is missing or corrupted, therefore the statistics viewing is disabled.
-										 <br /><br /><strong>additional Information:</strong>
-										 <br />The pChart library is licensed GNU/GPL<sup>V3</sup>, you must download yourself <a href="http://geolim4.com/pchart/pchart.zip">here</a> and extract inside %s directory.
-										 <br /><br /><em>Why on Geolim4.com and not on the pChart’s website author?</em>
-										 <br />Due to an encoding conflict of character between phpBB and pChart, the library had to be slightly modified to run correctly.',
+	'ACP_PHPBB_API_CRYPTO_ERROR'		=> 'The mcrypt extension is missing. Cannot activate that setting.',
+	'ACP_PHPBB_API_ERR_INSTALL'			=> 'The MOD is now disabled for security reasons until its installation is complete.',
+	'ACP_PHPBB_API_ERR_NOCONST'			=> '<em>API_KEYS_TABLE</em> Constant is missing… Check file in “/includes/api/constants.php” file',
+	'ACP_PHPBB_API_INSTALL_NO_COLLUMN'	=> 'The SQL column <strong>“ %1$s ”</strong> from the <strong>“ %2$s ”</strong> table is missing.',
+	'ACP_PHPBB_API_INSTALL_NO_FILE'		=> 'The file<strong>“ %s ”</strong> is missing.',
+	'ACP_PHPBB_API_INSTALL_NO_DIRECTORY'=> 'The directory<strong>“ %s ”</strong> is missing.',
+	'ACP_PHPBB_API_INSTALL_NO_TABLE'	=> 'The SQL table <strong>“ %1$s ”</strong> is missing.',
+	'ACP_PHPBB_API_NO_JAVASCRIPT'		=> 'Administration of this MOD require Javascript for better performances, please enable it!',
+    'ACP_PHPBB_API_NO_PCHART'			=> 'The pChart library is missing or corrupted, therefore the statistics viewing is disabled.
+											<br /><br /><strong>additional Information:</strong>
+											<br />The pChart library is licensed GNU/GPL<sup>V3</sup>, you must download yourself <a href="http://geolim4.com/pchart/pchart.zip">here</a> and extract inside %s directory.
+											<br /><br /><em>Why on Geolim4.com and not on the pChart’s website author?</em>
+											<br />Due to an encoding conflict of character between phpBB and pChart, the library had to be slightly modified to run correctly.',
+
 //Version Check
 	'ACP_ERRORS'						=> 'Errors',
 
