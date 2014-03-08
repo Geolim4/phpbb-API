@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB3 API Class core
-^>@version $Id: core.php v0.0.1 00h11 12/20/2013 Geolim4 Exp $
+* @package phpBB3 API Core
+^>@version $Id: core.php v0.0.1 13h37 03/08/2014 Geolim4 Exp $
 * @copyright (c) 2012 - 2014 Geolim4.com http://geolim4.com
 * @bug/function request: http://geolim4.com/tracker
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License

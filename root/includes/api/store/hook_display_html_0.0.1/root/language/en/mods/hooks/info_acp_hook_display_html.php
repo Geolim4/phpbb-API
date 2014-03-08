@@ -2,7 +2,7 @@
 /**
 *
 * @package language [English] phpBB API
-* @version $Id: phpbb_api.php v1.0.0 16:55 02/11/2012 Geolim4 Exp $
+* @version $Id: info_acp_hook_display_html.php v0.0.1 13h37 03/08/2014 Geolim4 Exp $
 * @copyright (c) 2012 Geolim4.com  http://Geolim4.com
 * @bug/function request: http://geolim4.com/tracker.php
 * @translator papicx 28/11/2013 14h50  version a papicx@phpbb-fr.com
@@ -47,8 +47,8 @@ $lang = array_merge($lang, array(
 $lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'][] = array(
 		//'method' => '',//Not translatable
 		//'a_'	=> true,//require the user to have at least an administrator key to view that paragraph!
-		0 => 'Get data to HTML format',
-		1 => 'This extension will allow you to retrieve data in HTML (Unordered list).
+		0 => 'Récupérer les données au format HTML',
+		1 => 'Cette extension vous permettra de récupérer les données au format HTML sous forme de liste de données.
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -56,7 +56,7 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE_HOOKS'][] = array(
 		"m" =>  false,
 		"t" => "topic_id",
 		"s" => "operator:LIKE",
-		"d" => "Welcome",
+		"d" => "Bienvenue",
 		"o" => "html",
 ));[/code]'
 );

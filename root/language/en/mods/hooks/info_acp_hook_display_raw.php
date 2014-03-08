@@ -2,10 +2,9 @@
 /**
 *
 * @package language [English] phpBB API
-* @version $Id: phpbb_api.php v1.0.0 16:55 02/11/2012 Geolim4 Exp $
+* @version $Id: info_acp_hook_display_raw.php v0.0.1 13h37 03/08/2014 Geolim4 Exp $
 * @copyright (c) 2012 Geolim4.com  http://Geolim4.com
 * @bug/function request: http://geolim4.com/tracker.php
-* @translator papicx 28/11/2013 14h50  version a papicx@phpbb-fr.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 

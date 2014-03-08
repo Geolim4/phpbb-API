@@ -2,10 +2,9 @@
 /**
 *
 * @package language [English] phpBB API
-^>@version $Id: info_ucp_phpbb_api.php v0.0.1 00h11 12/20/2013 Geolim4 Exp $
+^>@version $Id: info_ucp_phpbb_api.php v0.0.1 13h37 03/08/2014 Geolim4 Exp $
 * @copyright (c) 2012 - 2014 Geolim4.com http://geolim4.com
 * @bug/function request: http://geolim4.com/tracker
-* @translator papicx 28/11/2013 09h03  version a papicx@phpbb-fr.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
@@ -565,35 +564,35 @@ Please note that viewing your statistics from the API will [b]not[/b] be deducte
 	),
 	array(
 		0 => 'I reached my quota of total requests, how to continue to use the API?',
-		1 => 'Vous pouvez demander à un administrateur d’augmenter votre quota de requête totales ou, si vous en avez la permission, générer une nouvelle clé depuis votre panneau de contrôle de l’utilisateur.'
+		1 => 'You can ask an administrator to increase your quota of total requests, or if you have the appropriate permission, generate a new key from your user control panel.'
 	),
 	array(
 		0 => 'My key has expired has expired, what can i do ?',
-		1 => 'Vous pouvez demander à un administrateur de rallonger la durée de vie de votre clé ou, si vous en avez la permission, en générer une nouvelle clé depuis votre panneau de contrôle de l’utilisateur.'
+		1 => 'You can ask an administrator to extend the life-time of your key, or if you have the appropriate permission, generate a new key from your user control panel.'
 	),
 	array(
 		0 => 'My key has been disabled or is suspended, what can i do ?',
-		1 => 'Votre clé à peut-être été suspendue par un administrateur à la suite d’un abus. Notez qu’une clé est automatiquement désactivée lorsque vous en générez une nouvelle.'
+		1 => 'Your key may have been suspended by an administrator as a result of abuse. Note that a key is automatically disabled when you generate a new one.'
 	),
 	array(
 		0 => 'What is the API response encoding ?',
-		1 => 'Sauf spécifications contraire, toutes les réponses de L’API sont encodés en UTF-8 (sans BOM).'
+		1 => 'Unless otherwise specifications, all API responses are encoded in UTF-8 (without BOM).'
 	),
 	array(
-		0 => 'Existe-t-il des traces de mes requêtes sur l’API ?',
-		1 => 'Oui, vous pouvez les consulter depuis votre panneau de l’utilisateur sur l’onglet [i]Historique[/i], ainsi que l’administrateur qui peut voir de manière détaillé chaque requête que vous avez effectué.'
+		0 => 'Is there any traces of my requests to the API?',
+		1 => 'Yes, you can see from your user control panel on the [i]History[/i] tab, also the administrator can see in detailed way each query you made.'
 	),
 	array(
-		0 => 'Combien existe-t-il de chance que l’on puisse trouver ma clé au hasard ?',
-		1 => 'Elle sont de [i]1,7868991024601705453143247728944e+62[/i] (38√<sup>40</sup>) [u]sans[/u] authentification par email !'
+		0 => 'How many chances there’s we can find my key randomly?',
+		1 => 'It is of [i]1,7868991024601705453143247728944e+62[/i] (38√<sup>40</sup>) [u]without[/u] email authentication!'
 	),
 	array(
-		0 => 'Que faire en cas d’activité anormale sur une de mes clés ?',
-		1 => 'Vous devez contacter un administrateur au plus vite afin de faire suspendre celle-ci si il s’avère qu’une personne mal intentionné a fait usage de votre clé.'
+		0 => 'What can i do in case of abnormal activity on one of my keys?',
+		1 => 'You must contact an administrator as soon as possible in order to suspend it if it turns out that a malicious person has used your key.'
 	),
 	array(
-		0 => 'L’API à retourné une erreur fatale ou une exception, que doit-je faire ?',
-		1 => 'Chaque évènement inattendu est automatiquement géré et consigné par l’API, vous pouvez donc notifier un administrateur qui agiras selon les données archivés.'
+		0 => 'The API returned a fatal error or exception, what should I do?',
+		1 => 'Every unexpected event is automatically handled and consigned by the API, so you can notify an administrator therefore will act according to the consigned data.'
 	),
 	array(
 		0 => '--',
@@ -605,19 +604,19 @@ Please note that viewing your statistics from the API will [b]not[/b] be deducte
 	),
 	array(
 		0 => 'REGEXP',
-		1 => 'Acronyme de <em>expressions régulières</em> ou <em> expressions rationnelles</em>: masque de caractère permettant de faire correspondre une chaine de caractère. <a href="https://fr.wikipedia.org/wiki/Expression_rationnelle">Plus de détails</a>.'
+		1 => 'A regular expression (abbreviated regex or regexp) is a sequence of characters that forms a search pattern. <a href="https://en.wikipedia.org/wiki/Regular_expression">See more</a>.'
 	),
 	array(
 		0 => 'cURL',
-		1 => 'Librairie disponible en PHP permettant la communication avec de nombreux protocoles tel que HTTP, HTTPS, FTP, Telnet etc.'
+		1 => 'cURL is an available PHP library that allow communication with multiple protocols such as HTTP, HTTPS, FTP, Telnet etc..'
 	),
 	array(
 		0 => 'Callback',
-		1 => 'Fonction de retour executée en cas de requête réussie.'
+		1 => 'Function called in case of successful request.'
 	),
 	array(
 		0 => 'Fallback',
-		1 => 'Fonction de retour executée en cas de requête échouée.'
+		1 => 'Function called in case of failed request.'
 	),
 	array(
 		0 => '--HOOKS--',

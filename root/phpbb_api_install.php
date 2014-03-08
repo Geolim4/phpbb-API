@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package UMIL Forbidden Passwords
-* @version $Id: phpbb_api_install.php v0.0.1 00h11 12/20/2013 Geolim4 Exp $
+* @package UMIL phpBB API Install file
+* @version $Id: phpbb_api_install.php v0.0.1 13h37 03/08/2014 Geolim4 Exp $
 * @copyright (c) 2012 Geolim4.com  http://Geolim4.com
 * @bug/function request: http://geolim4.com/tracker.php
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
