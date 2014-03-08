@@ -5,7 +5,6 @@
 * @version $Id: phpbb_api.php v1.0.0 16:55 02/11/2012 Geolim4 Exp $
 * @copyright (c) 2012 Geolim4.com  http://Geolim4.com
 * @bug/function request: http://geolim4.com/tracker.php
-* @translator papicx 28/11/2013 14h50  version a papicx@phpbb-fr.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
@@ -34,10 +33,10 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 // Some characters you may want to copy&paste:
-// ’ « » “ ” …
+// ’ » “ ” …
 // Use: <strong style="color:green">Texte</strong>',
 //For add Color
 //
 $lang = array_merge($lang, array(
-	'ACP_API_MANAGE_HOOK_DISPLAY_INI' => 'Format de sortie INI',
+	'ACP_API_MANAGE_HOOK_DISPLAY_INI' => 'Sortie au format INI',
 ));
