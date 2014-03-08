@@ -60,7 +60,7 @@ $lang = array_merge($lang, array(
 	'UCP_PHPBB_API_KEYS'			=> 'Keys management',
 	'UCP_PHPBB_API_KEY_ID'			=> 'Key',
 	'UCP_PHPBB_API_SECRET_KEY'		=> 'Secret key',
-	'UCP_PHPBB_API_SECRET_KEY_EXP'	=> 'The secret key is useful only if you use the cryptographic functionality of the API. Like the API key, that key is strictly personal and you must not share it to untrusted people. 
+	'UCP_PHPBB_API_SECRET_KEY_EXP'	=> 'The secret key is useful only if you use the cryptographic feature of the API. Like the API key, that key is strictly personal and you don’t have to share it to untrusted people. 
 										<br />In case you compromise this key, ask an administrator to reinitialize it.',
 	'UCP_PHPBB_API_KEY_ID_EXP'		=> 'This key is strictly personal, it is your username to be able to operate on the API and identifies you as such, for more security, you can force authentication of this key by email.',
 	'UCP_PHPBB_API_LAST_QUERIES'	=> 'Last queries was: %s',
@@ -107,7 +107,7 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 	),
 	array(
 		0 => 'Communicate with the API',
-		1 => 'You will find below, different ways to communicate with the API depending the programing language you use:
+		1 => 'You will find below, different ways to communicate with the API depending the programming language you use:
 			[list]
 				[*]Perl (<a href="http://search.cpan.org/~gaas/libwww-perl-6.05/lib/LWP.pm#NETWORK_SUPPORT">LWP</a>)
 				[*]Java (<a href="http://docs.oracle.com/javase/7/docs/api/java/net/HttpURLConnection.html">HttpURLConnection</a> | <a href="http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/HttpsURLConnection.html">HttpsURLConnection</a>)
@@ -127,37 +127,37 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 		0 => 'Parameters (Query string)',
 		1 => 'The API use a lot of parameters that you can find below:
 		[list]
-			[*][b]k[/b]: The API key (mandatory). Example: [i]k={KB_API_KEY}[/i]
-			[*][b]e[/b]: Email that will authenticate the key (if needed). Example: [i]e={KB_USER_EMAIL}[/i]
-			[*][b]a[/b]: The action (mandatory) Example: [i]a=topic[/i] Note that the action is also is also available in your language if it was translated. Example (french): [i]sujet[/i]
-			[*][b]m[/b]: Multibyte activation: Enable UTF8 normalizer for [b]d[/b] and [b]t[/b] parameters (optional). Example: [i]m=true[/i]
-			[*][b]t[/b]: Type of data that identify the [b]d[/b] parameter (required depending [b]a[/b] parameter). Example: [i]t=topic_id[/i]
-			[*][b]s[/b]: SSO separated with a comma. Example: [i]s=operator:<>,start:5,limit:10[/i]
-			[*][b]d[/b]: Value sought depending [b]t[/b] parameter. Example: [i]d=24[/i]
-			[*][b]o[/b]: Output format (POST optional, JSON per default). Example: [i]o=json[/i]
-			[*][b]c[/b]: Callback JSONP (optional, POST only). Example: [i]c=mafonction()[/i]
-			[*][b]f[/b]: Fallback JSONP (optional, POST only). Example: [i]f=mafonction()[/i]
-			[*][b]u[/b]: Join current userdata (optional, disabled by default): Join to the result some informations about key owner. Example: [i]u=true[/i]
-			[*][b]h[/b]: Active la conversion des temps UNIX en temps textuel (optional, désactivé par défaut): Retourne un temps textuel plutôt qu’un entier. Example: [i]h=true[/i]
-			[*][b]p[/b]: Paramètres GET/POST envoyés (optional, désactivé par défaut): Retourne la liste des paramètres GET et POST envoyés au serveur. Example: [i]p=true[/i]
-			[adminkey][*][b]v[/b]: Active la prise en charge des constantes systèmes (optional, activé par défaut). Example: [i]v=true[/i]
-			[*][b]i[/b]: Use the key without administrator privilege, therefore it will be used as an user key (optional, disabled by default). Example: [i]i=true[/i][/adminkey]
-			[*][b]n[/b]: Enable the encrypted communication (optional, disabled by default). Example: [i]n=true[/i]. Please read carefully the [i]Cryptography support[/i] section.[/list]'
+			[*][b]k[/b]: The API key (mandatory). Eg [i]k={KB_API_KEY}[/i]
+			[*][b]e[/b]: Email that will authenticate the key (if needed). Eg: [i]e={KB_USER_EMAIL}[/i]
+			[*][b]a[/b]: The action (mandatory) Eg: [i]a=topic[/i] Note that the action is also available in your language if it was translated. Eg (french): [i]sujet[/i]
+			[*][b]m[/b]: Multibyte activation: Enable UTF-8 normalizer for [b]d[/b] and [b]t[/b] parameters (optional). Eg: [i]m=true[/i]
+			[*][b]t[/b]: Type of data that identifies the [b]d[/b] parameter (required depending [b]a[/b] parameter). Eg: [i]t=topic_id[/i]
+			[*][b]s[/b]: SSO separated with a comma. Eg: [i]s=operator:<>,start:5,limit:10[/i]
+			[*][b]d[/b]: Value sought depending [b]t[/b] parameter. Eg: [i]d=24[/i]
+			[*][b]o[/b]: Output format (POST optional, JSON per default). Eg: [i]o=json[/i]
+			[*][b]c[/b]: Callback JSONP (optional, POST only). Eg: [i]c=myfunction()[/i]
+			[*][b]f[/b]: Fallback JSONP (optional, POST only). Eg: [i]f=myfunction()[/i]
+			[*][b]u[/b]: Join current userdata (optional, disabled by default): Joins to the result some information about key owner. Eg: [i]u=true[/i]
+			[*][b]h[/b]: Enable conversion of UNIX time into textual time (optional, disabled by default): Returns a textual time rather than a integer. Eg: [i]h=true[/i]
+			[*][b]p[/b]: GET/POST parameters sent (optional, disabled by default): Return the list of GET and POST parameters sent to the server. Eg: [i]p=true[/i]
+			[adminkey][*][b]v[/b]: Enable automatic system constants handling (optional, enabled by default). Eg: [i]v=true[/i]
+			[*][b]i[/b]: Use the key without administrator privilege, therefore it will be used as an user key (optional, disabled by default). Eg: [i]i=true[/i][/adminkey]
+			[*][b]n[/b]: Enables the encrypted communication (optional, disabled by default). Eg: [i]n=true[/i]. Please read carefully the [i]Cryptography support[/i] section.[/list]'
 	),
 	array(
 		0 => 'Methods translation',
 		1 => 'Most API methods are translated and therefore can be used in the default language set on your user control panel.
-			[br]Note that methods are always available in their origin name. Below you can get the list of methods currently translated.
+			[br]Note those methods are always available in their original name. Below you can get the list of methods currently translated.
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/get_methods/-/-/json[/code]
-			Note that this method is not translatable and must be called as is.'
+			Note that this method is not translatable and must be called as such.'
 	),
 	array(
 		0 => 'Sub-methods translation',
 		1 => 'Most API sub-methods are also translated and therefore can be used in the default language set on your user control panel.
-			[br]Note that sub-methods are always available in their origin name. Below you can get the list of sub-methods currently translated for a certain method.
+			[br]Note those sub-methods are always available in their original name. Below you can get the list of sub-methods currently translated for a certain method.
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/get_submethods/topic/-/json[/code]
-			[b][color=#BC2A4D]/!\[/color][/b] The translated sub-method cannot be called in [b]GET[/b] mode, you must call it in his origin name. Example: <em>topic_id</em>
-			Note that this method is not translatable and must be called as is.'
+			[b][color=#BC2A4D]/!\[/color][/b] The translated sub-method cannot be called in [b]GET[/b] mode, you must call it in its origin name. Eg <em>topic_id</em>
+			Note that this method is not translatable and must be called as such.'
 	),
 	array(
 		0 => 'Simplified access with GET mode',
@@ -213,12 +213,12 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 }[/code]In the example above the level of the error is [i]E_USER_ERROR[/i].
 			[br]If the key requires authentication by e-mail ([b]e[/b]) it will be suffixed with the key wrapped with brackets:
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/topic/topic_id/24/json[/code]
-			[br]The GET mode also take care of some secured sort operators (S.S.O) and comparison on the sub-method of the current method (see «Advanced access with POST mode» chapter).
+			[br]The GET mode also takes care of some secured sort operators (S.S.O) and comparison on the sub-method of the current method (see «Advanced access with POST mode» chapter).
 				S.S.O must be suffixed to the sub-method the current method wrapped with brackets, here we only look for the ten topics where the topic_id is different of 24 while ignoring the first five topics.
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/topic/topic_id(operator:<>,start:5,limit:10)/24/json[/code]
 			[b][color=#BC2A4D]/!\[/color][/b] However, it is highly recommended to use the POST mode for hard requests.
 			Only the following S.S.O are supported: [i]NOT LIKE,LIKE,REGEXP,&nbsp;&lt;&gt;,&nbsp;&gt;,&nbsp;&lt;,&nbsp;=,&nbsp;&lt;=,&nbsp;&gt;=[/i]
-			[br]If the sub-methods ([b]t[/b]) and the value ([b]d[/b]) are optionals you can replace them using the generic char: [b]{KB_WILDCARD_CHAR}[/b]
+			[br]If the sub-methods ([b]t[/b]) and the value ([b]d[/b]) are optional you can replace them using the generic char: [b]{KB_WILDCARD_CHAR}[/b]
 			[code]{KB_SERVER_PROTOCOL}{KB_SERVER_NAME}{KB_SCRIPT_PATH}/api/{KB_API_KEY}({KB_USER_EMAIL})/key_stats/{KB_WILDCARD_CHAR}/{KB_WILDCARD_CHAR}/json[/code]'
 	),
 	array(
@@ -246,7 +246,7 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 		"d" => "[0-5]{3}",
 		"o" => "json",
 ));[/code]
-Here we searched a topic which his subject identifier [b]contain[/b] a three lenght digit integer between 0 and 5.
+Here we searched a topic which its subject identifier [b]contains[/b] a three lenght digit integer between 0 and 5.
 [br]Matching example: [color=#00BF40]345[/color], [color=#00BF40][u]125[/u]9[u]413[/u][/color], [color=#00BF40]550[/color]
 Non-matching example: [color=#FF0000]725[/color], [color=#FF0000]05[/color], [color=#FF0000]1385[/color]
 If you want the matching is done on the entire string and not a part only you need to specify like this: [b]^[0-5]{3}$[/b]'
@@ -276,7 +276,7 @@ If you want the matching is done on the entire string and not a part only you ne
 $encrypted_content = fread($handle, filesize("api.response"));
 fclose($handle);
 $decrypted_content = mcrypt_decrypt({KB_CRYPTO_CIPHER}, "your_secret_key", $encrypted_content, {KB_CRYPTO_MODE}, "{KB_CRYPTO_IV}");[/code]
-As you can see above the code used to decrypt the file is pretty simple. If the crypto cypher has changed since your last use contact an administrator for more informations.'
+As you can see above the code used to decrypt the file is pretty simple. If the crypto cypher has changed since your last use contact an administrator for more information.'
 	),
 
 	array(
@@ -302,7 +302,7 @@ You can modify the [b]v[/b] parameter to disable phpBB constants (enabled by def
 	array(
 		'method' => 'topic,post,forum,group',//Automatically translated
 		0 => 'Get topics/posts/forums/groups data',
-		1 => 'The API allow you to get some basic topics/posts/forums/groups data.
+		1 => 'The API allows you to get some basic topics/posts/forums/groups data.
 			[br]On the example below, we will try to get data from the forum with the following forum ID: [b]1[/b]
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
@@ -319,7 +319,7 @@ Of course you can alter the code if you want to retrieve data from topics, posts
 	array(
 		'method' => 'get_config',//Automatically translated
 		0 => 'Get configuration data',
-		1 => 'The API allow you to get some basic configuration data.
+		1 => 'The API allows you to get some basic configuration data.
 			[br]Here we will get all basic configuration data, like maximum avatar size, website description, or board’s opening date:
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
@@ -536,7 +536,7 @@ Please note that viewing your statistics from the API will [b]not[/b] be deducte
 	array(
 		'method' => 'login',//Automatically translated
 		0 => 'Connect to your account using API',
-		1 => 'You can connect to your account via the l’API using the [i]{METHOD}[/i] method without sub-method ([b]t[/b]) or value ([b]d[/b]) required. (Unless email ([b]e[/b]) if required)
+		1 => 'You can connect to your account via the API using the [i]{METHOD}[/i] method without sub-method ([b]t[/b]) or value ([b]d[/b]) required. (Unless email ([b]e[/b]) if required)
 			[code=php] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -583,7 +583,7 @@ Please note that viewing your statistics from the API will [b]not[/b] be deducte
 		1 => 'Yes, you can see from your user control panel on the [i]History[/i] tab, also the administrator can see in detailed way each query you made.'
 	),
 	array(
-		0 => 'How many chances there’s we can find my key randomly?',
+		0 => 'How many chances are there we can find my key randomly?',
 		1 => 'It is of [i]1,7868991024601705453143247728944e+62[/i] (38√<sup>40</sup>) [u]without[/u] email authentication!'
 	),
 	array(
@@ -600,7 +600,7 @@ Please note that viewing your statistics from the API will [b]not[/b] be deducte
 	),
 	array(
 		0 => 'S.S.O',
-		1 => 'Abbreviation of <em>Secured SQL Operator</em>: Secured and parsed SQL operator to perform customs sorting/comparison operations.'
+		1 => 'Abbreviation of <em>Secured Sort Operator</em>: Secured and parsed sort operators to perform customs sorting/comparison operations.'
 	),
 	array(
 		0 => 'REGEXP',
@@ -620,6 +620,6 @@ Please note that viewing your statistics from the API will [b]not[/b] be deducte
 	),
 	array(
 		0 => '--HOOKS--',
-		1 => 'Additional functionalities [i](extensions)[/i]'
+		1 => 'Additional features [i](extensions)[/i]'
 	),
 );
