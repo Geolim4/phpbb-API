@@ -6,7 +6,7 @@
 	<header>
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
-		<title lang="en"><![CDATA[phpBB API (French translation))]]></title>
+		<title lang="en"><![CDATA[phpBB API (French translation)]]></title>
 		<description lang="en"><![CDATA[That MOD will provide to your board a RESTfull API able to communicate in many format: JSON, XML, HTML etc.
 
 You can grab some posts/topics/forums/groups infos etc... The API will provide a special administrator access using admin-key privileges like:

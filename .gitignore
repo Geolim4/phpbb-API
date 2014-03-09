@@ -1,4 +1,5 @@
 ~*
 /root/includes/api/cache/*.php
+/root/includes/api/pchart/tmp/*.map
 error.log
 *.nppsession
