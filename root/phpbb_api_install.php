@@ -271,31 +271,31 @@ $versions = array(
 				'module_basename' => 'phpbb_api',
 				'module_langname' => 'ACP_PHPBB_API_KEYS',
 				'module_mode'	=> 'keys',
-				'module_auth' => 'acl_a_phpbb_api_keys',
+				'module_auth' => 'acl_a_phpbb_api_keys && cfg_api_mod_enable',
 			)),
 			array('acp', 'ACP_PHPBB_API', array(
 				'module_basename' => 'phpbb_api',
 				'module_langname' => 'ACP_PHPBB_API_LOGS',
 				'module_mode'	=> 'logs',
-				'module_auth' => 'acl_a_phpbb_api_logs',
+				'module_auth' => 'acl_a_phpbb_api_logs && cfg_api_mod_enable',
 			)),
 			array('acp', 'ACP_PHPBB_API', array(
 				'module_basename' => 'phpbb_api',
 				'module_langname' => 'ACP_PHPBB_API_ERR_LOGS',
 				'module_mode'	=> 'err_logs',
-				'module_auth' => 'acl_a_phpbb_api_logs',
+				'module_auth' => 'acl_a_phpbb_api_logs && cfg_api_mod_enable',
 			)),
 			array('acp', 'ACP_PHPBB_API', array(
 				'module_basename' => 'phpbb_api',
 				'module_langname' => 'ACP_PHPBB_API_HOOKS',
 				'module_mode'	=> 'hooks',
-				'module_auth' => 'acl_a_phpbb_api_hooks',
+				'module_auth' => 'acl_a_phpbb_api_hooks && cfg_api_mod_enable',
 			)),
 			array('acp', 'ACP_PHPBB_API', array(
 				'module_basename' => 'phpbb_api',
 				'module_langname' => 'ACP_PHPBB_API_STATS',
 				'module_mode'	=> 'stats',
-				'module_auth' => 'acl_a_phpbb_api_stats',
+				'module_auth' => 'acl_a_phpbb_api_stats && cfg_api_mod_enable',
 			)),
 
 			// Add the UCP API Category, pas a new tab

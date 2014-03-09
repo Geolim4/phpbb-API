@@ -51,7 +51,7 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_CONFIG_UMIL_REFLECTION_NO'	=> 'The <em><a href="http://php.net/manual/en/book.reflection.php">Reflection</a></em> extension is missing, contact your hosting provider.',
 	'ACP_PHPBB_API_CONFIG_UMIL_PCHART'			=> 'pChart library',
 	'ACP_PHPBB_API_CONFIG_UMIL_PCHART_OK'		=> 'pChart library is present.',
-	'ACP_PHPBB_API_CONFIG_UMIL_PCHART_NO'		=> 'pChart is missing, statistics will be disabled, <em><a href="http://geolim4.com">more infos</a></em>.',
+	'ACP_PHPBB_API_CONFIG_UMIL_PCHART_NO'		=> 'pChart is missing, statistics will be disabled, <em><a href="http://geolim4.com/nos-mods-en-developpement/phpbb-api-t1197.html#p3548more infos</a></em>.',
 	'ACP_PHPBB_API_CONFIG_UMIL_ZIP'				=> 'ZIP Extension',
 	'ACP_PHPBB_API_CONFIG_UMIL_ZIP_OK'			=> 'The <em><a href="http://php.net/manual/en/book.zip.php">ZIP</a></em> extension is present.',
 	'ACP_PHPBB_API_CONFIG_UMIL_ZIP_NO'			=> 'The <em><a href="http://php.net/manual/en/book.zip.php">ZIP</a></em> extension is missing, contact your hosting provider.',
@@ -209,8 +209,8 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_KEY_EMAIL'				=> 'Authenticated Key',
 	'ACP_PHPBB_API_KEY_EMAIL_EXP'			=> 'This key will be able to be used only if the email associated with the key-owner is provided .
 												<br />Please note that this setting is forced for "Administrator" key type.',
-	'ACP_PHPBB_API_KEY_FORCE_POST'			=> 'Force POST method',
-	'ACP_PHPBB_API_KEY_FORCE_POST_EXP'		=> 'This will block the key to be used as non-POST method',
+	'ACP_PHPBB_API_KEY_FORCE_POST'			=> 'Force POST mode',
+	'ACP_PHPBB_API_KEY_FORCE_POST_EXP'		=> 'This will block the key to be used as non-POST mode',
 	'ACP_PHPBB_API_KEY_HISTORY'				=> 'Brute history',
 	'ACP_PHPBB_API_KEY_HISTORY_DET'			=> 'Detailed history',
 	'ACP_PHPBB_API_KEY_INDEX'				=> 'Keys index',
@@ -356,7 +356,7 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_NO_JAVASCRIPT'		=> 'Administration of this MOD require Javascript for better performances, please enable it!',
     'ACP_PHPBB_API_NO_PCHART'			=> 'The pChart library is missing or corrupted, therefore the statistics viewing is disabled.
 											<br /><br /><strong>additional Information:</strong>
-											<br />The pChart library is licensed GNU/GPL<sup>V3</sup>, you must download yourself <a href="http://geolim4.com/pchart/pchart.zip">here</a> and extract inside %s directory.
+											<br />The pChart library is licensed GNU/GPL<sup>V3</sup>, you must download yourself <a href="http://geolim4.com/nos-mods-en-developpement/phpbb-api-t1197.html#p3548">here</a> and extract inside %s directory.
 											<br /><br /><em>Why on Geolim4.com and not on the pChart’s website author?</em>
 											<br />Due to an encoding conflict of character between phpBB and pChart, the library had to be slightly modified to run correctly.',
 

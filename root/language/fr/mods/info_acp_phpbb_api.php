@@ -51,7 +51,7 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_CONFIG_UMIL_REFLECTION_NO'	=> 'L’extension <em><a href="http://php.net/manual/fr/book.reflection.php">Reflection</a></em> est manquante, contactez votre hébergeur.',
 	'ACP_PHPBB_API_CONFIG_UMIL_PCHART'			=> 'Librairie pChart',
 	'ACP_PHPBB_API_CONFIG_UMIL_PCHART_OK'		=> 'La librairie pChart est présente.',
-	'ACP_PHPBB_API_CONFIG_UMIL_PCHART_NO'		=> 'pChart est absent, les statistique seront donc désactivés, <em><a href="http://geolim4.com">plus d’information</a></em>.',
+	'ACP_PHPBB_API_CONFIG_UMIL_PCHART_NO'		=> 'pChart est absent, les statistique seront donc désactivés, <em><a href="http://geolim4.com/nos-mods-en-developpement/phpbb-api-t1197.html#p3548">plus d’information</a></em>.',
 	'ACP_PHPBB_API_CONFIG_UMIL_ZIP'				=> 'Extension ZIP',
 	'ACP_PHPBB_API_CONFIG_UMIL_ZIP_OK'			=> 'L’extension <em><a href="http://php.net/manual/fr/book.zip.php">ZIP</a></em> est présente.',
 	'ACP_PHPBB_API_CONFIG_UMIL_ZIP_NO'			=> 'L’extension <em><a href="http://php.net/manual/fr/book.zip.php">ZIP</a></em> est manquante, contactez votre hébergeur.',
@@ -209,8 +209,8 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_KEY_EMAIL'				=> 'Clé authentifiée',
 	'ACP_PHPBB_API_KEY_EMAIL_EXP'			=> 'Cette clé ne pourra être utilisée seulement si l’adresse e-mail associée au proriétaire de la clé est fournie.
 												<br />Notez que ce paramètre est forcé pour les clés de type «&nbsp;Administrateur&nbsp;».',
-	'ACP_PHPBB_API_KEY_FORCE_POST'			=> 'Forcer la méthode POST',
-	'ACP_PHPBB_API_KEY_FORCE_POST_EXP'		=> 'Cela empêchera la clé d’être utilisée autrement qu’avec la méthode POST.',
+	'ACP_PHPBB_API_KEY_FORCE_POST'			=> 'Forcer le mode POST',
+	'ACP_PHPBB_API_KEY_FORCE_POST_EXP'		=> 'Cela empêchera la clé d’être utilisée autrement qu’avec la mode POST.',
 	'ACP_PHPBB_API_KEY_HISTORY'				=> 'Historique brut',
 	'ACP_PHPBB_API_KEY_HISTORY_DET'			=> 'Historique détaillé',
 	'ACP_PHPBB_API_KEY_INDEX'				=> 'Index des clés',
@@ -356,7 +356,7 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_NO_JAVASCRIPT'		=> 'L’administration de ce mod requiert Javascript pour de meilleures performances, merci de l’activer !',
 	'ACP_PHPBB_API_NO_PCHART'			=> 'La librairie pChart est manquante ou corrompue, la consultation des statistiques est par conséquent désactivée.
 											<br /><br /><strong>Information additionnelle :</strong>
-											<br />La librairie pChart étant sous licence GNU/GPL<sup>V3</sup>, vous devez la télécharger vous-même <a href="http://geolim4.com/pchart/pchart.zip">ici</a> et l’extraire dans le dossier %s.
+											<br />La librairie pChart étant sous licence GNU/GPL<sup>V3</sup>, vous devez la télécharger vous-même <a href="http://geolim4.com/nos-mods-en-developpement/phpbb-api-t1197.html#p3548">ici</a> et l’extraire dans le dossier %s.
 											<br /><br /><em>Pourquoi sur Geolim4.com et non sur le site de l’auteur de pChart?</em>
 											<br />Du fait d’un conflit d’encodage de caractère entre phpBB et pChart, la librairie a du être légèrement modifiée afin de fonctionner correctement.',
 
