@@ -448,7 +448,7 @@ class ucp_phpbb_api
 					'KB_USER_EMAIL' => $user->data['user_email'],
 					'KB_SERVER_PROTOCOL' => $config['server_protocol'],
 					'KB_SERVER_NAME' => $config['server_name'],
-					'KB_SCRIPT_PATH' => ($config['script_path'] != '/') ? $config['script_path'] : '',
+					'KB_SCRIPT_PATH' => (substr($config['script_path'], -1) != '/') ? $config['script_path'] : substr($config['script_path'], 0, -1),
 					'KB_WILDCARD_CHAR' => $config['api_mod_wildcard_char'],
 					'KB_API_KEY' => $api_key,
 					'KB_CRYPTO_CIPHER' => $crypto_config['cypher'],
