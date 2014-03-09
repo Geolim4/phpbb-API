@@ -190,7 +190,7 @@ $lang = array_merge($lang, array(
 											<br /><strong>Attention :</strong> Votre serveur doit avoir un certificat SSL valide faute de quoi les clients recevront une alerte de sécurité !',
 
 	'ACP_PHPBB_API_HEADER'				=> 'En-tête phpBB API',
-	'ACP_PHPBB_API_HEADER_EXP'			=> 'Si activé, le serveur renvera un en-tête “<em>X-Powered-By: phpBB API/' . $config['api_mod_version'] . '</em>”',
+	'ACP_PHPBB_API_HEADER_EXP'			=> 'Si activé, le serveur renvera un en-tête “<em>X-Powered-By: phpBB API/%s</em>”',
 	'ACP_PHPBB_API_CRYPTO_ENABLED'		=> 'Activer le support du chiffrement',
 	'ACP_PHPBB_API_CRYPTO_ENABLED_EXP'	=> 'Cela activera le support du chiffrement, voir la base de connaissance de l’API pour en savoir plus.',
 	'ACP_PHPBB_API_HOOKS'				=> 'Gestion des Hooks',

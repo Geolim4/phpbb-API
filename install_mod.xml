@@ -47,7 +47,7 @@ The API has been made in order to complete a crucial need in phpBB: A strong & s
 			<file from="root/language/en/*.*" to="language/en/*.*"/>
 			<file from="root/styles/*.*" to="styles/*.*"/>
 			<file from="root/umil/*.*" to="umil/*.*"/>
-			<file from="root/api.php*" to="api.php"/>
+			<file from="root/api.php" to="api.php"/>
 			<file from="root/phpbb_api_install.php" to="phpbb_api_install.php"/>
 		</copy>
 		<open src=".htaccess">

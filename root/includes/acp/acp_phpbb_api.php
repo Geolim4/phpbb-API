@@ -300,6 +300,9 @@ class acp_phpbb_api
 						'TITLE_EXPLAIN'			=> $user->lang['API_ERRORS_CONFIG_EXPLAIN'],
 						'TITLE_IMG'				=> $phpbb_root_path . 'images/api_' . $mode . '.png',
 
+						//Language
+						'L_ACP_PHPBB_API_HEADER_EXP' => $user->lang('ACP_PHPBB_API_HEADER_EXP', $config['api_mod_version']),
+
 						//Database info
 						'S_DB_NAME'				=> $dbname,
 						'S_TABLE_PREFIX'		=> $table_prefix,
