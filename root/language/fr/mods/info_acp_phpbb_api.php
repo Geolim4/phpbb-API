@@ -158,7 +158,7 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_CACHE_STATS'			=> 'Statistique en cache',
 	'ACP_PHPBB_API_CACHE_STATS_EXP'		=> 'Cette option vous permettra de mettre les statistiques en cache afin d’alléger la charge du serveur, toutefois celle-ci ne seront actualisé qu’à intervalle de quelques heures.',
 	'ACP_PHPBB_API_CRON_TASK'			=> 'Tâches CRON',
-	'ACP_PHPBB_API_CRON_TASK_EXP'		=> 'Les tâches CRON enverrons un rapport de statistiques périodique à tout les fondateurs du forum et effectueront un nettoyage partiel de l’API.',
+	'ACP_PHPBB_API_CRON_TASK_EXP'		=> 'Les tâches CRON enverront un rapport de statistiques périodique à tous les fondateurs du forum et effectueront un nettoyage partiel de l’API.',
 
 	'ACP_PHPBB_API_DB_CREDENTIALS'		=> 'Données de connexion',
 	'ACP_PHPBB_API_DB_NO_CHANGE'		=> 'Ne rien modifier',
