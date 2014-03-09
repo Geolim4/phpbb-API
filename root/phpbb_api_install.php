@@ -197,7 +197,7 @@ $versions = array(
 				'COLUMNS' => array(
 					'history_id'		=> array('USINT', NULL, 'auto_increment'),
 					'key_id'			=> array('VCHAR:40', ''),
-					'time'				=> array('TIMESTAMP'),
+					'time'				=> array('TIMESTAMP', 0),
 					'method'			=> array('VCHAR:40', ''),
 					'ip'				=> array('VCHAR:45', ''),
 				),
@@ -236,7 +236,7 @@ $versions = array(
 					'user_id'		=> array('UINT:10', ANONYMOUS),
 					'key_id'		=> array('VCHAR:40', ''),//Key ID are hexadecimal([a-z0-9]) format
 					'log_ip'		=> array('VCHAR:45', ''),
-					'log_time'		=> array('TIMESTAMP'),
+					'log_time'		=> array('TIMESTAMP', 0),
 					'log_operation'	=> array('VCHAR:100', ''),
 					'log_data'	=> array('TEXT', ''),
 				),
@@ -248,8 +248,9 @@ $versions = array(
 					'attempt_ip'			=> array('VCHAR:45', ''),
 					'attempt_browser'		=> array('VCHAR:150', ''),
 					'attempt_forwarded_for'	=> array('VCHAR:255', ''),
-					'attempt_time'			=> array('TIMESTAMP'),
+					'attempt_time'			=> array('TIMESTAMP', 0),
 				),
+				'PRIMARY_KEY'	=> 'attempt_id',
 			)),
 		),
 	//ACP Module
@@ -355,7 +356,7 @@ function create_api_group($action, $version)
 				'group_avatar_type'		=> 0,
 				'group_avatar_width'	=> 0,
 				'group_avatar_height'	=> 0,
-				'group_rank'			=> '',
+				'group_rank'			=> 0,
 				'group_colour'			=> 'FF6600',
 				'group_sig_chars'		=> 0,
 				'group_receive_pm'		=> true,
