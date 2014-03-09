@@ -40,9 +40,9 @@ $lang = array_merge($lang, array(
 	'G_API_MANAGER'						=> 'Gestionnaire API',
 //ACP hook management
 	//UMIL
-	'UMIL_GROUP_UNINSTALLED'					=> 'Suppression du groupe «Gestionnaire API»',
-	'UMIL_GROUP_INSTALLED'						=> 'Création du groupe «Gestionnaire API»',
-	'UMIL_GROUP_UPDATEED'						=> 'Mise à jour du groupe «Gestionnaire API»',//Yeah UMIL_GROUP_UPDATEED isn't a error
+	'UMIL_GROUP_UNINSTALLED'					=> 'Suppression du groupe « Gestionnaire API »',
+	'UMIL_GROUP_INSTALLED'						=> 'Création du groupe « Gestionnaire API »',
+	'UMIL_GROUP_UPDATEED'						=> 'Mise à jour du groupe « Gestionnaire API »',//Yeah UMIL_GROUP_UPDATEED isn't a error
 	'ACP_PHPBB_API_CONFIG_UMIL_PHP'				=> 'Version de PHP',
 	'ACP_PHPBB_API_CONFIG_UMIL_PHP_OK'			=> 'Vous possédez PHP <strong>%s</strong> ou supérieur, vous pouvez continuer l’installation.',
 	'ACP_PHPBB_API_CONFIG_UMIL_PHP_NO'			=> 'Vous ne possédez pas PHP <strong>%s</strong> ou supérieur, impossible de continuer l’installation',
@@ -58,9 +58,9 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_API_CONFIG_UMIL_CURL'			=> 'Extension cURL',
 	'ACP_PHPBB_API_CONFIG_UMIL_CURL_OK'			=> 'L’extension <em><a href="http://php.net/manual/fr/book.curl.php">cURL</a></em> est présente.',
 	'ACP_PHPBB_API_CONFIG_UMIL_CURL_NO'			=> 'L’extension <em><a href="http://php.net/manual/fr/book.curl.php">cURL</a></em> est manquante, contactez votre hébergeur.',
-	'ACP_PHPBB_API_CONFIG_UMIL_CURL'			=> 'Extension Mcrypt',
-	'ACP_PHPBB_API_CONFIG_UMIL_CURL_OK'			=> 'L’extension <em><a href="http://php.net/manual/fr/book.mcrypt.php">Mcrypt</a></em> est présente.',
-	'ACP_PHPBB_API_CONFIG_UMIL_CURL_NO'			=> 'L’extension <em><a href="http://php.net/manual/fr/book.mcrypt.php">Mcrypt</a></em> est manquante, contactez votre hébergeur.',
+	'ACP_PHPBB_API_CONFIG_UMIL_MCRYPT'			=> 'Extension Mcrypt',
+	'ACP_PHPBB_API_CONFIG_UMIL_MCRYPT_OK'		=> 'L’extension <em><a href="http://php.net/manual/fr/book.mcrypt.php">Mcrypt</a></em> est présente.',
+	'ACP_PHPBB_API_CONFIG_UMIL_MCRYPT_NO'		=> 'L’extension <em><a href="http://php.net/manual/fr/book.mcrypt.php">Mcrypt</a></em> est manquante, contactez votre hébergeur.',
 
 	'ACP_PHPBB_API_HOOK_AUTHOR'			=> 'Auteur',
 	'ACP_PHPBB_API_HOOK_DATE'			=> 'Date',
