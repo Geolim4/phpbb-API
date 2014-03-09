@@ -1,0 +1,20 @@
+Subject: Statistiques journalière de l'API
+
+Bonjour {USERNAME},
+
+Vous trouverez ci-dessous les statistiques journalière du {DATE}
+
+-Nombre de requêtes totale sur l'API: {TOTAL_QUERIES}
+
+-Nombre d'utilisateurs différent ayant utilisé l'API: {TOTAL_USERS}
+
+-Dernière requête le: {LAST_QUERIE_DATE}
+
+-{EXPIRED_KEY_COUNT} clé(s) expirée(s)
+
+-{CREATED_KEY_COUNT} clé(s) créée(s)
+
+-{TOTAL_BANNED_IPS} IP(s) bannie(s)
+----------
+
+{EMAIL_SIG}

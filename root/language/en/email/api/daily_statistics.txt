@@ -1,0 +1,20 @@
+Subject: API daily statistics
+
+Hello {USERNAME},
+
+You will find below the daily statistics of the {DATE}
+
+-Total requests performed to the API: {TOTAL_QUERIES}
+
+-Different number of users who used the API: {TOTAL_USERS}
+
+-Last request was: {LAST_QUERIE_DATE}
+
+-{EXPIRED_KEY_COUNT} key(s) expired
+
+-{CREATED_KEY_COUNT} key(s) created
+
+-{TOTAL_BANNED_IPS} banned IP(s)
+----------
+
+{EMAIL_SIG}

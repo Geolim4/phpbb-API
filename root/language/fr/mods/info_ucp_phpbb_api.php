@@ -600,7 +600,7 @@ Veuilliez notez que la consultation de vos statistiques n’est pas comptabilis�
 	),
 	array(
 		0 => 'O.S.S',
-		1 => 'Abréviation de <em>Opérateur SQL Sécurisé</em> : Opérateurs SQL parsés afin de sécuriser les requêtes SQL.'
+		1 => 'Abréviation de <em>Opérateur SQL Sécurisé</em> : Opérateurs SQL parsés afin d’effectuer des opération de tri/comparaison personalisées.'
 	),
 	array(
 		0 => 'REGEXP',
