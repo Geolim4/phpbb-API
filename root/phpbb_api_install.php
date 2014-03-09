@@ -191,6 +191,8 @@ $versions = array(
 			array('api_mod_max_attempts_time', 86400),
 			array('api_mod_crypto_enabled', 0),
 			array('api_mod_whitelist', ''),
+			array('api_mod_ucp_expire_type', 'month'),
+			array('api_mod_ucp_expire_value', 6),
 		),
 		'table_add' => array(
 			array(API_HISTORY_TABLE, array(
@@ -341,6 +343,7 @@ include($phpbb_root_path . 'umil/umil_auto.' . $phpEx);
 function create_api_group($action, $version)
 {
 	global $db, $user, $phpbb_root_path, $phpEx;
+	$user->add_lang('acp/groups');
 	include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
 	switch($action)
@@ -373,7 +376,16 @@ function create_api_group($action, $version)
 		break;
 
 		case 'uninstall':
-			group_delete(false, 'API_MANAGER');
+			$sql = 'SELECT group_id
+				FROM ' . GROUPS_TABLE . "
+				WHERE group_name = 'API_MANAGER'";
+			$result = $db->sql_query($sql);
+			$row = $db->sql_fetchrow($result);
+			$db->sql_freeresult($result);
+			if(!empty($row['group_id']))
+			{
+				group_delete($row['group_id'], 'API_MANAGER');
+			}
 		break;
 	}
 }

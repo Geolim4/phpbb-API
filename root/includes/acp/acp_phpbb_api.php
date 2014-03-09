@@ -311,7 +311,7 @@ class acp_phpbb_api
 						'ERRORS_VERSION'				=> sprintf($user->lang['API_ERRORS_VERSION_COPY'], $announcement_url, $config['api_mod_version']),
 						'S_NO_VERSION'					=> $latest_version ? false : true,
 						'S_IS_FOUNDER'					=> ($user->data['user_type'] == USER_FOUNDER) ? true : false,
-						'LATEST_VERSION'				=> $latest_version ? $latest_version : $user->lang['ERRORS_NO_VERSION'],
+						'LATEST_VERSION'				=> $latest_version ? $latest_version : $user->lang['API_ERRORS_NO_VERSION'],
 						'CURRENT_VERSION'				=> $config['api_mod_version'],
 						'API_MOD_CACHED_FILES'			=> $user->lang('ACP_PHPBB_API_PURGE_FILES', $cached_files['total_files'], get_formatted_filesize($cached_files['total_size'])),
 						'API_MOD_STATS_FILES'			=> $user->lang('ACP_PHPBB_API_PURGE_FILES', $stats_files['total_files'], get_formatted_filesize($stats_files['total_size'])),
