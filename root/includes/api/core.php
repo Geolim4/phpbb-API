@@ -1379,7 +1379,7 @@ class api
 				FROM ' . API_KEYS_TABLE . '
 				WHERE expire_time BETWEEN ' . $begin_day_time . ' AND ' . $end_day_time;
 			$result = $this->db->sql_query($sql);
-			$assign_vars['EXPIRED_KEY_COUNT'] = $this->db->sql_fetchfield('expired_keys');
+			$assign_vars['EXPIRED_KEY_COUNT'] = (int) $this->db->sql_fetchfield('expired_keys');
 			$this->db->sql_freeresult($result);
 
 			//Created keys
@@ -1387,7 +1387,7 @@ class api
 				FROM ' . API_KEYS_TABLE . '
 				WHERE creation_time BETWEEN ' . $begin_day_time . ' AND ' . $end_day_time;
 			$result = $this->db->sql_query($sql);
-			$assign_vars['CREATED_KEY_COUNT'] = $this->db->sql_fetchfield('created_keys');
+			$assign_vars['CREATED_KEY_COUNT'] = (int) $this->db->sql_fetchfield('created_keys');
 			$this->db->sql_freeresult($result);
 
 			//Total IP ban recorded
@@ -1395,11 +1395,11 @@ class api
 				FROM ' . API_LOGIN_ATTEMPTS . '
 				WHERE attempt_time <= BETWEEN ' . $begin_day_time . ' AND ' . $end_day_time;
 			$result = $this->db->sql_query($sql);
-			$assign_vars['TOTAL_BANNED_IPS'] = $this->db->sql_fetchfield('total');
+			$assign_vars['TOTAL_BANNED_IPS'] = (int) $this->db->sql_fetchfield('total');
 			$this->db->sql_freeresult($result);
 
 			//Get all founder, then email them
-			$sql = 'SELECT *
+			$sql = 'SELECT username, user_lang, user_email, user_id
 				FROM ' . USERS_TABLE .  '
 				WHERE user_type = ' . USER_FOUNDER;
 			$result = $this->db->sql_query($sql);
@@ -1414,7 +1414,7 @@ class api
 				$email_template = 'api/daily_statistics';
 				$this->messenger->template($email_template, $founders_['user_lang']);
 				$this->messenger->to($founders_['user_email'], $founders_['username']);
-				$this->messenger->anti_abuse_headers($this->config, $user);
+				$this->messenger->anti_abuse_headers($this->config, $this->user);
 
 				$this->messenger->assign_vars(array_merge($assign_vars, array(
 					'BOARD_CONTACT'			=> htmlspecialchars_decode($this->config['board_email']),
