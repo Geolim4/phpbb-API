@@ -53,7 +53,7 @@ if (!defined(__NAMESPACE__ . '\PURGE_HOOK_API_TARGET_VERSION') )
 		$acp_api_hook_manager = array(
 			//in case you want to use your own version checker, uncomment this, and follow instruction here: 
 			// https://geolim4.com/centre-de-documentations/phpbb-api-version-checker-instructions-t1763.html
-			'vchecker'	=> array('gl4.fr', '', 'api_hook_purge_cache.txt'),//http://gl4.fr/api_hook_purge_cache.txt
+			//'vchecker'=> array('yourwebsite.com', '/subpath', 'hookversion.txt'),
 			'download'	=> 'http://geolim4.com/api-hooks.html?h=hook_purge_cache',
 			'website'	=> 'http://geolim4.com',
 			'author'	=> 'Geolim4',
