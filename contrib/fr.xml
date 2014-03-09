@@ -6,7 +6,7 @@
 	<header>
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
-		<title lang="en"><![CDATA[phpBB API]]></title>
+		<title lang="en"><![CDATA[phpBB API (French translation))]]></title>
 		<description lang="en"><![CDATA[That MOD will provide to your board a RESTfull API able to communicate in many format: JSON, XML, HTML etc.
 
 You can grab some posts/topics/forums/groups infos etc... The API will provide a special administrator access using admin-key privileges like:
@@ -28,54 +28,23 @@ The API has been made in order to complete a crucial need in phpBB: A strong & s
 				<homepage><![CDATA[http://geolim4.com]]></homepage>
 				<email><![CDATA[contact@geolim4.com]]></email>
 			</author>
+			<author>
+				<username><![CDATA[Zoddo]]></username>
+			</author>
 		</author-group>
 		<mod-version>0.0.1</mod-version>
 		<installation>
 			<level>easy</level>
-			<time>120</time>
+			<time>60</time>
 			<target-version>3.0.12</target-version>
 		</installation>
 		<link-group>
-			<link type="contrib" href="contrib/fr.xml" lang="en">French Translation</link>
+			<link type="parent" href="./../install_mod.xml" lang="en">Main Install</link>
 		</link-group>
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/adm/*.*" to="adm/*.*"/>
-			<file from="root/images/*.*" to="images/*.*"/>
-			<file from="root/includes/*.*" to="includes/*.*"/>
-			<file from="root/language/en/*.*" to="language/en/*.*"/>
-			<file from="root/styles/*.*" to="styles/*.*"/>
-			<file from="root/umil/*.*" to="umil/*.*"/>
-			<file from="root/api.php*" to="api.php"/>
-			<file from="root/phpbb_api_install.php" to="phpbb_api_install.php"/>
+			<file from="root/language/fr/*.*" to="language/fr/*.*"/>
 		</copy>
-		<open src=".htaccess">
-			<edit>
-				<find><![CDATA[<Files "common.php">
-Order Allow,Deny
-Deny from All
-</Files>]]></find>
-				<action type="after-add"><![CDATA[##Mod begin: phpBB API
-RewriteEngine On
-#param pattern		#k			#e					#a			#m				#t			#s					#d		#o
-RewriteRule ^api/([a-z0-9_-]{40})\(?(.*[^/\(\)])?\)?/([a-z0-9_]+)(\([A-Za-z]+\))?/([a-z0-9_-]+)?\(?(.*[^/\(\)])?\)?/(.*[^/])?/([A-Za-z0-9_-]+)?$ api.php?k=$1&e=$2&a=$3&m=$4&t=$5&s=$6&d=$7&o=$8 [QSA,L,NC]
-RewriteRule ^api/?$ api.php [QSA,L,NC]
-#Example: http://yourwebsite.com/api/fmec9rvmo336zqiazfbmclcudfbcr2je54dle5e1(email@emil.com)/topic/forum_id(limit:5,start:0:operator:=)/2/xml
-#Using cURL:
-# curl_setopt($handle, CURLOPT_POSTFIELDS, array(
-#		k => '(string)',//Api Key, used to authenticate the user/admin (e.g "fmec9rvmo336zqiazfbmclcudfbcr2je54dle5e") (mandatory)
-#		e => '(string)',//Email attached to the API KEY (e.g "admin@admin.com") (optional)
-#		a => '(string)',//Action/Function to call (e.g "topic") (mandatory)
-#		m => '(string)',//Enable multibyte for the type of data (e.g "(multibyte)") (optional)
-#		t => '(string)',//Type of data to call (e.g "topic_id") (mandatory)
-#		s => '(string)',//SQL sort statement (e.g "start:10,limit:10")
-#		d => '(string/int)',//Data to inject as to be the data of "t" param (e.g "51") (mandatory)
-#		o => '(string)',//Output display mode (e.g "json") (mandatory)
-#	));
-##Mod end: phpBB API]]></action>
-			</edit>
-		</open>
-		<php-installer><![CDATA[phpbb_api_install.php]]></php-installer>
 	</action-group>
 </mod>
