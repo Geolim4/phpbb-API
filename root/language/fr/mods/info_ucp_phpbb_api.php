@@ -599,7 +599,7 @@ Veuilliez notez que la consultation de vos statistiques n’est pas comptabilis�
 		1 => 'Lexique'
 	),
 	array(
-		0 => 'S.S.O'
+		0 => 'S.S.O',
 		1 => 'Abréviation de <em>Secured Sort Operator</em> : Opérateurs de tri parsés sécurisés afin d’effectuer des opération de tri/comparaison personalisées.'
 	),
 	array(
