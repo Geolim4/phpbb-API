@@ -235,7 +235,7 @@ $lang['UCP_PHPBB_API_KNOWLEDGE_BASE'] = array(
 		"s" => "operator:LIKE",
 		"d" => "élémentaire",
 		"o" => "json",
-));[/code]Nous avons donc utilisé l’O.S.S "LIKE". Le masque "%" est ajouté automatiquement par l’API.
+));[/code]Nous avons donc utilisé le S.S.O "LIKE". Le masque "%" est ajouté automatiquement par l’API.
 [br]Vous pouvez également utiliser une REGEXP pour affiner les critères de recherche :[code] curl_setopt($handle, CURLOPT_POSTFIELDS, array(
 		"k" => "{KB_API_KEY}",
 		"e" => "{KB_USER_EMAIL}",
@@ -599,8 +599,8 @@ Veuilliez notez que la consultation de vos statistiques n’est pas comptabilis�
 		1 => 'Lexique'
 	),
 	array(
-		0 => 'O.S.S',
-		1 => 'Abréviation de <em>Opérateur SQL Sécurisé</em> : Opérateurs SQL parsés afin d’effectuer des opération de tri/comparaison personalisées.'
+		0 => 'S.S.O'
+		1 => 'Abréviation de <em>Secured Sort Operator</em> : Opérateurs de tri parsés sécurisés afin d’effectuer des opération de tri/comparaison personalisées.'
 	),
 	array(
 		0 => 'REGEXP',
