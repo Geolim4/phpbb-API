@@ -38,6 +38,7 @@ $hour_label = phpbb_api\functions\generate_daily_hours();
 $requests_per_hour = $ip_per_hour = array_fill_keys($hour_label, 0);
 $hightest_score = $average = $final_score = 0;
 $where_sql = '';
+$daystr = '';
 $begin_time = (int) mktime(0, 0, 0, phpbb_api\functions\inttostrtime($range_month, 'M'), $range_day, $range_year);
 $end_time = $begin_time + 86400;
 
@@ -163,7 +164,7 @@ $bertie_picture->drawRectangle(0,0, $config['api_stats_width'] - 1, $config['api
 /* Write the chart title */ 
 $bertie_picture->setFontProperties(array("FontName" => $pchart_root_path . "fonts/Forgotte.ttf","FontSize" => 11));
 $bertie_picture->drawText(40,50, $user->lang['ACP_PHPBB_API_STATS_HISTORY'] . ":",array("FontSize" => 20,"Align" => TEXT_ALIGN_BOTTOMLEFT));
-$date_str = str_replace(array('{daystr}', '{dayint}', '{monthstr}', '{yearint}'), array($user->lang['datetime'][$daystr], $range_day, $user->lang['datetime'][phpbb_api\functions\inttostrtime($range_month, 'F')], $range_year), $user->lang['ACP_PHPBB_API_STATS_DAY_FMT']);
+$date_str = str_replace(array('{daystr}', '{dayint}', '{monthstr}', '{yearint}'), array((isset($user->lang['datetime'][$daystr]) ? $user->lang['datetime'][$daystr] : ''), $range_day, $user->lang['datetime'][phpbb_api\functions\inttostrtime($range_month, 'F')], $range_year), $user->lang['ACP_PHPBB_API_STATS_DAY_FMT']);
 $bertie_picture->drawText(160,49,$user->lang['ACP_PHPBB_API_STATS_DAY'] . ": " . $date_str . '   ' . $user->lang('ACP_PHPBB_API_STATS_TOTAL', floor(array_sum($requests_per_hour))),array("FontSize" => 16,"Align" => TEXT_ALIGN_BOTTOMLEFT));
 
 if (!empty($no_result))

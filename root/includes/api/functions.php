@@ -101,12 +101,12 @@ function strptime($date, $format)
 	}
 
 	$ret = array(
-		"tm_sec"  => (int) $out['S'],
-		"tm_min"  => (int) $out['M'],
-		"tm_hour" => (int) $out['H'],
-		"tm_mday" => (int) $out['d'],
-		"tm_mon"  => $out['m']?$out['m']-1:0,
-		"tm_year" => $out['Y'] > 1900 ? $out['Y'] - 1900 : 0,
+		"tm_sec"  => (int) (isset($out['S']) ? $out['S'] : 0),
+		"tm_min"  => (int) (isset($out['M']) ? $out['M'] : 0),
+		"tm_hour" => (int) (isset($out['H']) ? $out['H'] : 0),
+		"tm_mday" => (int) (isset($out['d']) ? $out['d'] : 1),
+		"tm_mon"  => (int) (isset($out['m']) ? $out['m'] -1 : 1),
+		"tm_year" => (int) (isset($out['Y']) ? ($out['Y'] > 1900 ? $out['Y'] - 1900 : 0) : 1),
 	);
 	return $ret;
 }
@@ -695,9 +695,16 @@ function api_view_log($mode, &$log, &$log_count, $limit = 0, $offset = 0, $limit
 ****/
 function percent($num_amount, $num_total)
 {
-	$count1 = $num_amount / $num_total;
-	$count2 = $count1 * 100;
-	$count = number_format($count2, 0);
+	if($num_amount && $num_total)
+	{
+		$count1 = $num_amount / $num_total;
+		$count2 = $count1 * 100;
+		$count = number_format($count2, 0);
+	}
+	else
+	{
+		return 0;
+	}
 	return $count;
 }
 

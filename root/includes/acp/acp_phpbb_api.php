@@ -857,8 +857,6 @@ class acp_phpbb_api
 
 						//Mods vars
 						'ERRORS_VERSION'		=> sprintf($user->lang['API_ERRORS_VERSION_COPY'], $announcement_url, $config['api_mod_version']),
-						'S_NO_VERSION'			=> $latest_version ? false : true,
-						'LATEST_VERSION'		=> $latest_version ? $latest_version : $user->lang['ERRORS_NO_VERSION'],
 						'CURRENT_VERSION'		=> $config['api_mod_version'],
 						'API_MOD_ENABLE'		=> isset($config['api_mod_enable'])		? (((bool)	$config['api_mod_enable']	== 1) ? true : false) : '',
 						'API_MOD_MAX_OLD'		=> isset($config['api_mod_max_old'])		? (int)		$config['api_mod_max_old'] : '',
