@@ -36,7 +36,7 @@ The API has been made in order to complete a crucial need in phpBB: A strong & s
 			<target-version>3.0.12</target-version>
 		</installation>
 		<link-group>
-			<link type="contrib" href="contrib/fr.xml" lang="en">French Translation</link>
+			<link type="language" href="contrib/fr.xml" lang="en">French Translation</link>
 		</link-group>
 	</header>
 	<action-group>

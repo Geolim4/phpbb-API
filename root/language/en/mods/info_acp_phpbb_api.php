@@ -40,6 +40,9 @@ $lang = array_merge($lang, array(
 	'G_API_MANAGER'						=> 'API Manager',
 //ACP hook management
 	//UMIL
+	'UMIL_GROUP_UNINSTALLED'					=> 'Deleted «API Manager» group',
+	'UMIL_GROUP_INSTALLED'						=> 'Created «API Manager» group',
+	'UMIL_GROUP_UPDATEED'						=> 'Updated «API Manager» group',//Yeah UMIL_GROUP_UPDATEED isn't a error
 	'ACP_PHPBB_API_CONFIG_UMIL_PHP'				=> 'PHP version',
 	'ACP_PHPBB_API_CONFIG_UMIL_PHP_OK'			=> 'You have PHP <strong>%s</strong> or higher, you can proceed to the mod install',
 	'ACP_PHPBB_API_CONFIG_UMIL_PHP_NO'			=> 'You don’t have PHP <strong>%s</strong> or higher, you cannot proceed to the mod install',

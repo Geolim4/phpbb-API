@@ -388,6 +388,8 @@ function create_api_group($action, $version)
 			}
 		break;
 	}
+
+	return $user->lang['UMIL_GROUP_' . strtoupper($action) . 'ED'];
 }
 
 /****

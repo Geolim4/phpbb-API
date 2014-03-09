@@ -40,6 +40,9 @@ $lang = array_merge($lang, array(
 	'G_API_MANAGER'						=> 'Gestionnaire API',
 //ACP hook management
 	//UMIL
+	'UMIL_GROUP_UNINSTALLED'					=> 'Suppression du groupe «Gestionnaire API»',
+	'UMIL_GROUP_INSTALLED'						=> 'Création du groupe «Gestionnaire API»',
+	'UMIL_GROUP_UPDATEED'						=> 'Mise à jour du groupe «Gestionnaire API»',//Yeah UMIL_GROUP_UPDATEED isn't a error
 	'ACP_PHPBB_API_CONFIG_UMIL_PHP'				=> 'Version de PHP',
 	'ACP_PHPBB_API_CONFIG_UMIL_PHP_OK'			=> 'Vous possédez PHP <strong>%s</strong> ou supérieur, vous pouvez continuer l’installation.',
 	'ACP_PHPBB_API_CONFIG_UMIL_PHP_NO'			=> 'Vous ne possédez pas PHP <strong>%s</strong> ou supérieur, impossible de continuer l’installation',
